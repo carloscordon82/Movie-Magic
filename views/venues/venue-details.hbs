@@ -1,0 +1,27 @@
+{{#each allDates}}
+<a class="dates" href="{{../venue.id}}?movieDate={{this}}">{{this}}</a>
+{{/each}}
+<br>
+{{venue.name}}
+<br>
+{{#if movies}}
+{{#each movies}}
+<div class="horz">
+    <div>    
+    <img src="https://image.tmdb.org/t/p/original/{{movie.poster}}" alt="HTML tutorial" style="width:242px;">
+    </div>
+    <div>
+        {{movie.title}} <br>
+        {{#each times}}
+        <a href="/seats/{{../movie.id}}/{{../../venue.id}}?movieTime={{this}}&movieDate={{../../currentDate}}">{{this}}</a> <br>
+        {{/each}}
+    </div>
+</div>
+{{/each}}
+{{/if}}
+<br>
+<br>
+<a href="/venues/">ALL VENUES</a>
+{{#if errorMessage}}
+   {{errorMessage}}
+{{/if}}

@@ -1,0 +1,25 @@
+<form action="/admin/create-venue" method="POST">
+   
+  <br> <br>
+  
+  <br>
+  <div class="form-check">
+      <h1>Create Venue:</h1>
+       <label >Name</label>
+  <input class="input" type="input" value="" name="name">
+  <label >Location</label>
+  <input class="input" type="input" value="" name="location">
+
+  
+ 
+          
+ <br><br>
+   <button type="submit">Submit</button>
+</form>
+<br>
+{{#if errorMessage}}
+   {{errorMessage}}
+{{/if}}
+
+
+

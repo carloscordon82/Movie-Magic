@@ -1,0 +1,72 @@
+
+<a type="button" value="Go back!" onclick="history.back()">BACK
+</a>
+
+
+<h1>SELECT YOUR SEATS</h1>
+
+
+
+
+{{#if errorMessage}}
+   {{errorMessage}}
+{{/if}}
+
+<div class="movie-container">
+  
+  
+  <ul class="showcase">
+    <li>
+      <div class="seat"></div>
+      <small>Available</small>
+    </li>
+    <li>
+      <div class="seat selected"></div>
+      <small>Selected</small>
+    </li>
+    <li>
+      <div class="seat occupied"></div>
+      <small>Occupied</small>
+    </li>    
+  </ul>
+  
+  <div class="container">
+    <div class="screen"></div>
+    
+    <div class="row">
+      {{#each allSeats.row1}}
+        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        {{/each}}
+      </div>
+      <div class="row">
+      {{#each allSeats.row2}}
+        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        {{/each}}      </div>
+      <div class="row">
+      {{#each allSeats.row3}}
+        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        {{/each}}      </div>
+      <div class="row">
+      {{#each allSeats.row4}}
+        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        {{/each}}      </div>
+      <div class="row">
+      {{#each allSeats.row5}}
+        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        {{/each}}      </div>
+      <div class="row">
+      {{#each allSeats.row6}}
+        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        {{/each}}     
+         </div>
+    
+  </div>
+</div>
+
+    {{!-- <form action="/checkout/pre-summary" method="POST"> --}}
+    
+        <button id="btn">Submit</button>
+    
+<br>
+
+   <script src="/js/seats.js"></script>

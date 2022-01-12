@@ -1,0 +1,13 @@
+<div class="movies">
+{{#each movies}}
+<div>
+    <a href="/movies/{{_id}}?movieDate={{../today}}"><img src="https://image.tmdb.org/t/p/original/{{poster}}" alt="HTML tutorial" style="width:142px;"></a> 
+</div>
+{{/each}}
+</div>
+<br>
+<br>
+<a href="/">HOME</a>
+{{#if errorMessage}}
+   {{errorMessage}}
+{{/if}}

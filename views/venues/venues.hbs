@@ -1,0 +1,10 @@
+
+{{#each venues}}
+    <a href="/venues/{{_id}}?movieDate={{../today}}">{{name}}</a> {{location}} <br>
+{{/each}}<br>
+<br>
+<br>
+<a href="/">HOME</a>
+{{#if errorMessage}}
+   {{errorMessage}}
+{{/if}}
