@@ -48,8 +48,9 @@ router.post("/login", (req, res, next) => {
         }
         console.log("BEFORE", req.session.user);
         req.session.user = user;
+        req.app.locals.globalUser = user;
         req.session.user.tempSeats = [];
-        console.log("AFTERRR", req.session.user.tempSeats);
+        console.log("AFTERRR", req.app.locals.globalUser);
         return res.redirect("/");
       });
     })
@@ -105,11 +106,13 @@ router.post("/signup", (req, res, next) => {
           firstName,
           lastName,
           password: hashedPassword,
-          type: "user",
+          isAdmin: false,
         });
       })
       .then((user) => {
         req.session.user = user;
+        req.app.locals.globalUser = user;
+
         req.session.user.tempSeats = [];
         res.redirect("/");
       })
@@ -134,6 +137,7 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/logout", (req, res) => {
   req.session.destroy((err) => {
+    req.app.locals.globalUser = null;
     if (err) {
       return res
         .status(500)

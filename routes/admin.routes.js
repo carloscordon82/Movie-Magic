@@ -12,11 +12,13 @@ const axios = require("axios");
 
 const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
+const isAdminLoggedIn = require("../middleware/isAdminLoggedIn");
 
 const saltRounds = 10;
 
-router.get("/", (req, res, next) => {
-  res.render("admin/admin", { user: req.session.user });
+router.get("/", isAdminLoggedIn, (req, res, next) => {
+  console.log("CURRENT USER", req.app.globalUser);
+  res.render("admin/admin");
 });
 
 router.get("/manage-movies", (req, res, next) => {
