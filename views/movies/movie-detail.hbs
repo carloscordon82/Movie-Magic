@@ -1,24 +1,151 @@
 
-{{#each allDates}}
-<a class="dates" href="{{../movie._id}}?movieDate={{this}}">{{this}}</a>
-{{/each}}
+<div class="flex items-center w-screen justify-center">
+  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
+
+    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-gray-200 text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
+    
+  </div>
+</div>
+<div class="flex items-center justify-center">
+  <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg" role="group">
+     {{#each allDates}}
+    <a value = "{{shortDate}}" href="{{../movie._id}}?movieDate={{shortDate}}" class="dates selected-date inline-block px-10 py-2.5 bg-black text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"><span class="text-xl">{{longDate.day}} {{longDate.month}}</span> {{longDate.weekDay}}</a>
+        {{/each}}
+  </div>
+</div>
 
 
-    <img src="https://image.tmdb.org/t/p/original/{{movie.poster}}" alt="HTML tutorial" style="width:242px;">
-<h1>{{movie.title}}</h1>
-<br>
-<br>
+
+
+
+
+<div class="flex justify-center w-auto " style="padding: 50px;">
+
+    {{!-- <div style="position: absolute; width:0%; height:200px; background-image:url(https://image.tmdb.org/t/p/original/{{movie.backdrop}})">;lksajdf;lkjasdf;lkjasd;flkjasd;flkjasd;flkjas;dflkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasdf;lkj</div> --}}
+  <div class="flex flex-col md:flex-row md:full rounded-lg bg-white shadow-lg w-auto" style="position: relative;">
+
+{{!-- <div class="" style="width:300px; height:200px; background-image:url(https://image.tmdb.org/t/p/original/{{movie.backdrop}})"></div> --}}
+    <img class=" w-96 h-96 md:h-auto object-cover md:w-96 rounded-t-lg md:rounded-none md:rounded-l-lg" src="https://image.tmdb.org/t/p/original/{{movie.poster}}" alt="HTML tutorial" style="width:342px;"/>
+    
+        <div class="p-6 flex flex-col justify-start ">
+                  {{!-- <img class="opacity-25" src="https://image.tmdb.org/t/p/original/{{movie.backdrop}}" alt="HTML tutorial" style="position:absolute; width:942px;"/> --}}
+
+                <h3 class="text-gray-900 text-4xl font-medium mb-2">{{movie.title}}
+                            </h3>
+                <p class="text-gray-700 text-base mb-4">
+                    {{movie.overview}}
+                </p> 
+                <p class="text-gray-600 text-xs">Released: {{movie.releaseDate}}</p>
+                <br>
+                <p class="text-black text-2xl">Cast:</p>
+        
+        <section class="relative py-7 overflow-hidden ">
+ 
+    <div class="relative  mx-auto max-w-9xl">
+        {{!-- <p class="font-medium tracking-wide text-blue-500 uppercase">OUR TEAM</p>
+        <h2 class="relative max-w-lg mt-5 mb-10 text-4xl font-semibold leading-tight lg:text-5xl">An incredible team of <br>amazing individuals</h2> --}}
+        <div class="grid w-full grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
+           
+           
+           {{#each cast}}
+            <div class="flex flex-col items-center justify-start col-span-1">
+                <div class="relative ">
+                    {{!-- <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-blue-50"></div> --}}
+                    <img class="relative z-20 w-full rounded-lg" src="https://image.tmdb.org/t/p/original{{profile_path}}">
+                </div>
+                <div class="mt-3 space-y-2 text-center">
+                    <div class="space-y-1 text-md font-medium leading-6">
+                        <h3>{{name}}</h3>
+                        {{!-- <p class="text-blue-600">CEO and Founder</p> --}}
+                    </div>
+                    {{!-- <div class="relative flex items-center justify-center space-x-3">
+                        <a href="#_" class="text-gray-300 hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                        </a>
+                        <a href="#_" class="text-gray-300 hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+                        </a>
+                    </div> --}}
+                </div>
+            </div>
+            {{/each}}
+
+            
+
+        </div>
+    </div>
+</section>
+        
+        </div>
+
+        <div class="p-6 flex flex-col justify-start">
+            <p class="text-black text-4xl">Trailer</p>
+            <br>
+        <iframe width="560" height="315" src="{{trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+
+        {{!-- <div class="p-6 flex flex-col justify-start">
+        <h5 class="text-gray-900 text-xl font-medium mb-2">{{movie.title}}</h5>
+        <p class="text-gray-700 text-base mb-4">
+            {{movie.overview}}
+        </p>
+        <p class="text-gray-600 text-xs">Released: {{movie.releaseDate}}</p>
+        </div> --}}
+                    
+
+</div>
+
+</div>
+      {{!-- <div class="special-bg flex flex-col md:flex-row md:full rounded-lg shadow-lg w-auto"></div> --}}
+
+</div>
+
+
+
 {{#if show}}
 {{#each show}}
-    {{venue.name}} <br>
-        {{#each times}}
-        <a href="/seats/{{../../movie.id}}/{{../venue.id}}?movieTime={{this}}&movieDate={{../../currentDate}}">{{this}}</a> <br>
+
+
+<div class="flex justify-center pb-10" >
+  <div class="flex flex-col md:flex-row md:full rounded-lg bg-white shadow-lg w-11/12">
+            <div class="p-6 flex flex-col justify-start w-screen">
+
+                <h3 class="text-gray-900 text-4xl font-medium mb-2">{{venue.name}}
+                            </h3>
+                <p class="text-gray-700 text-base mb-4">
+                    {{!-- {{../movie.overview}} --}}
+                </p> 
+                <p class="text-gray-600 text-lg"> Amenities: Big Seats, Dolby Surround</p>
+
+                <p class="text-gray-600 text-lg"> {{venue.location}}</p>
+                <br>
+                <div class="grid w-full grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-8">
+                {{#each times}}
+                <div class="flex items-center flex-col justify-center text-sm">
+                <a href="/seats/{{../../movie.id}}/{{../venue.id}}?movieTime={{this.time}}&movieDate={{../../currentDate}}" class="w-36 inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-orange-600 border border-gray-200 rounded-md shadow-sm hover:bg-orange-300 focus:outline-none focus:shadow-none">
+                {{this.time}}
+            </a>
+            {{this.avail}} seats available
+            </div>
         {{/each}}
+        </div>
+        
+
+        </div>
+        
+                    <img class=" w-96 h-48 md:h-auto object-cover md:w-96 rounded-t-lg md:rounded-none md:rounded-r-lg" src="https://media-cdn.tripadvisor.com/media/photo-s/20/56/54/3d/cmx-cinebistro-doral.jpg" alt="HTML tutorial" style="width:242px;"/>
+
+     
+</div>
+
+</div>
+
 {{/each}}
 {{/if}}
-<br>
-<br>
-<a href="/movies/">ALL MOVIES</a>
+
+
+
 {{#if errorMessage}}
    {{errorMessage}}
 {{/if}}

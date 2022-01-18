@@ -20,6 +20,7 @@ const ticketSchema = new Schema({
   occupied: Boolean,
   time: String,
   date: String,
+  paymentId: String,
 });
 
 const Ticket = model("Ticket", ticketSchema);

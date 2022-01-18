@@ -30,6 +30,11 @@ module.exports = (app) => {
     })
   );
 
+  app.use((req, res, next) => {
+    req.app.locals.globalUser = req.session.user ? req.session.user : false;
+    next();
+  });
+
   app.use(
     favicon(path.join(__dirname, "..", "public", "images", "favicon.ico"))
   );

@@ -1,4 +1,51 @@
-<table id="myTable">
+
+
+<section class="container-ac">
+
+  <h1>CSS Accordions</h1>
+  <h3>Because we can.</h3>
+  
+
+
+  {{#each result}}
+  <div class="ac">
+    
+    <input class="ac-input" id="ac-a{{@index}}" name="ac-a{{@index}}" type="checkbox" />
+    <label class="ac-label" for="ac-a{{@index}}">{{@key}}</label>
+    <article class="ac-text">
+                  {{#each this}}
+                  <div class="ac-sub">
+                 
+                  <input class="ac-input" id="ac-b{{@index}}{{@key}}" name="ac-b{{@index}}{{@key}}" type="checkbox" />
+                  <label class="ac-label" for="ac-b{{@index}}{{@key}}">{{@key}}</label>
+                                 <article class="ac-sub-text">
+                                {{#each this}}
+                                <input class="ac-input" id="ac-c{{@index}}{{@key}}{{@../key}}" name="ac-c{{@index}}{{@key}}{{@../key}}" type="checkbox" />
+                                <label class="ac-label" for="ac-c{{@index}}{{@key}}{{@../key}}">{{@key}}</label>
+                                         {{#each this}}
+                                <article class="ac-sub-text">
+                                            <p> {{time}}    <a href="delete-showtime/{{_id}}">DELETE</a></p> 
+
+                                </article>
+                                        {{/each}}
+                                {{/each}}
+                                </article>
+
+                  </div>
+      
+                  {{/each}}
+    </article><!--/ac-text-->
+    
+  </div><!--/ac-->  
+  {{/each}}
+  
+</section>
+
+
+
+
+
+{{!-- <table id="myTable">
       {{#each showtimes}}
   <tr>
   
@@ -6,12 +53,21 @@
     <th>{{movie.title}}</th>
     <th>{{date}}</th>
     <th>{{time}}</th>
-    <th> <a href="delete-showtime/{{_id}}">DELETE</a></th>
   
   </tr>
     {{/each}}
   
-</table>
+</table> --}}
+
+
+
+
+
+
+
+
+
+
 
 <a href="/admin/create-showtime">ADD SHOWTIME</a>
 <br>

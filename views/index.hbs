@@ -1,8 +1,158 @@
-{{#if user}}
-    {{user}} is logged in <br>
-    <a href="logout" type="button">Logout</a>
+{{!-- 
+{{#each movies}}
+<div>
+  <a  href="/movies/{{_id}}?movieDate={{../today}}"><img class="small-poster" src="https://image.tmdb.org/t/p/original/{{poster}}" alt="HTML tutorial" style="width:242px;"></a> 
+</div>
+{{/each}} --}}
+
+
+
+
+<div class="flex items-center w-screen justify-center">
+  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
+
+    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-black text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
+    
+  </div>
+</div>
+
+
+
+
+
+{{#each movies}}
+{{#if odd}}
+<!-- Section 1 -->
+<section class="bg-white">
+  <div class="demo-wrap">
+  <img
+    class="demo-bg"
+    src="https://image.tmdb.org/t/p/original/{{backdrop}}"
+    alt=""
+  >
+  <div class="demo-content pt-10 pb-10 container items-center max-w-6xl px-8 mx-auto xl:px-5">
+    <div class="flex flex-wrap items-center sm:-mx-3">
+      <div class="w-full md:w-1/2 md:px-3">
+        <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
+          <h1 class="text-4xl font-extrabold tracking-tight  text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
+            <span class="block xl:inline ">{{title}}</span>
+            {{!-- <span class="block text-indigo-600 xl:inline">Tell Your Story!</span> --}}
+          </h1>
+          <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">{{overview}}</p>
+          <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+            <a href="/movies/{{_id}}?movieDate={{../today}}" class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-black rounded-md sm:mb-0 hover:bg-orange-600 sm:w-auto">
+              Buy Tickets Now!
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            {{!-- <a href="#_" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
+              Learn More
+            </a> --}}
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2">
+        <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+            <img src="https://image.tmdb.org/t/p/original/{{backdrop}}" class="">
+          </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+<div class="flex items-center w-screen justify-center">
+  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
+
+    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-orange-600 text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
+    
+  </div>
+</div>
+{{else}}
+<!-- Section 1 -->
+<section class="bg-white md:px-0">
+   <div class="demo-wrap">
+  <img
+    class="demo-bg"
+    src="https://image.tmdb.org/t/p/original/{{backdrop}}"
+    alt=""
+  >
+  <div class="demo-content pt-10 pb-10 container items-center max-w-6xl px-8 mx-auto xl:px-5">
+    
+    <div class="flex flex-row sm:-mx-3">
+ <div class="w-full md:w-1/2">
+        <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+            <img src="https://image.tmdb.org/t/p/original/{{backdrop}}" class="">
+          </div>
+      </div>
+      <div class="w-full md:w-1/2 md:px-3">
+        <div class="flex flex-col items-end w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
+          <h1 class="flex flex-col items-end  text-4xl text-right font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
+            <span class="block xl:inline text-righ">{{title}}</span>
+            {{!-- <span class="block text-indigo-600 xl:inline">Tell Your Story!</span> --}}
+          </h1>
+          <p class="flex flex-col items-end mx-auto text-right text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">{{overview}}</p>
+          <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+            <a href="/movies/{{_id}}?movieDate={{../today}}" class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-black rounded-md sm:mb-0 hover:bg-orange-600 sm:w-auto">
+              Buy Tickets Now!
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19" class=""></polyline></svg>
+            </a>
+            {{!-- <a href="#_" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
+              Learn More
+            </a> --}}
+          </div>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+  </div>
+</section>
+<div class="flex items-center w-screen justify-center">
+  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
+
+    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-orange-600 text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
+    
+  </div>
+</div>
 {{/if}}
-<br>
-<br>
-    <a href="movies" type="button">Movies</a><br>
-    <a href="venues" type="button">Venues</a><br>
+
+{{/each}}
+
+
+
+{{#each movies}}
+<!-- Section 1 -->
+<section class="px-0 py-10 mx-auto w-screen space-y-10  md:px-10">
+   
+    <!-- Block 3 -->
+    <div class="flex items-center shadow-lg	h-full  py-10 overflow-hidden bg-gray-900 bg-cover md:rounded-xl md:flex-row" style="background-image:url('https://image.tmdb.org/t/p/original/{{backdrop}}')">
+        <div class="flex flex-col items-center justify-center  h-full py-5 pl-16 pr-16 mb-10 md:w-1/2 md:mb-0 md:items-start md:pl-10 lg:pl-16 lg:pr-0">
+            {{!-- <h2 class="inline-block mx-auto text-5xl font-bold leading-tight text-transparent sm:text-6xl lg:text-7xl bg-black md:mx-0 text-white">The power of </h2> --}}
+            <h2 class=" text-5xl font-bold leading-tight text-white bg-black">{{title}}</h2>
+            {{!-- <h3 class="max-w-lg text-5xl font-bold leading-tight text-white bg-black">macOS Big Sur on M1.</h3> --}}
+            <p class="max-w-sm bg-black my-8 text-center text-white opacity-75 md:text-left lg:text-lg md:max-w-none">{{overview}}</p>
+            <a href="/movies/{{_id}}?movieDate={{../today}}" class="px-6 py-2 text-lg bg-black font-medium text-white border-2 border-white rounded-full">Learn More</a>
+        </div>
+
+
+
+{{!-- <div class="flex	absolute justify-start overflow-hidden w-auto h-auto md:w-1/2 md:pl-0">
+            <img src="https://image.tmdb.org/t/p/original//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg" class="object-cover w-full h-full transform translate-x-0 md:translate-x-0">
+        </div> --}}
+
+
+        <div class="flex pr-20 shadow-2xl	 justify-end w-12 pl-6 overflow-hidden md:rounded-xl md:w-1/2 md:pl-0">
+            {{!-- <img src="https://image.tmdb.org/t/p/original//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg" class="object-cover w-full h-full transform translate-x-0 md:translate-x-0" style="width: 300px;"> --}}
+        </div>
+    </div>
+</section>
+{{/each}}
+{{!-- {{#each movies}}
+<div>
+  <a  href="/movies/{{_id}}?movieDate={{../today}}"><img class="small-poster" src="https://image.tmdb.org/t/p/original/{{poster}}" alt="HTML tutorial" style="width:242px;"></a> 
+</div>
+{{/each}} --}}
+{{#if errorMessage}}
+   {{errorMessage}}
+{{/if}}
+
+

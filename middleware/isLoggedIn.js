@@ -1,7 +1,8 @@
 module.exports = (req, res, next) => {
   if (!req.session.user) {
-    return res.redirect("/login");
+    return res.render("auth/login", { originalUrl: req.originalUrl });
   }
-  req.user = req.session.user;
+  console.log("CHECKING LOGIN", req.app.locals.globalUser);
+  req.app.locals.globalUser = req.session.user;
   next();
 };

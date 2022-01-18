@@ -1,10 +1,14 @@
-<h1>Venues</h1>
+<h1 class="tab">Venues</h1>
+<div class="container-all-venues">
 {{#each venues}}
-    <a href="/venues/{{_id}}?movieDate={{../today}}">{{name}}</a> {{location}} <br>
+    <div>
+    <div><a href="/venues/{{_id}}?movieDate={{../today}}"><h2>{{name}}</h2></a></div> 
+    <div>{{location}} <br></div>
+    </div>
 {{/each}}<br>
+</div>
 <br>
 <br>
-<a href="/">HOME</a>
 {{#if errorMessage}}
    {{errorMessage}}
 {{/if}}

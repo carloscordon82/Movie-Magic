@@ -1,27 +1,111 @@
-{{#each allDates}}
-<a class="dates" href="{{../venue.id}}?movieDate={{this}}">{{this}}</a>
-{{/each}}
-<br>
-{{venue.name}}
-<br>
+
+
+<div class="flex items-center justify-center">
+  <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg" role="group">
+     {{#each allDates}}
+    <a value = "{{shortDate}}" href="{{../venue._id}}?movieDate={{shortDate}}" class="dates selected-date inline-block px-10 py-2.5 bg-black text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"><span class="text-xl">{{longDate.day}} {{longDate.month}}</span> {{longDate.weekDay}}</a>
+        {{/each}}
+  </div>
+</div>
+
+
+
+
+
+<div class="flex justify-center pt-10" >
+  <div class="flex flex-col md:flex-row md:full rounded-lg bg-white shadow-lg w-11/12">
+            <div class="p-6 flex flex-col justify-start w-screen">
+
+                <h3 class="text-gray-900 text-4xl font-medium mb-2">{{venue.name}}
+                            </h3>
+                <p class="text-gray-700 text-base mb-4">
+                    {{!-- {{../movie.overview}} --}}
+                </p> 
+                <p class="text-gray-600 text-lg"> Amenities: Big Seats, Dolby Surround</p>
+
+                <p class="text-gray-600 text-lg"> {{venue.location}}</p>
+                <br>
+                <div>
+                {{#each times}}
+                <a href="/seats/{{../../movie.id}}/{{../venue.id}}?movieTime={{this}}&movieDate={{../../currentDate}}" class="w-36 inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-orange-600 border border-gray-200 rounded-md shadow-sm hover:bg-orange-300 focus:outline-none focus:shadow-none">
+                {{this}}
+            </a>
+        {{/each}}
+        </div>
+        
+
+        </div>
+        
+                    <img class=" w-96 h-48 md:h-auto object-cover md:w-96 rounded-t-lg md:rounded-none md:rounded-r-lg" src="https://media-cdn.tripadvisor.com/media/photo-s/20/56/54/3d/cmx-cinebistro-doral.jpg" alt="HTML tutorial" style="width:242px;"/>
+
+     
+</div>
+
+</div>
+
+
+
+
+
 {{#if movies}}
 {{#each movies}}
-<div class="horz">
-    <div>    
-    <img src="https://image.tmdb.org/t/p/original/{{movie.poster}}" alt="HTML tutorial" style="width:242px;">
-    </div>
-    <div>
-        {{movie.title}} <br>
-        {{#each times}}
-        <a href="/seats/{{../movie.id}}/{{../../venue.id}}?movieTime={{this}}&movieDate={{../../currentDate}}">{{this}}</a> <br>
+<div class="flex justify-center w-auto" style="padding: 50px;">
+  <div class="flex flex-col md:flex-row md:full rounded-lg bg-white shadow-lg w-11/12">
+
+    <img class=" w-96 md:h-auto object-cover md:w-96 rounded-t-lg md:rounded-none md:rounded-l-lg" src="https://image.tmdb.org/t/p/original/{{movie.poster}}" alt="HTML tutorial" style="width:242px;"/>
+    
+        <div class="p-6 flex flex-col justify-start bg-[url(https://image.tmdb.org/t/p/original/{{movie.backdrop}})]">
+                  {{!-- <img class="opacity-25" src="https://image.tmdb.org/t/p/original/{{movie.backdrop}}" alt="HTML tutorial" style="position:absolute; width:942px;"/> --}}
+
+                <h3 class="text-gray-900 text-4xl font-medium mb-2">{{movie.title}}
+                            </h3>
+                <p class="text-gray-700 text-base mb-4">
+                    {{movie.overview}}
+                </p> 
+        
+        <section class="relative py-7 overflow-hidden ">
+ 
+    <div class="relative ">
+        {{!-- <p class="font-medium tracking-wide text-blue-500 uppercase">OUR TEAM</p>
+        <h2 class="relative max-w-lg mt-5 mb-10 text-4xl font-semibold leading-tight lg:text-5xl">An incredible team of <br>amazing individuals</h2> --}}
+        <div class="grid w-full grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-8">
+           
+           {{#each times}}
+           <div class="flex items-center flex-col justify-center text-sm">
+               
+                <a href="/seats/{{../movie.id}}/{{../../venue.id}}?movieTime={{this.time}}&movieDate={{../../currentDate}}"" class="w-36 inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-orange-600 border border-gray-200 rounded-md shadow-sm hover:bg-orange-300 focus:outline-none focus:shadow-none">
+                {{this.time}}
+            </a>
+            <a >{{this.avail}} seats available</a> <br>
+           </div>
         {{/each}}
+
+            
+
+        </div>
     </div>
+</section>
+        
+        </div>
+
+
+
+        {{!-- <div class="p-6 flex flex-col justify-start">
+        <h5 class="text-gray-900 text-xl font-medium mb-2">{{movie.title}}</h5>
+        <p class="text-gray-700 text-base mb-4">
+            {{movie.overview}}
+        </p>
+        <p class="text-gray-600 text-xs">Released: {{movie.releaseDate}}</p>
+        </div> --}}
+        
+</div>
+
 </div>
 {{/each}}
 {{/if}}
-<br>
-<br>
-<a href="/venues/">ALL VENUES</a>
+
+
+
 {{#if errorMessage}}
    {{errorMessage}}
 {{/if}}

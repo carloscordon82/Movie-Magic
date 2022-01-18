@@ -1,14 +1,21 @@
-<h1>Movies</h1>
+<div class="flex items-center w-screen justify-center">
+  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
+
+    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-black text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
+    
+  </div>
+</div>
+
+<h1 class="tab">Movies</h1>
 <div class="movies">
 {{#each movies}}
 <div>
-    <a href="/movies/{{_id}}?movieDate={{../today}}"><img src="https://image.tmdb.org/t/p/original/{{poster}}" alt="HTML tutorial" style="width:142px;"></a> 
+  <a  href="/movies/{{_id}}?movieDate={{../today}}"><img class="small-poster" src="https://image.tmdb.org/t/p/original/{{poster}}" alt="HTML tutorial" style="width:242px;"></a> 
 </div>
 {{/each}}
 </div>
 <br>
 <br>
-<a href="/">HOME</a>
 {{#if errorMessage}}
    {{errorMessage}}
 {{/if}}

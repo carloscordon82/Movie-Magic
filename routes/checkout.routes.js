@@ -14,6 +14,7 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const path = require("path");
 const { redirect } = require("express/lib/response");
+const { log } = require("console");
 const saltRounds = 10;
 
 router.post("/process", async (req, res, next) => {
@@ -22,7 +23,7 @@ router.post("/process", async (req, res, next) => {
     const sessi = await stripe.checkout.sessions
       .create({
         mode: "payment",
-        success_url: `http://${mypath}/checkout/success`,
+        success_url: `http://${mypath}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `http://${mypath}/checkout/summary`,
         payment_method_types: ["card"],
         line_items: [
@@ -71,8 +72,7 @@ router.get("/summary", isLoggedIn, (req, res, next) => {
     });
 });
 
-router.get("/success", isLoggedIn, (req, res, next) => {
-  console.log("SESSION SEATS", req.session.user.tempSeats);
+router.get("/success", isLoggedIn, async (req, res, next) => {
   if (req.session.user.tempSeats.length > 0) {
     User.findByIdAndUpdate(
       req.session.user._id,
@@ -84,7 +84,13 @@ router.get("/success", isLoggedIn, (req, res, next) => {
       .then((updatedUser) => {
         Ticket.update(
           { _id: { $in: req.session.user.tempSeats } },
-          { $set: { user: req.session.user._id, occupied: true } },
+          {
+            $set: {
+              user: req.session.user._id,
+              occupied: true,
+              paymentId: req.query.session_id,
+            },
+          },
           { multi: true }
         )
 
@@ -98,8 +104,64 @@ router.get("/success", isLoggedIn, (req, res, next) => {
       })
       .catch((err) => next(err));
   } else {
-    redirect("/");
+    res.redirect("/");
   }
+});
+
+router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {
+  let refundStatus = "";
+  Ticket.findById(req.params.seatId)
+    .then(async (ticket) => {
+      console.log("FOUND TICKET", ticket);
+
+      const session = await stripe.checkout.sessions.retrieve(ticket.paymentId);
+      const refund = await stripe.refunds
+        .create({
+          payment_intent: session.payment_intent,
+          amount: 2000,
+        })
+        .then((result) => {
+          console.log("RESULT", result);
+          refundStatus = result.status;
+        })
+        .catch((err) => next(err));
+
+      console.log("REFUND STATUS", refund);
+
+      if (refundStatus === "succeeded") {
+        Ticket.findByIdAndUpdate(req.params.seatId, {
+          occupied: false,
+          paymentId: "",
+        }).then((result) => {
+          User.updateOne(
+            { username: req.session.user.username },
+            {
+              $pullAll: {
+                tickets: [req.params.seatId],
+              },
+            }
+          )
+            .then((result2) => {
+              User.updateOne(
+                { username: req.session.user.username },
+                {
+                  $push: {
+                    refundedTickets: ticket._id,
+                  },
+                }
+              )
+                .then((result3) => {
+                  console.log("test succes");
+                  res.redirect("/user/tickets");
+                })
+                .catch((err) => next(err));
+            })
+            .catch((err) => next(err));
+        });
+      }
+    })
+    .catch((err) => next(err));
+  //
 });
 
 module.exports = router;

@@ -10,11 +10,9 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const saltRounds = 10;
 
 router.get("/login", isLoggedOut, (req, res, next) => {
-  if (!req.session.user) {
-    res.render("auth/login");
-  } else {
-    res.render("index", { user: req.session.user.username });
-  }
+  console.log("ORIGNAL", req.app.locals.originalUrl);
+
+  res.render("auth/login", { layout: false });
 });
 
 router.post("/login", (req, res, next) => {
@@ -46,12 +44,20 @@ router.post("/login", (req, res, next) => {
             .status(400)
             .render("auth/login", { errorMessage: "Wrong credentials." });
         }
-        console.log("BEFORE", req.session.user);
         req.session.user = user;
         req.app.locals.globalUser = user;
         req.session.user.tempSeats = [];
-        console.log("AFTERRR", req.app.locals.globalUser);
-        return res.redirect("/");
+        console.log(
+          "ORIGNAL",
+          req.body.redirect,
+          "ORIGNAL 2",
+          req.body.originalUrl
+        );
+        if (req.body.redirect) {
+          return res.redirect(`${req.body.redirect}`);
+        } else {
+          return res.redirect("/");
+        }
       });
     })
 

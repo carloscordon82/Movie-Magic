@@ -1,13 +1,15 @@
+<h1>MOVIES</h1>
 <div class="movies">
 {{#each movies}}
-<div>
-    <a> <img src="https://image.tmdb.org/t/p/original/{{poster}}" alt="HTML tutorial" style="width:142px;"></a> 
+<div class="delete">
+  <a  href="/movies/{{_id}}?movieDate={{../today}}"><img class="small-poster" src="https://image.tmdb.org/t/p/original/{{poster}}" alt="HTML tutorial" style="width:242px;"></a> 
+  <a class="d-btn" href="delete-movie/{{_id}}">DELETE</a>
 </div>
-<a href="delete-movie/{{_id}}">DELETE</a>
 {{/each}}
 </div>
+<br>
+<br>
+<h1><a href="/admin/create-movie">ADD MOVIE</a></h1>
 
-<a href="/admin/create-movie">ADD MOVIE</a>
 <br>
 <br>
-<a href="/admin/">ADMIN DASHBOARD</a>

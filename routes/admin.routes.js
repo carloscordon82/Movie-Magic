@@ -17,7 +17,7 @@ const isAdminLoggedIn = require("../middleware/isAdminLoggedIn");
 const saltRounds = 10;
 
 router.get("/", isAdminLoggedIn, (req, res, next) => {
-  console.log("CURRENT USER", req.app.globalUser);
+  console.log("CURRENT USER", req.app.locals.globalUser);
   res.render("admin/admin");
 });
 
@@ -92,8 +92,34 @@ router.get("/manage-showtimes", (req, res, next) => {
     .populate("movie")
     .populate("venue")
     .then((showtimes) => {
+      // TESTING NEW OBJECT
+      result = showtimes.reduce(function (r, a) {
+        r[a.venue.name] = r[a.venue.name] || [];
+        r[a.venue.name].push(a);
+        return r;
+      }, Object.create(null));
+
+      for (const [key, value] of Object.entries(result)) {
+        result[key] = value.reduce(function (r, a) {
+          r[a.movie.title] = r[a.movie.title] || [];
+          r[a.movie.title].push(a);
+          return r;
+        }, Object.create(null));
+      }
+
+      for (const [key, value] of Object.entries(result)) {
+        for (const [key2, value2] of Object.entries(value)) {
+          result[key][key2] = value2.reduce(function (r, a) {
+            r[a.date] = r[a.date] || [];
+            r[a.date].push(a);
+            return r;
+          }, Object.create(null));
+        }
+      }
+
+      // END TEST
       console.log(showtimes);
-      res.render("admin/manage-showtimes", { showtimes });
+      res.render("admin/manage-showtimes", { showtimes, result });
     })
     .catch((err) => {
       next(err);
@@ -249,6 +275,7 @@ router.post("/create-showtime", (req, res, next) => {
           occupied: seat.occupied,
           time: time,
           date: date,
+          paymentId: "",
         });
       });
 
