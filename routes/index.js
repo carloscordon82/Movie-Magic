@@ -20,12 +20,14 @@ router.get("/", (req, res, next) => {
   });
   Movie.find()
     .then((movies) => {
-      movies.forEach((element, i) => {
-        movies[i].odd = i % 2;
-        console.log("odd", element.odd);
-      });
-      console.log("MOVIES", movies[0].odd);
-      res.render("index", { movies, today });
+      if (movies) {
+        movies.forEach((element, i) => {
+          movies[i].odd = i % 2;
+          console.log("odd", element.odd);
+        });
+        console.log("MOVIES", movies[0].odd);
+        res.render("index", { movies, today });
+      }
     })
     .catch((err) => {
       console.log("Something went wrong", err);
