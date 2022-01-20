@@ -1,32 +1,83 @@
+<div class="flex items-center w-screen justify-center">
+  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
 
-<a type="button" value="Go back!" onclick="history.back()">BACK
-</a>
-
-
-<h1>SELECT YOUR SEATS</h1>
-
-
-
+    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-black text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
+    
+  </div>
+</div>
 
 {{#if errorMessage}}
    {{errorMessage}}
 {{/if}}
 
-<div class="movie-container2">
+
+
+
+
+
+
+
+
+
+<!-- Section 1 -->
+<section class="w-full bg-gray-100 ">
+   <div class="demo-wrap">
+     <img
+    class="demo-bg"
+    src="https://image.tmdb.org/t/p/original/{{seats.[0].movie.backdrop}}"
+    alt=""
+  >
+    <div class="demo-content pt-5 pb-5 max-w-5xl mx-auto">
+        <div class="flex flex-col items-center md:flex-row">
+
+            {{!-- <div class="w-full space-y-5 md:w-3/5 md:pr-16">
+                <p class="font-medium text-blue-500 uppercase">Building Businesses</p>
+                <h2 class="text-2xl font-extrabold leading-none text-black sm:text-3xl md:text-5xl">
+                    Changing The Way People Do Business.
+                </h2>
+                <p class="text-xl text-gray-600 md:pr-16">Learn how to engage with your visitors and teach them about your mission. We're revolutionizing the way customers and businesses interact.</p>
+            </div> --}}
+
+
+
+
+
+
+
+
+
+ <div class="w-full space-y-5 md:w-3/5 md:pr-16">
+
+
+
+
+
+<div class="pt-10 border-gray-300 rounded-lg shadow-2xl bg-white movie-container2">
   
   
   <ul class="showcase">
     <li>
+      <div class="flex flex-col justify-items-center	items-center	 ">
       <div class="seat"></div>
       <small>Available</small>
+      </div>
     </li>
     <li>
+      <div class="flex flex-col justify-items-center	items-center	 ">
       <div class="seat selected"></div>
+            
+
       <small>Selected</small>
+      </div>
+
     </li>
     <li>
+      <div class="flex flex-col justify-items-center	items-center	 ">
       <div class="seat occupied"></div>
+
       <small>Occupied</small>
+            </div>
+
     </li>    
   </ul>
   
@@ -62,11 +113,27 @@
     
   </div>
 </div>
+</div>
+
+            <div class="w-screen mt-16 md:mt-0 md:w-2/5 pl-20 ">
+                <div class="relative z-10 h-auto p-8 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7">
+                    <h3 class="mb-6 text-2xl font-medium text-center">Seats Selected:</h3>
+                    <h3 class="selected-seats mb-6 text-2xl font-medium text-center">None</h3>
+                    <div class="block">
+                        <button id="btn" class="w-full px-3 py-4 font-medium text-white rounded-lg">Purchase</button>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</section>
+
 
     {{!-- <form action="/checkout/pre-summary" method="POST"> --}}
     
-        <button id="btn">Submit</button>
+        {{!-- <button id="btn">Submit</button> --}}
     
-<br>
-
    <script src="/js/seats.js"></script>

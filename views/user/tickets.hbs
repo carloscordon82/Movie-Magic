@@ -1,370 +1,459 @@
+<div class="flex items-center w-screen justify-center">
+  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
 
-  <div class="grid md:grid-cols-3">
-    <div class="md:col-span-1 md:flex md:justify-end">
-      <nav class="text-right">
-        <div class="flex justify-between items-center">
-          <h1 class="font-bold uppercase p-4 border-b border-gray-100">
-            <a href="/" class="hover:text-gray-700 tracking-widest">Food Ninja</a>
-          </h1>
-          <div class="px-4 cursor-pointer md:hidden" id="burger">
-            <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-          </div>
-        </div>
-        <ul class="text-sm mt-6 hidden md:block" id="menu">
-          <li class="text-gray-700 font-bold py-1">
-            <a href="#" class="block px-4 flex justify-end border-r-4 border-primary">
-              <span>Home</span>
-              <svg class="w-5 ml-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-            </a>
-          </li>
-          <li class="py-1">
-            <a href="#" class="block px-4 flex justify-end border-r-4 border-white">
-              <span>About</span>
-              <svg class="w-5 ml-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-            </a>
-          </li>
-          <li class="py-1">
-            <a href="#" class="block px-4 flex justify-end border-r-4 border-white">
-              <span>Contact</span>
-              <svg class="w-5 ml-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  
-    <main class="px-16 py-6 md:col-span-2 bg-gray-100">
-      <div class="flex justify-center md:justify-end">
-        <a href="#" class="btn text-primary border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500">Log in</a>
-        <a href="#" class="btn text-primary ml-2 border-primary md:border-2 hover:bg-primary hover:text-white transition ease-out duration-500">Sign up</a>
-      </div>
-
-      <header class="mt-4">
-        <h2 class="text-gray-700 text-6xl font-semibold leading-none tracking-wider">Recipes</h2>
-        <h3 class="text-2xl font-semibold tracking-wider">For Ninjas</h3>
-      </header>
-
-      <div>
-        <h4 class="font-bold pb-2 mt-12 border-b border-gray-200">Latest Recipes</h4>
-  
-        <div class="mt-8 grid lg:grid-cols-3 gap-10">
-          <!-- cards go here -->
-          <div class="card hover:shadow-lg"> 
-            <img src="img/stew.jpg" alt="stew" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">5 Bean Chili Stew</span>
-              <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-            </div>
-            <div class="badge">
-              <svg class="inline-block w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-          <div class="card hover:shadow-lg"> 
-            <img src="img/noodles.jpg" alt="noodles" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">Veg Noodles</span>
-              <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-            </div>
-            <div class="badge">
-              <svg class="inline-block w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-          <div class="card hover:shadow-lg"> 
-            <img src="img/curry.jpg" alt="curry" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">Tofu Curry</span>
-              <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-            </div>
-            <div class="badge">
-              <svg class="inline-block w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-        </div>
-
-        <h4 class="font-bold pb-2 mt-12 border-b border-gray-200">Most Popular</h4>
-
-        <div class="mt-8 grid lg:grid-cols-3 gap-10">
-          <!-- cards go here -->
-          <div class="card hover:shadow-lg"> 
-            <img src="img/stew.jpg" alt="stew" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold truncate block">5 Bean Chili Stew with Feta Cheese</span>
-              <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-            </div>
-            <div class="badge">
-              <svg class="inline-block w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-          <div class="card hover:shadow-lg"> 
-            <img src="https://github.com/iamshaunjp/tailwind-tutorial/blob/lesson-19/public/img/curry.jpg?raw=true" alt="noodles" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">Veg Noodles</span>
-              <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-            </div>
-            <div class="badge">
-              <svg class="inline-block w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-          <div class="card hover:shadow-lg"> 
-            <img src="img/curry.jpg" alt="curry" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">Tofu Curry</span>
-              <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-            </div>
-            <div class="badge">
-              <svg class="inline-block w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-12 flex justify-center">
-        <div class="btn bg-secondary-100 text-secondary-200 inline-block hover:shadow-inner transform hover:scale-125 hover:bg-opacity-50 transition ease-out duration-300">Load more</div>
-      </div>    
-    </main>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="flex flex-col justify-center">
-<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-<div class="inline-block py-2 w-1/2 sm:px-6 lg:px-8">
-<div class="overflow-hidden shadow-md sm:rounded-lg">
-<table class="min-w-full">
-<thead class="bg-gray-50 dark:bg-gray-700">
-<tr>
-<th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-Name
-</th>
-<th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-Color
-</th>
-<th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-Category
-</th>
-<th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-Price
-</th>
-<th scope="col" class="relative py-3 px-6">
-<span class="sr-only">Edit</span>
-</th>
-</tr>
-</thead>
-<tbody>
-
-{{#each tickets}}
-<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-black text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
     
-<td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-    <img class="w-12 h-16"
-                                                src="https://image.tmdb.org/t/p/original//tUkY0WxffPZ9PoyC62PIyyUMGnt.jpg"
-                                                alt="" />
-{{this.movie.title}}
-</td>
-<td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-{{this.seatNumber}}
-</td>
-<td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-{{this.venue.name}}
-</td>
-<td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-{{this.venue.location}}
-</td>
-<td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-<a href="#" class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">Edit</a>
- </td>
-</tr>
-{{/each}}
-
-
-</tbody>
-</table>
-</div>
-</div>
-</div>
+  </div>
 </div>
 
 
 
-{{!-- <div class="bg-white p-8 rounded-md w-full">
-	<div class=" flex items-center justify-between pb-6">
-		<div>
-			<h2 class="text-gray-600 font-semibold">Products Oder</h2>
-			<span class="text-xs">All products item</span>
-		</div>
-		<div class="flex items-center justify-between">
-			<div class="flex bg-gray-50 items-center p-2 rounded-md">
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-					fill="currentColor">
-					<path fill-rule="evenodd"
-						d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-						clip-rule="evenodd" />
-				</svg>
-				<input class="bg-gray-50 outline-none ml-1 block " type="text" name="" id="" placeholder="search...">
+
+
+
+
+<div class="flex justify-center pt-10 pb-15" style="margin:auto">
+<div class="pr-10 pb-10">
+          <div class="flex justify-center  overflow-hidden bg-white rounded-lg">
+            <div class="hidden md:flex md:flex-shrink-0">
+              <div class="flex flex-col w-64">
+                <div class="
+              flex flex-col flex-grow
+              pt-5
+              overflow-y-auto
+              bg-white
+              border-r border-gray-50
+            ">
+                  <div class="flex flex-col items-center flex-shrink-0 px-4">
+                    <a href="/" class="px-8 text-left focus:outline-none">
+                      <h2 class="
+                    block
+                    p-2
+                    text-xl
+                    font-medium
+                    tracking-tighter
+                    text-gray-900
+                    transition
+                    duration-500
+                    ease-in-out
+                    transform
+                    cursor-pointer
+                    hover:text-gray-900
+                  ">My Account</h2>
+                    </a>
+                    <button class="hidden rounded-lg focus:outline-none focus:shadow-outline">
+                      <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="flex flex-col flex-grow px-4 mt-5 pb-10">
+                    <nav class="flex-1 space-y-1 bg-white">
+                      <ul>
+                        {{!-- <li>
+                          <a class="
+                        inline-flex
+                        items-center
+                        w-full
+                        px-4
+                        py-2
+                        mt-1
+                        text-base text-gray-900
+                        transition
+                        duration-500
+                        ease-in-out
+                        transform
+                        rounded-lg
+                        bg-gray-50
+                        focus:shadow-outline
+                      " white="" 70="" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            <span class="ml-4"> Overview</span>
+                          </a>
+                        </li> --}}
+                        {{!-- <li>
+                          <a class="
+                        inline-flex
+                        items-center
+                        w-full
+                        px-4
+                        py-2
+                        mt-1
+                        text-base text-gray-900
+                        transition
+                        duration-500
+                        ease-in-out
+                        transform
+                        rounded-lg
+                        focus:shadow-outline
+                        hover:bg-gray-50
+                      " href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                            <span class="ml-4">Chat</span>
+                          </a>
+                        </li> --}}
+                        <li>
+                          <a class="
+                        inline-flex
+                        items-center
+                        w-full
+                        px-4
+                        py-2
+                        mt-1
+                        text-base text-gray-900
+                        transition
+                        duration-500
+                        ease-in-out
+                        transform
+                        rounded-lg
+                        focus:shadow-outline
+                        hover:bg-gray-50
+                      " href="/user/edit">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            <span class="ml-4">Info</span>
+                          </a>
+                        </li>
+                        {{!-- <li>
+                          <a class="
+                        inline-flex
+                        items-center
+                        w-full
+                        px-4
+                        py-2
+                        mt-1
+                        text-base text-gray-900
+                        transition
+                        duration-500
+                        ease-in-out
+                        transform
+                        rounded-lg
+                        focus:shadow-outline
+                        hover:bg-gray-50
+                      " href="#"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="ml-4">Settings</span></a>
+                        </li> --}}
+                     
+                        <li>
+                          <a class="
+                        inline-flex
+                        items-center
+                        w-full
+                        px-4
+                        py-2
+                        mt-1
+                        text-base text-gray-900
+                        transition
+                        duration-500
+                        ease-in-out
+                        transform
+                        rounded-lg
+                        focus:shadow-outline
+                        hover:bg-gray-50
+                      " white="" 70="" href="/user/change-my-password">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                            <span class="ml-4">Change Password</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a class="
+                        inline-flex
+                        items-center
+                        w-full
+                        px-4
+                        py-2
+                        mt-1
+                        text-base text-gray-900
+                        transition
+                        duration-500
+                        ease-in-out
+                        transform
+                        rounded-lg
+                        focus:shadow-outline
+                        hover:bg-gray-50
+                      " white="" 70="" href="/user/tickets">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="ml-4">Movie Tickets</span>
+                          </a>
+                        </li>
+                        {{!-- <li>
+                          <a class="
+                        inline-flex
+                        items-center
+                        w-full
+                        px-4
+                        py-2
+                        mt-1
+                        text-base text-gray-900
+                        transition
+                        duration-500
+                        ease-in-out
+                        transform
+                        rounded-lg
+                        focus:shadow-outline
+                        hover:bg-gray-50
+                      " white="" 70="" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                            <span class="ml-4"> Dashboard</span>
+                          </a>
+                        </li> --}}
+                      </ul>
+                    </nav>
+                  </div>
+                  {{!-- <div class="flex flex-shrink-0 p-4 px-4 bg-gray-50">
+                    <a href="#" class="flex-shrink-0 block w-full group">
+                      <div class="flex items-center">
+                        <div>
+                          <img class="inline-block rounded-full h-9 w-9" src="https://d33wubrfki0l68.cloudfront.net/c5b13c40dad2f6fe28f2f7f016c9d027f2a39306/afe15/images/wickedlabslogo.jpg" alt="">
+                        </div>
+                        <div class="ml-3">
+                          <p class="text-sm font-medium text-gray-900">Wicked Labs</p>
+                        </div>
+                      </div>
+                    </a>
+                  </div> --}}
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col flex-1 w-0 overflow-hidden">
+              <main class="relative flex-1 overflow-y-auto focus:outline-none">
+                <div class="py-6">
+                  <div class="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
+                    <h1 class="text-lg text-neutral-600"> Here is where you put your stuff </h1>
+                  </div>
+                  <div class="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
+                    <!-- Put your content here -->
+                   
+                    {{!-- <div class="py-4">
+                      <div class="rounded-lg bg-gray-50 h-96"></div>
+                    </div> --}}
+                    <!-- Do not cross the closing tag underneath this coment-->
+                  </div>
+                </div>
+              </main>
+            </div>
           </div>
-				<div class="lg:ml-40 ml-10 space-x-8">
-					<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">New Report</button>
-					<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Create</button>
-				</div>
-			</div>
-		</div>
-		<div>
-			<div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-				<div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-					<table class="min-w-full leading-normal">
-						<thead>
-							<tr>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Movie
-								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Seat
-								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Showtime Date
-								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Showtime Time
-								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Status
-								</th>
-                                <th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Action
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-
-{{#each tickets}}
+                  </div>
 
 
-							<tr>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<div class="flex items-center">
-										<div class="flex-shrink-0 w-24 h-30">
-											<img class="w-full h-full"
-                                                src="https://image.tmdb.org/t/p/original//tUkY0WxffPZ9PoyC62PIyyUMGnt.jpg"
-                                                alt="" />
-                                        </div>
-											<div class="ml-3">
-												<p class="text-gray-900 whitespace-no-wrap">
-													{{this.movie.title}}
-												</p>
-											</div>
-										</div>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">Admin</p>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">
-										Jan 21, 2020
-									</p>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">
-										43
-									</p>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<span
-                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                        <span aria-hidden
-                                            class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-									<span class="relative">Active</span>
-									</span>
-								</td>
-                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm">
-									<button id="dropdownButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Action <svg class="ml-2 w-2 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+
+                   <div class="flex flex-col">
+                       {{!-- TABLE 1 START --}}
+                         
+  <div class="pb-2">ACTIVE / EXPIRED TICKETS</div>
+  
+  
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Movie & Seat
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Date & Time
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Venue
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+         
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Edit</span>
+              
+              </th>
+            </tr>
+          </thead>
+{{#if tickets}}
+          <tbody class="bg-white divide-y divide-gray-200">
+              {{#each tickets}}
+              {{!-- MODAL --}}
+              <div class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="popup-modal{{@index}}" aria-hidden="true">
+<div class="relative px-4 w-full max-w-md h-full md:h-auto">
+
+<div class="relative bg-white rounded-lg shadow dark:bg-gray-100">
+
+<div class="flex justify-end p-2">
+<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal{{@index}}">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+</button>
+</div>
+
+<div class="p-6 pt-0 text-center">
+<svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+<h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to cancel this Ticket? {{@index}}</h3>
+<form action="/checkout/refund/{{_id}}">
+<button type="submit" data-modal-toggle="popup-modal{{@index}}" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+Yes, I'm sure
+</button>
+</form>
+<button data-modal-toggle="popup-modal{{@index}}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600">No, cancel</button>
+</div>
+</div>
+</div>
+</div>
+              {{!-- MODAL --}}
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-20 w-15">
+                    <img class="h-20 w-15 " src="https://image.tmdb.org/t/p/original/{{this.movie.poster}}" alt="">
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">
+                      {{this.movie.title}}
+                    </div>
+                    <div class="text-sm text-gray-500">
+                      {{this.seatNumber}}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{this.date}}</div>
+                <div class="text-sm text-gray-500">{{this.time}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{this.venue.name}}</div>
+                <div class="text-sm text-gray-500">{{this.venue.location}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  Active
+                </span>
+              </td>
+           
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+            
+                 <button id="dropdownButton{{@index}}" data-dropdown-toggle="dropdown{{@index}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Edit<svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
 
 <!-- Dropdown menu -->
-<div id="dropdown" class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-    <ul class="py-1" aria-labelledby="dropdownButton">
+<div id="dropdown{{@index}}" class="hidden z-10 w-22 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+    <ul class="py-1" aria-labelledby="dropdownButton{{@index}}">
       <li>
-        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+        <a href="/seats/change-seats/{{this.movie._id}}/{{this.venue._id}}?movieTime={{this.time}}&movieDate={{this.date}}&seat={{this.seatNumber}}&id={{this._id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">Change Seats</a>
       </li>
       <li>
-        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200" data-modal-toggle="popup-modal{{@index}}">Cancel Ticket</a>
+      </li>
+      {{!-- <li>
+        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">Earnings</a>
       </li>
       <li>
-        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-      </li>
-      <li>
-        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-      </li>
+        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">Sign out</a>
+      </li> --}}
     </ul>
 </div>
-								</td>
-                                
-							</tr>
-							
+              </td>
+            </tr>
+         
 {{/each}}
+            <!-- More people... -->
+          </tbody>
+           {{else}}
+ <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">NO TICKETS TO DISPLAY</div>
+              </td>        {{/if}}
+        </table>
+      </div>
+    </div>
+  </div>
+  {{!-- TABLE 1 END --}}
 
+  {{!-- TABLE 2 START --}}
+  <br>
+  <div class="pb-2">REFUNDED TICKETS    </div>
 
-
-						</tbody>
-					</table>
-					<div
-						class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
-						<span class="text-xs xs:text-sm text-gray-900">
-                            Showing 1 to 4 of 50 Entries
-                        </span>
-						<div class="inline-flex mt-2 xs:mt-0">
-							<button
-                                class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">
-                                Prev
-                            </button>
-							&nbsp; &nbsp;
-							<button
-                                class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">
-                                Next
-                            </button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> --}}
-
-{{#each tickets}}
-<br>Ticket ID: {{this._id}}<br>
-<a href="/checkout/refund/{{_id}}">REFUND</a>
-<br>Movie Title: {{this.movie.title}}<br>
-<br>Seat Number: {{this.seatNumber}}<br>
-<br>Venue: {{this.venue.name}}<br>
-<br>Location: {{this.venue.location}}<br>
-<br>
-<br>
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 pb-5">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Movie & Seat
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Date & Time
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Venue
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+             
+            </tr>
+          </thead>
+          {{#if refundedTickets}}
+          <tbody class="bg-white divide-y divide-gray-200">
+              {{#each refundedTickets}}
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-20 w-15">
+                    <img class="h-20 w-15 " src="https://image.tmdb.org/t/p/original/{{this.movie.poster}}" alt="">
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">
+                      {{this.movie.title}}
+                    </div>
+                    <div class="text-sm text-gray-500">
+                      {{this.seatNumber}}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{this.date}}</div>
+                <div class="text-sm text-gray-500">{{this.time}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{this.venue.name}}</div>
+                <div class="text-sm text-gray-500">{{this.venue.location}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                  Refunded
+                </span>
+              </td>
+            
+              
+            </tr>
 {{/each}}
+            <!-- More people... -->
+          </tbody>
+            {{else}}
+ <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">NO TICKETS TO DISPLAY</div>
+              </td>        {{/if}}
+        </table>
+      </div>
+    </div>
+  </div>
+{{!-- TABLE 2 END --}}
 
-
-{{!-- <a href="#" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-<img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://image.tmdb.org/t/p/original//tUkY0WxffPZ9PoyC62PIyyUMGnt.jpg" alt="">
-<div class="flex flex-col justify-between p-4 leading-normal">
-<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
 </div>
-</a> --}}
+</div>
+<!-- This example requires Tailwind CSS v2.0+ -->
+

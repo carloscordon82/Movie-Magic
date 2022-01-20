@@ -95,10 +95,19 @@ router.get("/success", isLoggedIn, async (req, res, next) => {
         )
 
           .then((updatedTickets) => {
-            req.session.user.tempSeats = [];
-            console.log({ updatedTickets });
-            req.session.user = updatedUser;
-            res.render("checkout/success");
+            Ticket.find({ _id: { $in: req.session.user.tempSeats } })
+              .populate("venue")
+              .populate("movie")
+
+              .then((tickets) => {
+                let price = tickets.length * 20;
+                req.session.user.tempSeats = [];
+                req.session.user = updatedUser;
+                res.render("checkout/success", { tickets, price });
+              })
+              .catch((err) => {
+                next(err);
+              });
           })
           .catch((err) => next(err));
       })
@@ -151,8 +160,18 @@ router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {
                 }
               )
                 .then((result3) => {
-                  console.log("test succes");
-                  res.redirect("/user/tickets");
+                  User.findById(req.session.user._id)
+                    .then((found) => {
+                      console.log(
+                        "test succes",
+                        req.session.user,
+                        "results3",
+                        found
+                      );
+                      req.session.user = found;
+                      res.redirect("/user/tickets");
+                    })
+                    .catch((err) => next(err));
                 })
                 .catch((err) => next(err));
             })

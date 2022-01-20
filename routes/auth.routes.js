@@ -21,12 +21,16 @@ router.post("/login", (req, res, next) => {
   if (!username) {
     return res
       .status(400)
-      .render("auth/login", { errorMessage: "Please provide your username." });
+      .render("auth/login", {
+        errorMessage: "Please provide your username.",
+        layout: false,
+      });
   }
 
   if (password.length < 8) {
     return res.status(400).render("auth/login", {
       errorMessage: "Your password needs to be at least 8 characters long.",
+      layout: false,
     });
   }
 
@@ -35,14 +39,20 @@ router.post("/login", (req, res, next) => {
       if (!user) {
         return res
           .status(400)
-          .render("auth/login", { errorMessage: "Wrong credentials." });
+          .render("auth/login", {
+            errorMessage: "Wrong credentials.",
+            layout: false,
+          });
       }
 
       bcrypt.compare(password, user.password).then((isSamePassword) => {
         if (!isSamePassword) {
           return res
             .status(400)
-            .render("auth/login", { errorMessage: "Wrong credentials." });
+            .render("auth/login", {
+              errorMessage: "Wrong credentials.",
+              layout: false,
+            });
         }
         req.session.user = user;
         req.app.locals.globalUser = user;
@@ -67,40 +77,45 @@ router.post("/login", (req, res, next) => {
 });
 
 router.get("/signup", (req, res, next) => {
-  res.render("auth/signup");
+  res.render("auth/signup", { layout: false });
 });
 
 router.post("/signup", (req, res, next) => {
   const { username, firstName, lastName, password } = req.body;
   if (!username) {
-    return res
-      .status(400)
-      .render("auth/signup", { errorMessage: "Please provide your username." });
+    return res.status(400).render("auth/signup", {
+      layout: false,
+      errorMessage: "Please provide your username.",
+    });
   }
 
   if (!firstName) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please provide your First Name.",
+      layout: false,
     });
   }
 
   if (!lastName) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please provide your Last Name.",
+      layout: false,
     });
   }
 
   if (password.length < 8) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Your password needs to be at least 8 characters long.",
+      layout: false,
     });
   }
 
   User.findOne({ username }).then((found) => {
     if (found) {
-      return res
-        .status(400)
-        .render("auth/signup", { errorMessage: "Username already taken." });
+      return res.status(400).render("auth/signup", {
+        errorMessage: "Username already taken.",
+        layout: false,
+      });
     }
 
     return bcrypt
@@ -124,19 +139,22 @@ router.post("/signup", (req, res, next) => {
       })
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
-          return res
-            .status(400)
-            .render("auth/signup", { errorMessage: error.message });
+          return res.status(400).render("auth/signup", {
+            errorMessage: error.message,
+            layout: false,
+          });
         }
         if (error.code === 11000) {
           return res.status(400).render("auth/signup", {
             errorMessage:
               "Username need to be unique. The username you chose is already in use.",
+            layout: false,
           });
         }
-        return res
-          .status(500)
-          .render("auth/signup", { errorMessage: error.message });
+        return res.status(500).render("auth/signup", {
+          errorMessage: error.message,
+          layout: false,
+        });
       });
   });
 });
@@ -147,9 +165,9 @@ router.get("/logout", (req, res) => {
     if (err) {
       return res
         .status(500)
-        .render("auth/logout", { errorMessage: err.message });
+        .render("auth/logout", { errorMessage: err.message, layout: false });
     }
-    res.redirect("login");
+    res.redirect("/");
   });
 });
 

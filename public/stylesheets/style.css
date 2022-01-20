@@ -71,7 +71,11 @@
 }
 
 .occupied {
-  background-color: #fff;
+  background-color: orange;
+}
+
+.you {
+  background-color: red;
 }
 
 .seat:nth-of-type(2) {
@@ -124,7 +128,7 @@
 }
 
 .screen {
-  background: #fff;
+  background: gray;
   height: 70px;
   width: 70%;
   margin: 15px 0;
@@ -154,6 +158,8 @@ p.text span {
   align-items: baseline;
   margin-top: 9px;
   font-size: 12px;
+  pointer-events: none;
+  color: white;
 }
 
 body {

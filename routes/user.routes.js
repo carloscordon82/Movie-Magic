@@ -134,6 +134,20 @@ router.get("/tickets", isLoggedIn, (req, res, next) => {
         model: "Venue",
       },
     })
+    .populate({
+      path: "refundedTickets",
+      populate: {
+        path: "movie",
+        model: "Movie",
+      },
+    })
+    .populate({
+      path: "refundedTickets",
+      populate: {
+        path: "venue",
+        model: "Venue",
+      },
+    })
     .then((data) => {
       console.log("DATA", data);
       res.render("user/tickets", data);
