@@ -20,7 +20,7 @@ router.get("/", (req, res, next) => {
   });
   Movie.find()
     .then((movies) => {
-      if (movies) {
+      if (movies.length) {
         console.log("MOVIES", movies);
 
         movies.forEach((element, i) => {
