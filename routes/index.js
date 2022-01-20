@@ -21,6 +21,8 @@ router.get("/", (req, res, next) => {
   Movie.find()
     .then((movies) => {
       if (movies) {
+        console.log("MOVIES", movies);
+
         movies.forEach((element, i) => {
           movies[i].odd = i % 2;
           console.log("odd", element.odd);
