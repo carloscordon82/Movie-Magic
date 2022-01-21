@@ -61,13 +61,7 @@ router.get("/", (req, res, next) => {
         });
         // console.log("MOVIES", movies[0].odd);
       }
-      let date = new Date(movies[1].createdAt);
-      const [month, day, year] = [
-        date.getMonth(),
-        date.getDate(),
-        date.getFullYear(),
-      ];
-      console.log(date, [month + 1, day, year]);
+
       res.render("movies/movies", { movies, today });
     })
     .catch((err) => {
