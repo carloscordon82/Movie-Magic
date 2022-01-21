@@ -15,17 +15,23 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const saltRounds = 10;
 
 router.get("/dashboard", isLoggedIn, (req, res, next) => {
-  res.render("user/dashboard", req.session.user);
+  res.redirect("tickets");
 });
 
 router.get("/edit", isLoggedIn, (req, res, next) => {
   console.log("EDIT", req.session.user);
-  res.render("user/edit", req.session.user);
+  res.render("user/edit");
 });
 
 router.post("/edit", isLoggedIn, (req, res, next) => {
+  function ValidateEmail(email) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      return true;
+    }
+    return false;
+  }
   let username = req.session.user.username;
-  const { firstName, lastName } = req.body;
+  const { firstName, lastName, email } = req.body;
 
   if (!firstName) {
     return res.status(400).render("user/edit", {
@@ -43,9 +49,21 @@ router.post("/edit", isLoggedIn, (req, res, next) => {
     });
   }
 
+  if (!email) {
+    return res.status(400).render("user/edit", {
+      errorMessage: "Please provide an Email.",
+    });
+  }
+
+  if (!ValidateEmail(email)) {
+    return res.status(400).render("user/edit", {
+      errorMessage: "Please provide a valid Email.",
+    });
+  }
+
   User.findOneAndUpdate(
     { username },
-    { firstName: firstName, lastName: lastName },
+    { firstName: firstName, lastName: lastName, email: email },
     {
       returnOriginal: false,
     }
@@ -53,7 +71,10 @@ router.post("/edit", isLoggedIn, (req, res, next) => {
     .then((found) => {
       req.session.user = found;
       req.app.locals.globalUser = found;
-      res.redirect("/user/dashboard");
+      return res.status(200).render("user/edit", {
+        successMessage: "Info updated Succesfully",
+      });
+      // res.redirect("/user/dashboard");
     })
     .catch((error) => {});
 });
@@ -95,7 +116,10 @@ router.post("/change-my-password", isLoggedIn, (req, res, next) => {
             .then((found) => {
               req.session.user = found;
               req.app.locals.globalUser = found;
-              res.redirect("/user/dashboard");
+              return res.status(200).render("user/change-my-password", {
+                successMessage: "Password Changed Succesfully",
+              });
+              // res.redirect("/user/dashboard");
             })
 
             .catch((error) => {

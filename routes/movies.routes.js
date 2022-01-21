@@ -40,8 +40,10 @@ function convertDate(data) {
   var month = months[convertedStartDate.getMonth() + 1];
   var weekDay = days[convertedStartDate.getDay()];
   var day = convertedStartDate.getDate();
+  var year = convertedStartDate.getFullYear();
+  var pureMonth = convertedStartDate.getMonth() + 1;
 
-  return { day, month, weekDay };
+  return { day, month, weekDay, year, pureMonth };
 }
 
 router.get("/", (req, res, next) => {
@@ -50,12 +52,38 @@ router.get("/", (req, res, next) => {
   });
   Movie.find()
     .then((movies) => {
-      console.log("TODAY", today);
+      if (movies.length) {
+        // console.log("MOVIES", movies);
+
+        movies.forEach((element, i) => {
+          movies[i].odd = i % 2;
+          console.log("odd", element.odd);
+        });
+        // console.log("MOVIES", movies[0].odd);
+      }
+      let date = new Date(movies[1].createdAt);
+      const [month, day, year] = [
+        date.getMonth(),
+        date.getDate(),
+        date.getFullYear(),
+      ];
+      console.log(date, [month + 1, day, year]);
       res.render("movies/movies", { movies, today });
     })
     .catch((err) => {
       console.log("Something went wrong", err);
     });
+  // let today = new Date().toLocaleDateString("en-US", {
+  //   timeZone: "America/New_York",
+  // });
+  // Movie.find()
+  //   .then((movies) => {
+  //     console.log("TODAY", convertDate(movies[1].createdAt));
+  //     res.render("movies/movies", { movies, today });
+  //   })
+  //   .catch((err) => {
+  //     console.log("Something went wrong", err);
+  //   });
 });
 
 router.get("/:movieId/", (req, res, next) => {

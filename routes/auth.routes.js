@@ -19,12 +19,10 @@ router.post("/login", (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username) {
-    return res
-      .status(400)
-      .render("auth/login", {
-        errorMessage: "Please provide your username.",
-        layout: false,
-      });
+    return res.status(400).render("auth/login", {
+      errorMessage: "Please provide your username.",
+      layout: false,
+    });
   }
 
   if (password.length < 8) {
@@ -37,32 +35,23 @@ router.post("/login", (req, res, next) => {
   User.findOne({ username })
     .then((user) => {
       if (!user) {
-        return res
-          .status(400)
-          .render("auth/login", {
-            errorMessage: "Wrong credentials.",
-            layout: false,
-          });
+        return res.status(400).render("auth/login", {
+          errorMessage: "Wrong credentials.",
+          layout: false,
+        });
       }
 
       bcrypt.compare(password, user.password).then((isSamePassword) => {
         if (!isSamePassword) {
-          return res
-            .status(400)
-            .render("auth/login", {
-              errorMessage: "Wrong credentials.",
-              layout: false,
-            });
+          return res.status(400).render("auth/login", {
+            errorMessage: "Wrong credentials.",
+            layout: false,
+          });
         }
         req.session.user = user;
         req.app.locals.globalUser = user;
         req.session.user.tempSeats = [];
-        console.log(
-          "ORIGNAL",
-          req.body.redirect,
-          "ORIGNAL 2",
-          req.body.originalUrl
-        );
+
         if (req.body.redirect) {
           return res.redirect(`${req.body.redirect}`);
         } else {
@@ -81,7 +70,13 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", (req, res, next) => {
-  const { username, firstName, lastName, password } = req.body;
+  function ValidateEmail(email) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      return true;
+    }
+    return false;
+  }
+  const { username, firstName, lastName, email, password } = req.body;
   if (!username) {
     return res.status(400).render("auth/signup", {
       layout: false,
@@ -110,6 +105,20 @@ router.post("/signup", (req, res, next) => {
     });
   }
 
+  if (!email) {
+    return res.status(400).render("auth/signup", {
+      errorMessage: "Please provide an Email.",
+      layout: false,
+    });
+  }
+
+  if (!ValidateEmail(email)) {
+    return res.status(400).render("auth/signup", {
+      errorMessage: "Please provide a valid Email.",
+      layout: false,
+    });
+  }
+
   User.findOne({ username }).then((found) => {
     if (found) {
       return res.status(400).render("auth/signup", {
@@ -126,6 +135,7 @@ router.post("/signup", (req, res, next) => {
           username,
           firstName,
           lastName,
+          email,
           password: hashedPassword,
           isAdmin: false,
         });

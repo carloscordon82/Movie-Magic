@@ -17,14 +17,41 @@ const isAdminLoggedIn = require("../middleware/isAdminLoggedIn");
 const saltRounds = 10;
 
 router.get("/", isAdminLoggedIn, (req, res, next) => {
-  console.log("CURRENT USER", req.app.locals.globalUser);
-  res.render("admin/admin");
+  res.redirect("admin/manage-movies");
 });
 
 router.get("/manage-movies", (req, res, next) => {
   Movie.find()
     .then((movies) => {
-      res.render("admin/manage-movies", { movies });
+      movies.forEach((element, i) => {
+        Showtime.find({ movie: element._id })
+          .then((showtimes) => {
+            element.shows = showtimes.length;
+            let seats = 0;
+            showtimes.forEach((showtime) => {
+              showtime.tickets.forEach((ticket) => {
+                if (!ticket.occupied) seats++;
+              });
+            });
+
+            element.seats = seats;
+            let date = new Date(element.createdAt);
+            const [month, day, year] = [
+              date.getMonth(),
+              date.getDate(),
+              date.getFullYear(),
+            ];
+            const [hour, minutes] = [date.getHours(), date.getMinutes()];
+            element.createdDate = `${month + 1}/${day}/${year}`;
+            element.createdTime = `${hour}:${minutes}`;
+            if (i === movies.length - 1) {
+              res.render("admin/manage-movies", { movies });
+            }
+          })
+          .catch((err) => {
+            next(err);
+          });
+      });
     })
     .catch((err) => {
       next(err);

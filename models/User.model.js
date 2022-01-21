@@ -19,6 +19,11 @@ const userSchema = new Schema({
     required: true,
   },
 
+  email: {
+    type: String,
+    required: true,
+  },
+
   tickets: [{ type: mongoose.Types.ObjectId, ref: "Ticket" }],
   refundedTickets: [{ type: mongoose.Types.ObjectId, ref: "Ticket" }],
   isAdmin: Boolean,
