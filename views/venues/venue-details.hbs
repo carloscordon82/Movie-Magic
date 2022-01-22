@@ -21,7 +21,7 @@
                 <p class="text-gray-700 text-base mb-4">
                     {{!-- {{../movie.overview}} --}}
                 </p> 
-                <p class="text-gray-600 text-lg"> Amenities: Big Seats, Dolby Surround</p>
+                <p class="text-gray-600 text-lg"> Amenities: {{venue.ameneties}}</p>
 
                 <p class="text-gray-600 text-lg"> {{venue.location}}</p>
                 <br>
@@ -49,7 +49,7 @@
 
 {{#if movies}}
 {{#each movies}}
-<div class="flex justify-center w-auto" style="padding: 50px;">
+<div class="flex justify-center w-auto" style="padding: 20px;">
   <div class="flex flex-col md:flex-row md:full rounded-lg bg-white shadow-lg w-11/12">
 
     <img class=" w-96 md:h-auto object-cover md:w-96 rounded-t-lg md:rounded-none md:rounded-l-lg" src="https://image.tmdb.org/t/p/original/{{movie.poster}}" alt="HTML tutorial" style="width:242px;"/>
@@ -104,8 +104,9 @@
 {{/each}}
 {{/if}}
 
-
+<br>
 
 {{#if errorMessage}}
    {{errorMessage}}
 {{/if}}
+

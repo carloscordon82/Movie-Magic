@@ -1,10 +1,4 @@
-<div class="flex items-center w-screen justify-center">
-  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
 
-    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-black text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
-    
-  </div>
-</div>
 
 {{#if errorMessage}}
    {{errorMessage}}
@@ -82,7 +76,7 @@
   </ul>
   
   <div class="container2">
-    <div class="screen"></div>
+    <div class="screen" style="background-size:100% 100%; opacity: 0.5; background-image: url(https://image.tmdb.org/t/p/original/{{seats.[0].movie.backdrop}}); "></div>
     
     <div class="row">
       {{#each allSeats.row1}}

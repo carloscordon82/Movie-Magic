@@ -6,7 +6,6 @@
 
 
 
-
 <div class="flex justify-center pt-10 pb-15" style="margin:auto">
 <div class="pr-10 pb-10">
           <div class="flex justify-center  overflow-hidden bg-white rounded-lg">
@@ -252,23 +251,23 @@
 
            
 <div class="pb-10 mt-5 w-1/2 md:mt-0 md:col-span-2">
-      <form action="/admin/create-venue" method="POST">
+      <form action="/admin/edit-venue/{{venue._id}}" method="POST">
         <div class="shadow overflow-hidden sm:rounded-md">
           <div class="px-4 py-5 bg-white sm:p-6">
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" name="name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input type="text" value="{{venue.name}} "name="name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
 
               <div class="col-span-6 sm:col-span-4">
                 <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-                <input type="text"  name="location" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input type="text" value="{{venue.location}}" name="location" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
 
               <div class="col-span-6 sm:col-span-4">
                 <label for="picUrl" class="block text-sm font-medium text-gray-700">Picture URL</label>
-                <input type="text"  name="picUrl" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input type="text" value="{{venue.picUrl}}" name="picUrl" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
 <!-- Required form plugin -->
 <link
@@ -301,7 +300,7 @@
 
 
 {{#if errorMessage}}
-      <div class="message pt-5" role="alert">
+      <div class="pt-5" role="alert">
   <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
     Error!
   </div>
@@ -311,7 +310,7 @@
 </div>
 {{/if}}
 {{#if successMessage}}
-<div class="message pt-5">
+<div class="pt-5">
 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
   <div class="flex">
     <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>

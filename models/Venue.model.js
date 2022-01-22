@@ -10,6 +10,10 @@ const venueSchema = new Schema({
     type: String,
   },
 
+  picUrl: {
+    type: String,
+  },
+
   ameneties: [
     {
       type: String,

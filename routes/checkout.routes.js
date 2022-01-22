@@ -28,7 +28,7 @@ router.post("/process", async (req, res, next) => {
         payment_method_types: ["card"],
         line_items: [
           {
-            price: "price_1KG7HyDpYP7j5IOA6q1gE5P3",
+            price: "price_1KKocmDpYP7j5IOAmbja4w1g",
             quantity: req.session.user.tempSeats.length,
           },
         ],

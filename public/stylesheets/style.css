@@ -230,7 +230,9 @@ body {
   padding: 8px;
   border-radius: 10px;
 }
-
+.top-element {
+  border-bottom: 10px solid black;
+}
 .container-dates div a {
   color: white;
 }

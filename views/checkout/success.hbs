@@ -1,11 +1,5 @@
 
-<div class="flex items-center w-screen justify-center">
-  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
 
-    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-black text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
-    
-  </div>
-</div>
 
 <!-- Section 1 -->
 <section class="relative py-0 bg-white lg:py-0">
@@ -23,7 +17,19 @@
                     <img class="small-poster" src="https://image.tmdb.org/t/p/original/{{tickets.[0].movie.poster}}" style="width: 300px;">
                 </div>
             </div>
+           <div>
+<h1 class="box-border mt-0 mb-4 text-3xl font-black text-gray-800 md:text-4xl lg:text-5xl xl:text-6xl">
+                Purchase
+                <span class="font-black text-indigo-600">Succesfull</span>.
+            </h1>
+            <form action="/user/tickets" method="GET">
 
+<div class="relative">
+                            <button type="submit" class="text-3xl inline-block w-1/2 px-5 py-4 text-lg font-medium text-center text-white transition duration-200 bg-orange-600 rounded-lg hover:bg-orange-400 ease">View Tickets</button>
+                            
+                        </div>
+                        </form>
+            </div>
             <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
                 <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
                     {{!-- <h4 class="w-full text-4xl font-medium leading-snug">Summary</h4> --}}

@@ -23,34 +23,33 @@ router.get("/", isAdminLoggedIn, (req, res, next) => {
 router.get("/manage-movies", (req, res, next) => {
   Movie.find()
     .then((movies) => {
+      let steps = [];
       movies.forEach((element, i) => {
-        Showtime.find({ movie: element._id })
-          .then((showtimes) => {
-            element.shows = showtimes.length;
-            let seats = 0;
-            showtimes.forEach((showtime) => {
-              showtime.tickets.forEach((ticket) => {
-                if (!ticket.occupied) seats++;
-              });
+        steps.push(Showtime.find({ movie: element._id }));
+      });
+      Promise.all(steps).then((values) => {
+        values.forEach((showtimes, i) => {
+          movies[i].shows = showtimes.length;
+          let seats = 0;
+          showtimes.forEach((showtime) => {
+            showtime.tickets.forEach((ticket) => {
+              if (!ticket.occupied) seats++;
             });
-
-            element.seats = seats;
-            let date = new Date(element.createdAt);
-            const [month, day, year] = [
-              date.getMonth(),
-              date.getDate(),
-              date.getFullYear(),
-            ];
-            const [hour, minutes] = [date.getHours(), date.getMinutes()];
-            element.createdDate = `${month + 1}/${day}/${year}`;
-            element.createdTime = `${hour}:${minutes}`;
-            if (i === movies.length - 1) {
-              res.render("admin/manage-movies", { movies });
-            }
-          })
-          .catch((err) => {
-            next(err);
           });
+
+          movies[i].seats = seats;
+          let date = new Date(movies[i].createdAt);
+          const [month, day, year] = [
+            date.getMonth(),
+            date.getDate(),
+            date.getFullYear(),
+          ];
+          const [hour, minutes] = [date.getHours(), date.getMinutes()];
+          movies[i].createdDate = `${month + 1}/${day}/${year}`;
+          movies[i].createdTime = `${hour}:${minutes}`;
+          console.log("PROMISES", movies[i].title, movies[i].seats);
+        });
+        res.render("admin/manage-movies", { movies });
       });
     })
     .catch((err) => {
@@ -118,35 +117,45 @@ router.get("/manage-showtimes", (req, res, next) => {
   Showtime.find()
     .populate("movie")
     .populate("venue")
+    .populate("tickets")
     .then((showtimes) => {
       // TESTING NEW OBJECT
-      result = showtimes.reduce(function (r, a) {
-        r[a.venue.name] = r[a.venue.name] || [];
-        r[a.venue.name].push(a);
-        return r;
-      }, Object.create(null));
+      // result = showtimes.reduce(function (r, a) {
+      //   r[a.venue.name] = r[a.venue.name] || [];
+      //   r[a.venue.name].push(a);
+      //   return r;
+      // }, Object.create(null));
 
-      for (const [key, value] of Object.entries(result)) {
-        result[key] = value.reduce(function (r, a) {
-          r[a.movie.title] = r[a.movie.title] || [];
-          r[a.movie.title].push(a);
-          return r;
-        }, Object.create(null));
-      }
+      // for (const [key, value] of Object.entries(result)) {
+      //   result[key] = value.reduce(function (r, a) {
+      //     r[a.movie.title] = r[a.movie.title] || [];
+      //     r[a.movie.title].push(a);
+      //     return r;
+      //   }, Object.create(null));
+      // }
 
-      for (const [key, value] of Object.entries(result)) {
-        for (const [key2, value2] of Object.entries(value)) {
-          result[key][key2] = value2.reduce(function (r, a) {
-            r[a.date] = r[a.date] || [];
-            r[a.date].push(a);
-            return r;
-          }, Object.create(null));
-        }
-      }
+      // for (const [key, value] of Object.entries(result)) {
+      //   for (const [key2, value2] of Object.entries(value)) {
+      //     result[key][key2] = value2.reduce(function (r, a) {
+      //       r[a.date] = r[a.date] || [];
+      //       r[a.date].push(a);
+      //       return r;
+      //     }, Object.create(null));
+      //   }
+      // }
 
       // END TEST
-      console.log(showtimes);
-      res.render("admin/manage-showtimes", { showtimes, result });
+      showtimes.forEach((each) => {
+        let amount = 0;
+        each.tickets.forEach((element) => {
+          if (element.occupied) amount++;
+        });
+        each.seatsFree = 64 - amount;
+        each.seatsOccupied = amount;
+        console.log("WORKING");
+      });
+      console.log("FINISHED");
+      res.render("admin/manage-showtimes", { showtimes });
     })
     .catch((err) => {
       next(err);
@@ -180,6 +189,28 @@ router.get("/create-venue", (req, res, next) => {
 });
 
 router.post("/create-venue", (req, res, next) => {
+  if (!req.body.name) {
+    return res.status(400).render("user/edit", {
+      firstName,
+      lastName,
+      errorMessage: "Please provide a Name.",
+    });
+  }
+
+  if (!req.body.location) {
+    return res.status(400).render("user/edit", {
+      firstName,
+      lastName,
+      errorMessage: "Please provide a Location.",
+    });
+  }
+
+  if (!req.body.picUrl) {
+    return res.status(400).render("user/edit", {
+      errorMessage: "Please provide a Picture URL.",
+    });
+  }
+
   Venue.create(req.body)
     .then((venue) => {
       console.log(venue);
@@ -189,6 +220,47 @@ router.post("/create-venue", (req, res, next) => {
       next(err);
     });
 });
+
+router.get("/edit-venue/:venueId", (req, res, next) => {
+  Venue.findById(req.params.venueId).then((venue) => {
+    console.log("VENUE", venue);
+    res.render("admin/edit-venue", { venue });
+  });
+});
+
+router.post("/edit-venue/:venueId", (req, res, next) => {
+  if (!req.body.name) {
+    return res.status(400).render("user/edit", {
+      firstName,
+      lastName,
+      errorMessage: "Please provide a Name.",
+    });
+  }
+
+  if (!req.body.location) {
+    return res.status(400).render("user/edit", {
+      firstName,
+      lastName,
+      errorMessage: "Please provide a Location.",
+    });
+  }
+
+  if (!req.body.picUrl) {
+    return res.status(400).render("user/edit", {
+      errorMessage: "Please provide a Picture URL.",
+    });
+  }
+
+  Venue.findByIdAndUpdate(req.params.venueId, req.body)
+    .then((venue) => {
+      console.log(venue);
+      res.redirect("/admin/manage-venues");
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.get("/create-movie", (req, res, next) => {
   res.render("admin/create-movie");
 });
@@ -271,6 +343,17 @@ router.get("/create-showtime", (req, res, next) => {
 });
 
 router.post("/create-showtime", (req, res, next) => {
+  let date1 = new Date(req.body.StartDate);
+  let date2 = new Date(req.body.EndDate);
+  let today = new Date();
+  today.setHours(today.getHours() - 23);
+
+  if (date1.getTime() > date2.getTime() || date1.getTime() < today.getTime()) {
+    return res.status(400).render("admin/create-showtime", {
+      errorMessage: "Invalid Dates",
+    });
+  }
+
   let getDaysArray = function (start, end) {
     for (
       var arr = [], dt = new Date(start);

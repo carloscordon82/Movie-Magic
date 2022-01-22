@@ -1,11 +1,5 @@
 
-<div class="flex items-center w-screen justify-center">
-  <div class="inline-flex shadow-md items-center w-screen justify-center hover:shadow-lg focus:shadow-lg" role="group">
 
-    <a  class="dates items-center w-screen justify-center selected-date  px-10 py-2.5 bg-black text-white font-medium text-xs leading-tight uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out focused"></a>
-    
-  </div>
-</div>
 
 <!-- Section 1 -->
 <section class="relative py-0 bg-white lg:py-0">
@@ -15,16 +9,19 @@
     src="https://image.tmdb.org/t/p/original/{{tickets.[0].movie.backdrop}}"
     alt=""
   >
+  
     <div class="demo-content flex flex-col items-center justify-between px-10 mx-auto max-w-7xl xl:px-5 lg:flex-row">
 
         <div class="flex flex-col items-center w-full px-10 pt-5 pb-20 lg:pt-20 lg:flex-row">
+           
             <div class="relative w-full max-w-md bg-cover lg:max-w-2xl lg:w-7/12">
                 <div class="relative flex flex-col items-center justify-center w-full h-full lg:pr-10">
                     <img class="small-poster" src="https://image.tmdb.org/t/p/original/{{tickets.[0].movie.poster}}" style="width: 300px;">
                 </div>
             </div>
-
+ 
             <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
+               
                 <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
                     {{!-- <h4 class="w-full text-4xl font-medium leading-snug">Summary</h4> --}}
                     <h4 class="w-full text-3xl text-gray-400 font-medium leading-snug">Movie</h4>
