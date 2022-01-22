@@ -26,7 +26,7 @@
                 <div class="relative flex flex-col items-center justify-center w-full h-full px-10 my-20 lg:px-16 lg:my-0">
                     <div class="flex flex-col items-start space-y-8 tracking-tight lg:max-w-3xl">
                         <div class="relative">
-    <img class=" w-96 h-96 md:h-auto object-cover md:w-96 rounded-t-lg md:rounded-none md:rounded-l-lg" src="/images/logo.png" alt="HTML tutorial" style="width:242px;"/>
+    <a href="/"><img  class=" w-96 h-96 md:h-auto object-cover md:w-96 rounded-t-lg md:rounded-none md:rounded-l-lg" src="/images/logo.png" alt="HTML tutorial" style="width:242px;"/></a>
     <br>
                             <h2 class="text-5xl font-bold text-white xl:text-6xl">Signup to enjoy all the Benefits of Movie Magic</h2>
                         </div>
@@ -36,34 +36,57 @@
                 </div>
             </div>
             <div class="w-full  lg:w-6/12 xl:w-5/12">
-                <div class="flex flex-col items-center justify-center w-full h-full p-10 lg:p-16 xl:p-24 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7">
+                <div class="flex flex-col items-right justify-center w-full h-full p-10 lg:p-16 xl:p-24 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7">
+                 {{#if errorMessage}}
+      <div class="message" style="padding-bottom: 20px;" role="alert">
+  <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+    Error!
+  </div>
+  <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+    <p>{{errorMessage}}</p>
+  </div>
+</div>
+{{/if}}
+{{#if successMessage}}
+<div class="pb-15">
+<div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+  <div class="flex">
+    <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+    <div>
+      <p class="font-bold">Success!</p>
+      <p class="text-sm">{{successMessage}}</p>
+    </div>
+  </div>
+</div>
+</div>
+{{/if}}
                     <h4 class="w-full text-3xl font-bold">Signup</h4>
                     <p class="text-lg text-gray-500">or, if you have an account you can <a href="/login" class="text-blue-600 underline">Sign In</a></p>
-                    <div class="relative w-full mt-10 space-y-8">
+                    <div class="relative w-full mt-10 space-y-5">
                         <div class="relative">
                             <label class="font-medium text-gray-900">First Name</label>
-                            <input type="text" name="firstName" class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Enter Your First Name">
+                            <input type="text" name="firstName" class="block w-full px-4 py-2 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Enter Your First Name">
                         </div>
                         <div class="relative">
                             <label class="font-medium text-gray-900">Last Name</label>
-                            <input type="text" name="lastName" class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Enter Your Last Name">
+                            <input type="text" name="lastName" class="block w-full px-4 py-2 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Enter Your Last Name">
                         </div>
                                                 <div class="relative">
                             <label class="font-medium text-gray-900">Username</label>
-                            <input type="text" name="username" class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Enter Your Username">
+                            <input type="text" name="username" class="block w-full px-4 py-2 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Enter Your Username">
                         </div>
 
                         <div class="relative">
                             <label class="font-medium text-gray-900">Email</label>
-                            <input type="text" name="email" class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Enter Your Email">
+                            <input type="text" name="email" class="block w-full px-4 py-2 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Enter Your Email">
                         </div>
 
                         <div class="relative">
                             <label class="font-medium text-gray-900">Password</label>
-                            <input type="password" name="password" class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Password">
+                            <input type="password" name="password" class="block w-full px-4 py-2 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" placeholder="Password">
                         </div>
                         <div class="relative">
-                            <button type="submit" class="inline-block w-full px-5 py-4 text-lg font-medium text-center text-white transition duration-200 bg-orange-600 rounded-lg hover:bg-orange-400 ease">Create Account</button>
+                            <button type="submit" class="inline-block w-full px-5 py-2 text-lg font-medium text-center text-white transition duration-200 bg-orange-600 rounded-lg hover:bg-orange-400 ease">Create Account</button>
                             
                         </div>
                     </div>

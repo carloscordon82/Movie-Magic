@@ -57,7 +57,7 @@ router.get("/manage-movies", (req, res, next) => {
     });
 });
 
-router.get("/delete-movie/:movieId", (req, res, next) => {
+router.get("/delete-movie/:movieId", isAdminLoggedIn, (req, res, next) => {
   console.log("DELETE");
   Movie.findByIdAndDelete(req.params.movieId)
     .then((movie) => {
@@ -80,7 +80,7 @@ router.get("/delete-movie/:movieId", (req, res, next) => {
     });
 });
 
-router.get("/manage-venues", (req, res, next) => {
+router.get("/manage-venues", isAdminLoggedIn, (req, res, next) => {
   Venue.find()
     .then((venues) => {
       res.render("admin/manage-venues", { venues });
@@ -90,7 +90,7 @@ router.get("/manage-venues", (req, res, next) => {
     });
 });
 
-router.get("/delete-venue/:venueId", (req, res, next) => {
+router.get("/delete-venue/:venueId", isAdminLoggedIn, (req, res, next) => {
   console.log("DELETE");
   Venue.findByIdAndDelete(req.params.venueId)
     .then((venue) => {
@@ -113,7 +113,7 @@ router.get("/delete-venue/:venueId", (req, res, next) => {
     });
 });
 
-router.get("/manage-showtimes", (req, res, next) => {
+router.get("/manage-showtimes", isAdminLoggedIn, (req, res, next) => {
   Showtime.find()
     .populate("movie")
     .populate("venue")
@@ -162,33 +162,37 @@ router.get("/manage-showtimes", (req, res, next) => {
     });
 });
 
-router.get("/delete-showtime/:showtimeId", (req, res, next) => {
-  console.log("DELETE");
-  Showtime.findByIdAndDelete(req.params.showtimeId)
-    .populate("tickets")
-    .then((showtime) => {
-      Ticket.deleteMany({
-        _id: {
-          $in: showtime.tickets,
-        },
-      })
-        .then((tickets) => {
-          res.redirect("../manage-showtimes");
+router.get(
+  "/delete-showtime/:showtimeId",
+  isAdminLoggedIn,
+  (req, res, next) => {
+    console.log("DELETE");
+    Showtime.findByIdAndDelete(req.params.showtimeId)
+      .populate("tickets")
+      .then((showtime) => {
+        Ticket.deleteMany({
+          _id: {
+            $in: showtime.tickets,
+          },
         })
-        .catch((err) => {
-          next(err);
-        });
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+          .then((tickets) => {
+            res.redirect("../manage-showtimes");
+          })
+          .catch((err) => {
+            next(err);
+          });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
-router.get("/create-venue", (req, res, next) => {
+router.get("/create-venue", isAdminLoggedIn, (req, res, next) => {
   res.render("admin/create-venue");
 });
 
-router.post("/create-venue", (req, res, next) => {
+router.post("/create-venue", isAdminLoggedIn, (req, res, next) => {
   if (!req.body.name) {
     return res.status(400).render("user/edit", {
       firstName,
@@ -221,14 +225,14 @@ router.post("/create-venue", (req, res, next) => {
     });
 });
 
-router.get("/edit-venue/:venueId", (req, res, next) => {
+router.get("/edit-venue/:venueId", isAdminLoggedIn, (req, res, next) => {
   Venue.findById(req.params.venueId).then((venue) => {
     console.log("VENUE", venue);
     res.render("admin/edit-venue", { venue });
   });
 });
 
-router.post("/edit-venue/:venueId", (req, res, next) => {
+router.post("/edit-venue/:venueId", isAdminLoggedIn, (req, res, next) => {
   if (!req.body.name) {
     return res.status(400).render("user/edit", {
       firstName,
@@ -261,7 +265,7 @@ router.post("/edit-venue/:venueId", (req, res, next) => {
     });
 });
 
-router.get("/create-movie", (req, res, next) => {
+router.get("/create-movie", isAdminLoggedIn, (req, res, next) => {
   res.render("admin/create-movie");
 });
 router.post("/search-movie", (req, res, next) => {
@@ -286,7 +290,7 @@ router.post("/search-movie", (req, res, next) => {
   }
 });
 
-router.get("/create-movie-id/:id", (req, res, next) => {
+router.get("/create-movie-id/:id", isAdminLoggedIn, (req, res, next) => {
   async function insert() {
     try {
       await axios
@@ -325,7 +329,7 @@ router.get("/create-movie-id/:id", (req, res, next) => {
   insert();
 });
 
-router.get("/create-showtime", (req, res, next) => {
+router.get("/create-showtime", isAdminLoggedIn, (req, res, next) => {
   Venue.find()
     .then((venues) => {
       Movie.find()
@@ -342,7 +346,7 @@ router.get("/create-showtime", (req, res, next) => {
     });
 });
 
-router.post("/create-showtime", (req, res, next) => {
+router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
   let date1 = new Date(req.body.StartDate);
   let date2 = new Date(req.body.EndDate);
   let today = new Date();

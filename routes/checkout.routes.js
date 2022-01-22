@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const seatsDefault = require("../config/seatsDefault");
 const timesDefault = require("../config/timesDefault");
-
+const htmlTemplate = require("../config/email");
 const User = require("../models/User.model");
 const Movie = require("../models/Movie.model");
 const Venue = require("../models/Venue.model");
@@ -9,13 +9,64 @@ const Showtime = require("../models/Showtime.model");
 const Ticket = require("../models/Ticket.model");
 const mongoose = require("mongoose");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
+let fs = require("fs");
+
 var url = require("url");
+const hbs = require("hbs");
+const nodemailer = require("nodemailer");
 const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const path = require("path");
 const { redirect } = require("express/lib/response");
 const { log } = require("console");
 const saltRounds = 10;
+
+function sendEmail(data) {
+  console.log("received for email this data", data);
+  let readHTMLFile = function (path, callback) {
+    fs.readFile(path, { encoding: "utf-8" }, function (err, html) {
+      if (err) {
+        callback(err);
+        throw err;
+      } else {
+        callback(null, html);
+      }
+    });
+  };
+
+  let transporter = nodemailer.createTransport({
+    host: "mail.realhomesgroup.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: "movie-theater@realhomesgroup.com",
+      pass: "56lmqw12",
+    },
+  });
+
+  readHTMLFile("invoice.html", function (err, html) {
+    var message = {
+      from: "movie-theater@realhomesgroup.com",
+      to: "memevertical@gmail.com",
+      subject: "Message title",
+      text: "Plaintext version of the message",
+      // attachments: [
+      //   {
+      //     filename: "attach.pdf",
+      //     path: path.join(__dirname, "/output.pdf"),
+      //     contentType: "application/pdf",
+      //   },
+      // ],
+      html: htmlTemplate(data),
+    };
+    transporter.sendMail(message, function (error, response) {
+      if (error) {
+        console.log(error);
+        callback(error);
+      }
+    });
+  });
+}
 
 router.post("/process", async (req, res, next) => {
   if (req.session.user.tempSeats.length > 0) {
@@ -58,7 +109,6 @@ router.post("/pre-summary", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/summary", isLoggedIn, (req, res, next) => {
-  console.log("TEMP SEATS", req.session.user.tempSeats);
   Ticket.find({ _id: { $in: req.session.user.tempSeats } })
     .populate("venue")
     .populate("movie")
@@ -103,6 +153,8 @@ router.get("/success", isLoggedIn, async (req, res, next) => {
                 let price = tickets.length * 20;
                 req.session.user.tempSeats = [];
                 req.session.user = updatedUser;
+
+                sendEmail(tickets);
                 res.render("checkout/success", { tickets, price });
               })
               .catch((err) => {
