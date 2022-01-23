@@ -475,8 +475,8 @@ const template = (tickets) => {
                           <table class="discount" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                             <tr>
                               <td align="center">
-                                <h1 class="f-fallback discount_heading">Thank you for your purchase!</h1>
-                                <!-- <p class="f-fallback discount_body">Thanks for your support! Here's a coupon for 10% off your next purchase if used by {{expiration_date}}.</p> -->
+                               
+                               
   
                                 <!-- Border based button
              https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->

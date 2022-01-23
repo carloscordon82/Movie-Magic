@@ -52,13 +52,13 @@
   <ul class="showcase">
     <li>
       <div class="flex flex-col justify-items-center	items-center	 ">
-      <div class="seat"></div>
+      <div class="layout1"></div>
       <small>Available</small>
       </div>
     </li>
     <li>
       <div class="flex flex-col justify-items-center	items-center	 ">
-      <div class="seat selected"></div>
+      <div class="layout1 selected"></div>
             
 
       <small>Selected</small>
@@ -67,7 +67,7 @@
     </li>
     <li>
       <div class="flex flex-col justify-items-center	items-center	 ">
-      <div class="seat occupied"></div>
+      <div class="layout1 occupied"></div>
 
       <small>Occupied</small>
             </div>
@@ -76,32 +76,33 @@
   </ul>
   
   <div class="container2">
-    <div class="screen" style="background-size:100% 100%; opacity: 0.5; background-image: url(https://image.tmdb.org/t/p/original/{{seats.[0].movie.backdrop}}); "></div>
+    <div class="screen" style="background-size:100% 100%; opacity: 0.5; background-image: url(https://image.tmdb.org/t/p/original/{{seats.[0].movie.backdrop2}}); "></div>
     
     <div class="row">
       {{#each allSeats.row1}}
-        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+      
+        <div class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}
       </div>
       <div class="row">
       {{#each allSeats.row2}}
-        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}      </div>
       <div class="row">
       {{#each allSeats.row3}}
-        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}      </div>
       <div class="row">
       {{#each allSeats.row4}}
-        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}      </div>
       <div class="row">
       {{#each allSeats.row5}}
-        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}      </div>
       <div class="row">
       {{#each allSeats.row6}}
-        <div class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}     
          </div>
     

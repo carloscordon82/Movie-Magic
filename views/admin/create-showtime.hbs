@@ -286,55 +286,6 @@
 
 
 
-
-<form action="/admin/create-showtime" method="POST">
-   
-  <br> <br>
-  
-  <br>
-  <div class="form-check">
-      <h1>Select Venue:</h1>
-      {{#each venues}}
-  <input class="form-check-input" type="radio" value="{{_id}}" name="venue" {{#unless @index}}checked{{/unless}}>
-  <label class="form-check-label" for="defaultCheck1">{{name}}</label>
-    {{/each}}
-          <h1>Select Movie:</h1>
-
-        {{#each movies}}
-  <input class="form-check-input" type="radio" value="{{_id}}" name="movie" {{#unless @index}}checked{{/unless}}>
-  <label class="form-check-label" for="defaultCheck1">{{title}}</label>
-    {{/each}}
-
-    <div class="form-check">
-              <h1>Select Times:</h1>
-
-                {{#each timesDefault}}
-
-  <input class="form-check-input" type="checkbox" value="{{this}}" name="time" checked>
-  <label class="form-check-label" for="defaultCheck1">{{this}}</label>
-      {{/each}}
-<br>
-<br>
-
-<label for="StartDateInput">Start Date: <input id="StartDateInput" type="date"
-        name="StartDate"></label>
-    <label for="EndDateInput">End Date: <input id="EndDateInput" type="date"
-        name="EndDate"></label>
-  </div>  
- 
-  </div> 
- <br>
-   <button type="submit">Submit</button>
-</form>
-<br>
-
-
-
-
-
 {{#if errorMessage}}
    {{errorMessage}}
 {{/if}}
-
-
-

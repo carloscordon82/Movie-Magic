@@ -278,7 +278,7 @@
 
 <label class="block sm:col-span-3 text-left" style="max-width: 300px">
   <span class="text-gray-700">Ameneties</span>
-  <select name="ameneties" class="form-multiselect block w-full mt-1" multiple>
+  <select name="ameneties" class="form-multiselect block w-full mt-1 " style="height: 112px;" multiple>
     <option>Dolby Surround</option>
     <option>Reclining Seats</option>
     <option>Food Service</option>
@@ -286,7 +286,35 @@
     <option>Valet Parking</option>
   </select>
 </label>
+
+
+
             </div>
+
+
+<br>
+            <h1>Select Layout:</h1>
+        <div class="flex flex-row flex-wrap text-center justify-left items-center">
+
+        {{!-- {{#each movies}} --}}
+        <div class=" flex flex-col align-items-center w-96 flex-wrap items-center">
+          <img class="" src="/images/layout1.png" alt="" style="width: 800px;">
+          <input class="form-check-input" type="radio" value="1" name="layout" checked>
+          <label class="h-12 form-check-label" for="defaultCheck1">VIP Seating</label>
+        </div>
+
+            <div class=" flex flex-col align-items-center w-96 flex-wrap items-center">
+          <img class="" src="/images/layout2.png" alt="" style="width: 800px;">
+          <input class="form-check-input" type="radio" value="2" name="layout">
+          <label class="h-12 form-check-label" for="defaultCheck1">Standard Seating</label>
+        </div>
+      {{!-- {{/each}} --}}
+        </div>
+
+
+
+
+
           </div>
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -332,60 +360,5 @@
     </div>
                   
 </div>
-
-
-
-
-{{!-- {{#each venues}}
-<div>
-    <a>{{name}}</a> <br>
-    <br>
-</div>
-<a href="delete-venue/{{_id}}">DELETE</a><br>
-<br>
-{{/each}}
-
-<a href="/admin/create-venue">ADD VENUE</a>
-<br>
-<br>
-<a href="/admin/">ADMIN DASHBOARD</a> --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<form action="/admin/create-venue" method="POST">
-   
-  <br> <br>
-  
-  <br>
-  <div class="form-check">
-      <h1>Create Venue:</h1>
-       <label >Name</label>
-  <input class="input" type="input" value="" name="name">
-  <label >Location</label>
-  <input class="input" type="input" value="" name="location">
-
-  
- 
-          
- <br><br>
-   <button type="submit">Submit</button>
-</form>
-<br>
-{{#if errorMessage}}
-   {{errorMessage}}
-{{/if}}
-
 
 

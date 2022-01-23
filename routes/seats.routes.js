@@ -83,6 +83,7 @@ router.get("/change-seats/:movieId/:venueId", isLoggedIn, (req, res, next) => {
         })
           .populate("tickets")
           .populate("movie")
+          .populate("venue")
           .then((seats) => {
             console.log("SEATS", seats);
             if (seats.length === 0) {
@@ -109,7 +110,7 @@ router.get("/change-seats/:movieId/:venueId", isLoggedIn, (req, res, next) => {
             let row5 = seats[0].tickets.slice(32, 40);
             let row6 = seats[0].tickets.slice(40, 48);
             allSeats = { row1, row2, row3, row4, row5, row6 };
-            // console.log("ALL SEATS", seats);
+            console.log("ALL SEATS", seats);
             // allSeats[2].occupied = true;
             let data = {
               allSeats,
@@ -145,6 +146,7 @@ router.get("/:movieId/:venueId", isLoggedIn, (req, res, next) => {
   })
     .populate("tickets")
     .populate("movie")
+    .populate("venue")
     .then((seats) => {
       console.log("SEATS", seats);
       if (seats.length === 0) {

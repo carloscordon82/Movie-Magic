@@ -53,20 +53,20 @@
   <ul class="showcase">
      <li>
       <div class="flex flex-col justify-items-center	items-center	 ">
-      <div class="seat you"></div>
+      <div class="layout1 you"></div>
       <small>Your Seat</small>
       </div>
     </li>
     <li>
       <div class="flex flex-col justify-items-center	items-center	 ">
-      <div class="seat"></div>
+      <div class="layout1"></div>
       <small>Available</small>
       </div>
     </li>
  
     <li>
       <div class="flex flex-col justify-items-center	items-center	 ">
-      <div class="seat occupied"></div>
+      <div class="layout1 occupied"></div>
 
       <small>Occupied</small>
             </div>
@@ -81,28 +81,28 @@
     <div class="row">
       {{#each allSeats.row1}}
     
-        <div data-modal-toggle="popup-modal-a{{@index}}" class="seat {{#if occupied}}occupied{{/if}} {{#if you}}you{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div data-modal-toggle="popup-modal-a{{@index}}" class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}} {{#if you}}you{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}
       </div>
       <div class="row">
       {{#each allSeats.row2}}
-        <div data-modal-toggle="popup-modal-b{{@index}}" class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div data-modal-toggle="popup-modal-b{{@index}}" class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}} {{#if you}}you{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}      </div>
       <div class="row">
       {{#each allSeats.row3}}
-        <div data-modal-toggle="popup-modal-c{{@index}}" class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div data-modal-toggle="popup-modal-c{{@index}}" class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}} {{#if you}}you{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}      </div>
       <div class="row">
       {{#each allSeats.row4}}
-        <div data-modal-toggle="popup-modal-d{{@index}}" class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div data-modal-toggle="popup-modal-d{{@index}}" class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}} {{#if you}}you{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}      </div>
       <div class="row">
       {{#each allSeats.row5}}
-        <div data-modal-toggle="popup-modal-e{{@index}}" class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div data-modal-toggle="popup-modal-e{{@index}}" class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}} {{#if you}}you{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}      </div>
       <div class="row">
       {{#each allSeats.row6}}
-        <div data-modal-toggle="popup-modal-f{{@index}}" class="seat {{#if occupied}}occupied{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
+        <div data-modal-toggle="popup-modal-f{{@index}}" class="seat layout{{../seats.[0].venue.layout}} {{#if occupied}}occupied{{/if}} {{#if you}}you{{/if}}" {{#unless occupied}}id="{{id}}"{{/unless}}><div class="seatNumber">{{seatNumber}}</div></div>
         {{/each}}     
          </div>
     

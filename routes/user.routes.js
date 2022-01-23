@@ -174,6 +174,19 @@ router.get("/tickets", isLoggedIn, (req, res, next) => {
     })
     .then((data) => {
       console.log("DATA", data);
+      let today = new Date();
+      today.setHours(today.getHours() - 23);
+      data.tickets.expiredExists = false;
+      data.tickets.forEach((ticket) => {
+        let date = new Date(ticket.date);
+
+        if (date.getTime() < today.getTime()) {
+          ticket.expired = true;
+          data.tickets.expiredExists = true;
+        } else {
+          ticket.expired = false;
+        }
+      });
       res.render("user/tickets", data);
     })
     .catch((err) => {

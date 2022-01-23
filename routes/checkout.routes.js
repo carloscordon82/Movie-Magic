@@ -21,18 +21,9 @@ const { redirect } = require("express/lib/response");
 const { log } = require("console");
 const saltRounds = 10;
 
-function sendEmail(data) {
+function sendEmail(data, recipient, subject) {
+  console.log("RECIPIENT", recipient);
   console.log("received for email this data", data);
-  let readHTMLFile = function (path, callback) {
-    fs.readFile(path, { encoding: "utf-8" }, function (err, html) {
-      if (err) {
-        callback(err);
-        throw err;
-      } else {
-        callback(null, html);
-      }
-    });
-  };
 
   let transporter = nodemailer.createTransport({
     host: "mail.realhomesgroup.com",
@@ -43,28 +34,25 @@ function sendEmail(data) {
       pass: "56lmqw12",
     },
   });
+  var message = {
+    from: "Movie Magic<movie-theater@realhomesgroup.com>",
+    to: recipient,
+    subject: subject,
+    text: "Plaintext version of the message",
+    // attachments: [
+    //   {
+    //     filename: "attach.pdf",
+    //     path: path.join(__dirname, "/output.pdf"),
+    //     contentType: "application/pdf",
+    //   },
+    // ],
+    html: htmlTemplate(data),
+  };
 
-  readHTMLFile("invoice.html", function (err, html) {
-    var message = {
-      from: "movie-theater@realhomesgroup.com",
-      to: "memevertical@gmail.com",
-      subject: "Message title",
-      text: "Plaintext version of the message",
-      // attachments: [
-      //   {
-      //     filename: "attach.pdf",
-      //     path: path.join(__dirname, "/output.pdf"),
-      //     contentType: "application/pdf",
-      //   },
-      // ],
-      html: htmlTemplate(data),
-    };
-    transporter.sendMail(message, function (error, response) {
-      if (error) {
-        console.log(error);
-        callback(error);
-      }
-    });
+  transporter.sendMail(message, function (error, response) {
+    if (error) {
+      console.log(error);
+    }
   });
 }
 
@@ -153,9 +141,13 @@ router.get("/success", isLoggedIn, async (req, res, next) => {
                 let price = tickets.length * 20;
                 req.session.user.tempSeats = [];
                 req.session.user = updatedUser;
-
-                sendEmail(tickets);
-                res.render("checkout/success", { tickets, price });
+                let recipient = req.session.user.email;
+                let subject = `Purchase Receipt - ${tickets[0].movie.title} - ${tickets[0].date} - ${tickets[0].time}`;
+                sendEmail(tickets, recipient, subject);
+                res.render("checkout/success", {
+                  tickets,
+                  price,
+                });
               })
               .catch((err) => {
                 next(err);

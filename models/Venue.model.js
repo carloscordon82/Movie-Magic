@@ -14,6 +14,10 @@ const venueSchema = new Schema({
     type: String,
   },
 
+  layout: {
+    type: Number,
+  },
+
   ameneties: [
     {
       type: String,

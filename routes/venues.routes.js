@@ -48,6 +48,13 @@ router.get("/", (req, res, next) => {
   });
   Venue.find()
     .then((venues) => {
+      venues.forEach((venue) => {
+        if (venue.layout === 1) {
+          venue.seating = "VIP - Automatic Chairs";
+        } else {
+          venue.seating = "Standard - Not that great";
+        }
+      });
       res.render("venues/venues", { venues, today });
     })
     .catch((err) => {
@@ -127,6 +134,12 @@ router.get("/:venueId/", (req, res, next) => {
                 return +a.time.substr(0, 2) - +b.time.substr(0, 2);
               });
             });
+          }
+
+          if (venue.layout === 1) {
+            venue.seating = "VIP - Automatic Chairs";
+          } else {
+            venue.seating = "Standard - Not that great";
           }
 
           let currentDate = req.query.movieDate;

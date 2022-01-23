@@ -16,6 +16,13 @@ const isAdminLoggedIn = require("../middleware/isAdminLoggedIn");
 
 const saltRounds = 10;
 
+let amens = [
+  "Dolby Surround",
+  "Reclining Seats",
+  "Food Service",
+  "VIP Experience",
+  "Valet Parking",
+];
 router.get("/", isAdminLoggedIn, (req, res, next) => {
   res.redirect("admin/manage-movies");
 });
@@ -83,6 +90,13 @@ router.get("/delete-movie/:movieId", isAdminLoggedIn, (req, res, next) => {
 router.get("/manage-venues", isAdminLoggedIn, (req, res, next) => {
   Venue.find()
     .then((venues) => {
+      venues.forEach((venue) => {
+        if (venue.layout === 1) {
+          venue.seating = "VIP - Automatic Chairs";
+        } else {
+          venue.seating = "Standard - Not that great";
+        }
+      });
       res.render("admin/manage-venues", { venues });
     })
     .catch((err) => {
@@ -227,7 +241,21 @@ router.post("/create-venue", isAdminLoggedIn, (req, res, next) => {
 
 router.get("/edit-venue/:venueId", isAdminLoggedIn, (req, res, next) => {
   Venue.findById(req.params.venueId).then((venue) => {
-    console.log("VENUE", venue);
+    venue.amensExist = [];
+    amens.forEach((amenetie, i) => {
+      if (venue.ameneties.indexOf(amenetie) > -1) {
+        venue.amensExist[i] = true;
+      } else {
+        venue.amensExist[i] = false;
+      }
+    });
+    if (venue.layout === 1) {
+      venue.vip = true;
+    } else {
+      venue.vip = false;
+    }
+    console.log("VENUE", venue.amenExist);
+
     res.render("admin/edit-venue", { venue });
   });
 });
@@ -352,74 +380,95 @@ router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
   let today = new Date();
   today.setHours(today.getHours() - 23);
 
-  if (date1.getTime() > date2.getTime() || date1.getTime() < today.getTime()) {
-    return res.status(400).render("admin/create-showtime", {
-      errorMessage: "Invalid Dates",
-    });
-  }
-
-  let getDaysArray = function (start, end) {
-    for (
-      var arr = [], dt = new Date(start);
-      dt <= end;
-      dt.setDate(dt.getDate() + 1)
-    ) {
-      arr.push(new Date(dt).toLocaleDateString("en-US", { timeZone: "UTC" }));
-    }
-    return arr;
-  };
-
-  let dates = getDaysArray(
-    new Date(req.body.StartDate),
-    new Date(req.body.EndDate)
-  );
-  let times = req.body.time;
-  if (typeof times === "string") times = [times];
-
-  dates.forEach((date) => {
-    times.forEach((time) => {
-      let newTickets = [];
-      let newTicket = [];
-      seatsDefault.forEach((seat) => {
-        newTicket.push({
-          venue: req.body.venue,
-          movie: req.body.movie,
-          user: seat.user,
-          seatNumber: seat.seatNumber,
-          occupied: seat.occupied,
-          time: time,
-          date: date,
-          paymentId: "",
-        });
-      });
-
-      Ticket.create(newTicket)
-        .then((results) => {
-          results.forEach((element) => {
-            newTickets.push(element._id.toString());
+  if (
+    date1.getTime() > date2.getTime() ||
+    date1.getTime() < today.getTime() ||
+    !req.body.time
+  ) {
+    Venue.find()
+      .then((venues) => {
+        Movie.find()
+          .then((movies) => {
+            data = {
+              movies,
+              venues,
+              seatsDefault,
+              timesDefault,
+              errorMessage: "Invalid Dates / Times",
+            };
+            return res.status(400).render("admin/create-showtime", data);
+          })
+          .catch((err) => {
+            next(err);
           });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  } else {
+    let getDaysArray = function (start, end) {
+      for (
+        var arr = [], dt = new Date(start);
+        dt <= end;
+        dt.setDate(dt.getDate() + 1)
+      ) {
+        arr.push(new Date(dt).toLocaleDateString("en-US", { timeZone: "UTC" }));
+      }
+      return arr;
+    };
 
-          let newShowtime = {
+    let dates = getDaysArray(
+      new Date(req.body.StartDate),
+      new Date(req.body.EndDate)
+    );
+    let times = req.body.time;
+    if (typeof times === "string") times = [times];
+
+    dates.forEach((date) => {
+      times.forEach((time) => {
+        let newTickets = [];
+        let newTicket = [];
+        seatsDefault.forEach((seat) => {
+          newTicket.push({
             venue: req.body.venue,
             movie: req.body.movie,
-            tickets: newTickets,
+            user: seat.user,
+            seatNumber: seat.seatNumber,
+            occupied: seat.occupied,
             time: time,
             date: date,
-          };
-          Showtime.create(newShowtime)
-            .then((results) => {
-              console.log("Success New Showtime", results);
-              res.redirect("/admin/manage-showtimes");
-            })
-            .catch((err) => {
-              console.log("Something went wrong", err);
-            });
-        })
-        .catch((err) => {
-          console.log("Something went wrong", err);
+            paymentId: "",
+          });
         });
+
+        Ticket.create(newTicket)
+          .then((results) => {
+            results.forEach((element) => {
+              newTickets.push(element._id.toString());
+            });
+
+            let newShowtime = {
+              venue: req.body.venue,
+              movie: req.body.movie,
+              tickets: newTickets,
+              time: time,
+              date: date,
+            };
+            Showtime.create(newShowtime)
+              .then((results) => {
+                console.log("Success New Showtime", results);
+                res.redirect("/admin/manage-showtimes");
+              })
+              .catch((err) => {
+                console.log("Something went wrong", err);
+              });
+          })
+          .catch((err) => {
+            console.log("Something went wrong", err);
+          });
+      });
     });
-  });
+  }
 });
 
 module.exports = router;
