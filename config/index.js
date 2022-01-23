@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const favicon = require("serve-favicon");
 const path = require("path");
 const MongoStore = require("connect-mongo");
+const User = require("../models/User.model");
 
 module.exports = (app) => {
   app.use(logger("dev"));
@@ -31,8 +32,15 @@ module.exports = (app) => {
   );
 
   app.use((req, res, next) => {
-    req.app.locals.globalUser = req.session.user ? req.session.user : false;
-    next();
+    if (req.session.user) {
+      User.findById(req.session.user._id).then((user) => {
+        // req.session.user = user;
+        req.app.locals.globalUser = user;
+        next();
+      });
+    } else {
+      next();
+    }
   });
 
   app.use(

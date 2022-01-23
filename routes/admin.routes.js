@@ -182,14 +182,43 @@ router.get(
   (req, res, next) => {
     console.log("DELETE");
     Showtime.findByIdAndDelete(req.params.showtimeId)
-      .populate("tickets")
+      .populate({
+        path: "tickets",
+        populate: {
+          path: "user",
+          model: "User",
+        },
+      })
       .then((showtime) => {
-        Ticket.deleteMany({
-          _id: {
-            $in: showtime.tickets,
-          },
-        })
-          .then((tickets) => {
+        console.log("MADE IT TO SECOND STEP");
+        // Ticket.deleteMany({
+        //   _id: {
+        //     $in: showtime.tickets,
+        //   },
+        // })
+        let promises = [];
+        showtime.tickets.forEach((ticket) => {
+          if (ticket.user) {
+            console.log("Only erasing for", ticket.user.username);
+
+            promises.push(
+              User.updateOne(
+                { username: ticket.user.username },
+                {
+                  $pullAll: {
+                    tickets: [ticket._id],
+                  },
+                  $push: {
+                    canceledTickets: ticket._id,
+                  },
+                  alert: "One or more of your Tickets has been canceled",
+                }
+              )
+            );
+          }
+        });
+        Promise.all(promises)
+          .then((values) => {
             res.redirect("../manage-showtimes");
           })
           .catch((err) => {

@@ -84,6 +84,7 @@ router.put("/pre-summary", isLoggedIn, (req, res, next) => {
   } else {
     req.session.user.tempSeats = req.body.selectedSeats;
   }
+
   res.json("");
 });
 
@@ -97,6 +98,8 @@ router.post("/pre-summary", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/summary", isLoggedIn, (req, res, next) => {
+  console.log("PRE SUMMARY", req.session.user.tempSeats);
+
   Ticket.find({ _id: { $in: req.session.user.tempSeats } })
     .populate("venue")
     .populate("movie")

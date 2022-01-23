@@ -14,7 +14,7 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 
 const saltRounds = 10;
 
-router.get("/", async (req, res, next) => {
+router.get("/", (req, res, next) => {
   // let pis = ["pi_3KKxkMDpYP7j5IOA0hLYarfS", "pi_3KKxpyDpYP7j5IOA4wWYUSZ2"];
   // let promises = [];
   // pis.forEach((payId) => {
@@ -28,6 +28,7 @@ router.get("/", async (req, res, next) => {
   // Promise.all(promises).then((values) => {
   //   console.log(values);
   // });
+
   res.redirect("movies");
 });
 

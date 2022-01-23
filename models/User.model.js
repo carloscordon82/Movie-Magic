@@ -26,7 +26,9 @@ const userSchema = new Schema({
 
   tickets: [{ type: mongoose.Types.ObjectId, ref: "Ticket" }],
   refundedTickets: [{ type: mongoose.Types.ObjectId, ref: "Ticket" }],
+  canceledTickets: [{ type: mongoose.Types.ObjectId, ref: "Ticket" }],
   isAdmin: Boolean,
+  alert: String,
 });
 
 const User = model("User", userSchema);

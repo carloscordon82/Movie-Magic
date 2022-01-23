@@ -5,7 +5,6 @@ module.exports = (req, res, next) => {
       originalUrl: req.originalUrl,
     });
   }
-  console.log("CHECKING LOGIN", req.app.locals.globalUser);
-  req.app.locals.globalUser = req.session.user;
+
   next();
 };

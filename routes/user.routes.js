@@ -142,6 +142,17 @@ router.post("/change-my-password", isLoggedIn, (req, res, next) => {
     });
 });
 
+router.get("/dismiss-alerts", isLoggedIn, (req, res, next) => {
+  User.findByIdAndUpdate(req.session.user._id, { alert: "" })
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  // console.log(req.originalUrl);
+});
+
 router.get("/tickets", isLoggedIn, (req, res, next) => {
   User.findById(req.session.user._id)
     .populate({
@@ -167,6 +178,20 @@ router.get("/tickets", isLoggedIn, (req, res, next) => {
     })
     .populate({
       path: "refundedTickets",
+      populate: {
+        path: "venue",
+        model: "Venue",
+      },
+    })
+    .populate({
+      path: "canceledTickets",
+      populate: {
+        path: "movie",
+        model: "Movie",
+      },
+    })
+    .populate({
+      path: "canceledTickets",
       populate: {
         path: "venue",
         model: "Venue",
