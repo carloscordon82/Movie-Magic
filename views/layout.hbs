@@ -17,15 +17,15 @@
 <!-- Section 1 -->
 <section class="top-element relative w-full px-8 text-white bg-gradient-to-t from-orange-600 to-orange-500 body-font">
     <div class="container flex flex-col flex-wrap items-center justify-between py-1 mx-auto md:flex-row max-w-7xl">
-    <img class="  md:h-auto object-cover  rounded-t-lg md:rounded-none md:rounded-l-lg" src="/images/logo.png" alt="HTML tutorial" style="width:190px; margin:-10px 0px -20px 50px"/>
+    <img class="  md:h-auto object-cover  rounded-t-lg md:rounded-none md:rounded-l-lg" src="/images/logo.png" alt="HTML tutorial" style="width:190px; margin:-10px 0px -20px -50px"/>
 
         <nav class="top-0 left-0 z-0 flex items-center justify-center w-full h-full py-5 -ml-0 space-x-5 text-base md:-ml-5 md:py-0 md:absolute">
-            <a href="/" class="relative font-medium text-lg leading-6 text-white transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+            {{!-- <a href="/" class="relative font-medium text-lg leading-6 text-white transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
                 <span class="block">Home</span>
                 <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
                     <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0"></span>
                 </span>
-            </a>
+            </a> --}}
              <a href="/movies" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:text-white hover:bg-orange-400 focus:outline-none focus:shadow-none">
                 Movies
             </a>
@@ -34,7 +34,52 @@
             </a>
           
         </nav>
+
+
+
 {{#if globalUser.username}}
+<div class="relative z-10 inline-flex items-center space-x-6 md:ml-5 lg:justify-end">
+
+<a href="/user/dashboard" class="relative font-medium text-lg leading-6 text-white transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <span class="block">My Account</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0"></span>
+                </span>
+            </a>
+            {{#if globalUser.isAdmin}}
+           <a href="/admin" class="relative font-medium text-lg leading-6 text-white transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <span class="block">Manage</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0"></span>
+                </span>
+            </a>
+            {{/if}}
+            <a href="/logout" class="relative font-medium text-lg leading-6 text-white transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <span class="block">Logout</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0"></span>
+                </span>
+            </a>
+        </div>
+{{else}}
+        <div class="relative z-10 inline-flex items-center space-x-6 md:ml-5 lg:justify-end">
+            <a href="/login" class="relative font-medium text-lg leading-6 text-white transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <span class="block">Sign In</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0"></span>
+                </span>
+            </a>
+             <span class="inline-flex rounded-md shadow-sm">
+                <a href="/signup" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-orange-400 border border-gray-200 rounded-md shadow-sm hover:bg-blue-700 hover:text-gray-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Sign up
+                </a>
+            </span>
+        </div>
+        {{/if}}
+
+
+
+{{!-- {{#if globalUser.username}}
 <div class="relative z-10 inline-flex items-center space-x-3 md:ml-5 lg:justify-end">
             <a href="/user/dashboard" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:text-white hover:bg-orange-400 focus:outline-none focus:shadow-none">
                 My Account
@@ -61,10 +106,21 @@
                 </a>
             </span>
         </div>
-        {{/if}}
+        {{/if}} --}}
+
+
+
+
+
+
     </div>
 </section>
-
+<div class="relative z-20 flex items-center justify-center w-full h-12 px-5 overflow-hidden text-xs font-normal cursor-pointer bg-gradient-to-r from-indigo-500 via-blue-400 to-green-400 text-blue-50">
+        <div class="relative flex items-center justify-center w-full h-full mx-auto max-w-7xl">
+            <svg class="w-4 h-4 mr-1 text-blue-100 stroke-current" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+            <span><span class="hidden sm:inline-block">Click here to </span> learn more about our upcoming event</span>
+        </div>
+    </div>
 
 {{{body}}}
 
