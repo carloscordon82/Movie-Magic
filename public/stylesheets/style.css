@@ -158,12 +158,13 @@
 
 .screen {
   background: gray;
-  height: 70px;
-  width: 70%;
+  height: 80px;
+  width: 90%;
   margin: 15px 0;
   margin-bottom: 30px;
   transform: rotateX(-45deg);
   box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
 }
 
 p.text {
@@ -270,18 +271,20 @@ body {
   margin: 20px;
 }
 
-/* .btn {
-  background-color: red;
-  color: white;
-  padding: 15px;
-} */
-
 .small-poster {
   border-radius: 15px;
   margin: 25px;
   box-shadow: black;
   box-shadow: 20px;
   box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.small-pic {
+  border-radius: 5px;
+
+  box-shadow: black;
+  box-shadow: 5px;
+  box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
 .dates-venue {

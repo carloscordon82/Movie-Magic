@@ -150,7 +150,8 @@ router.get("/dismiss-alerts", isLoggedIn, (req, res, next) => {
     .catch((error) => {
       console.log(error);
     });
-  // console.log(req.originalUrl);
+  // console.log(req.query);
+  res.redirect(req.query.red);
 });
 
 router.get("/tickets", isLoggedIn, (req, res, next) => {

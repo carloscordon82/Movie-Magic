@@ -327,7 +327,7 @@ Yes, I'm sure
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
                   <div class="flex-shrink-0 h-20 w-15">
-                    <img class="h-20 w-15 " src="https://image.tmdb.org/t/p/original/{{poster}}" alt="">
+                    <img class="h-20 w-15  small-pic" src="https://image.tmdb.org/t/p/original/{{poster}}" alt="">
                   </div>
                   <div class="ml-4">
                     <div class="text-sm font-medium text-gray-900">
@@ -361,8 +361,18 @@ Yes, I'm sure
             <!-- More people... -->
           </tbody>
            {{else}}
- <td class="px-6 py-4 whitespace-nowrap">
+ <div class="bg-white divide-y divide-gray-200">
+                <td class="px-6 py-4 bg-white whitespace-nowrap">
                 <div class="text-sm text-gray-900">NO TICKETS TO DISPLAY</div>
+                </td>  
+                <td class="px-6 py-4 bg-white whitespace-nowrap">
+                </td>  
+                <td class="px-6 py-4 bg-white whitespace-nowrap">
+                </td>  
+                <td class="px-6 py-4 bg-white whitespace-nowrap">
+                </td>  
+                
+              </div>  
               </td>        {{/if}}
         </table>
       </div>

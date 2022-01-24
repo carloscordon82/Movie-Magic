@@ -236,10 +236,10 @@ Yes, I'm sure
 </div>
               {{!-- MODAL --}}
             <tr>
-              <td class="px-6 py-1 whitespace-nowrap">
+              <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
                   <div class="flex-shrink-0 h-20 w-15">
-                    <img class="h-20 w-15 " src="https://image.tmdb.org/t/p/original/{{poster}}" alt="">
+                    <img class="h-20 w-15 small-pic" src="{{venue.picUrl}}" alt="" style="width: 120px;">
                   </div>
                   <div class="ml-4">
                     <div class="text-sm font-medium text-gray-900">
@@ -252,8 +252,15 @@ Yes, I'm sure
                 </div>
               </td>
               <td class="px-6 py-1 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-20 w-15">
+                    <img class="h-20 w-15 small-pic" src="https://image.tmdb.org/t/p/original/{{movie.poster}}" alt="">
+                  </div>
+                  <div class="ml-4">
                 <div class="text-sm text-gray-900">{{movie.title}}</div>
                 <div class="text-sm text-gray-500">{{time}}</div>
+                </div>
+                </div>
               </td>
               <td class="px-6 py-1 whitespace-nowrap">
                 <div class="text-sm text-gray-900">{{seatsOccupied}} Seats Occupied</div>
@@ -273,8 +280,17 @@ Yes, I'm sure
             <!-- More people... -->
           </tbody>
            {{else}}
- <td class="px-6 py-1 whitespace-nowrap">
+ <div class="bg-white divide-y divide-gray-200">
+                <td class="px-6 py-4 bg-white whitespace-nowrap">
                 <div class="text-sm text-gray-900">NO SHOWTIMES TO DISPLAY</div>
+                </td>  
+                <td class="px-6 py-4 bg-white whitespace-nowrap">
+                </td>  
+                <td class="px-6 py-4 bg-white whitespace-nowrap">
+                </td>  
+                <td class="px-6 py-4 bg-white whitespace-nowrap">
+                </td>   
+              </div>  
               </td>        {{/if}}
         </table>
       </div>

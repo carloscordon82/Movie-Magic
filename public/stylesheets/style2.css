@@ -908,6 +908,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2rem;
 }
 
+.h-1\/2 {
+  height: 50%;
+}
+
+.h-3\/4 {
+  height: 75%;
+}
+
 .min-h-full {
   min-height: 100%;
 }
@@ -982,6 +990,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-8 {
   width: 2rem;
+}
+
+.w-max {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
 .min-w-full {
@@ -1510,6 +1524,26 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(254 249 195 / var(--tw-bg-opacity));
 }
 
+.bg-blue-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 64 175 / var(--tw-bg-opacity));
+}
+
+.bg-orange-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 237 213 / var(--tw-bg-opacity));
+}
+
+.bg-orange-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 215 170 / var(--tw-bg-opacity));
+}
+
+.bg-blue-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(191 219 254 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-t {
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
 }
@@ -1576,6 +1610,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .via-blue-500 {
   --tw-gradient-stops: var(--tw-gradient-from), #3b82f6, var(--tw-gradient-to, rgb(59 130 246 / 0));
+}
+
+.via-yellow-500 {
+  --tw-gradient-stops: var(--tw-gradient-from), #eab308, var(--tw-gradient-to, rgb(234 179 8 / 0));
 }
 
 .to-orange-500 {
