@@ -160,6 +160,14 @@ router.get("/manage-showtimes", isAdminLoggedIn, (req, res, next) => {
 
       // END TEST
       showtimes.forEach((each) => {
+        let row1 = each.tickets.slice(0, 8);
+        let row2 = each.tickets.slice(8, 16);
+        let row3 = each.tickets.slice(16, 24);
+        let row4 = each.tickets.slice(24, 32);
+        let row5 = each.tickets.slice(32, 40);
+        let row6 = each.tickets.slice(40, 48);
+        allSeats = { row1, row2, row3, row4, row5, row6 };
+        each.allSeats = allSeats;
         let amount = 0;
         each.tickets.forEach((element) => {
           if (element.occupied) amount++;

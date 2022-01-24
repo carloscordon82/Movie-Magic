@@ -9,6 +9,7 @@ npm-debug.log
 .env
 tailwind.config.json
 tailwind.css
+.DS_Store
 # for maintenance purposes - not best practices
 package-lock.json
 
