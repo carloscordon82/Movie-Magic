@@ -37,11 +37,11 @@ function convertDate(data) {
     "Saturday",
   ];
   var convertedStartDate = new Date(data);
-  var month = months[convertedStartDate.getMonth() + 1];
+  var month = months[convertedStartDate.getMonth()];
   var weekDay = days[convertedStartDate.getDay()];
   var day = convertedStartDate.getDate();
   var year = convertedStartDate.getFullYear();
-  var pureMonth = convertedStartDate.getMonth() + 1;
+  var pureMonth = convertedStartDate.getMonth();
 
   return { day, month, weekDay, year, pureMonth };
 }
@@ -53,13 +53,10 @@ router.get("/", (req, res, next) => {
   Movie.find()
     .then((movies) => {
       if (movies.length) {
-        // console.log("MOVIES", movies);
-
         movies.forEach((element, i) => {
           movies[i].odd = i % 2;
           console.log("odd", element.odd);
         });
-        // console.log("MOVIES", movies[0].odd);
       }
 
       res.render("movies/movies", { movies, today });
@@ -67,17 +64,6 @@ router.get("/", (req, res, next) => {
     .catch((err) => {
       console.log("Something went wrong", err);
     });
-  // let today = new Date().toLocaleDateString("en-US", {
-  //   timeZone: "America/New_York",
-  // });
-  // Movie.find()
-  //   .then((movies) => {
-  //     console.log("TODAY", convertDate(movies[1].createdAt));
-  //     res.render("movies/movies", { movies, today });
-  //   })
-  //   .catch((err) => {
-  //     console.log("Something went wrong", err);
-  //   });
 });
 
 router.get("/:movieId/", (req, res, next) => {
@@ -177,8 +163,6 @@ router.get("/:movieId/", (req, res, next) => {
                           },
                           times: [],
                         }),
-                          //     (show[i].venue.name = element.venue.name);
-                          //   show[i].venue.id = element.venue._id.toString();
                           show[i].times.push({
                             time: element.time,
                             avail: avail,
@@ -186,20 +170,18 @@ router.get("/:movieId/", (req, res, next) => {
                       }
                     });
                     show.forEach((element) => {
+                      if (element.venue.layout === 1) {
+                        element.venue.seating = "VIP - Automatic Chairs";
+                      } else {
+                        element.venue.seating = "Standard - Not that great";
+                      }
+
                       element.times.sort(function (a, b) {
                         return +a.time.substr(0, 2) - +b.time.substr(0, 2);
                       });
                     });
                   }
-                  //TEST
 
-                  //TEST
-                  console.log("PASSING ", {
-                    movie,
-                    show,
-                    currentDate,
-                    trailer,
-                  });
                   res.render("movies/movie-detail", {
                     movie,
                     show,

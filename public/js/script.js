@@ -18,7 +18,7 @@ if (myParam)
 const message = document.getElementsByClassName("message");
 console.log("before good bye");
 setTimeout(() => {
-  if (message[0].style)
+  if (message[0])
     console.log("good bye", (message[0].style["display"] = "none"));
   // message.style.display = "none";
 }, 5000);

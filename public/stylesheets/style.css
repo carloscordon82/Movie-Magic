@@ -263,6 +263,9 @@ body {
 .top-element {
   border-bottom: 10px solid black;
 }
+.bottom-element {
+  border-top: 10px solid black;
+}
 .container-dates div a {
   color: white;
 }

@@ -100,18 +100,15 @@ router.get("/change-seats/:movieId/:venueId", isLoggedIn, (req, res, next) => {
                 element.you = false;
               }
             });
-            //   allSeats = seats[0].tickets;
 
             let row1 = seats[0].tickets.slice(0, 8);
-            console.log(row1);
             let row2 = seats[0].tickets.slice(8, 16);
             let row3 = seats[0].tickets.slice(16, 24);
             let row4 = seats[0].tickets.slice(24, 32);
             let row5 = seats[0].tickets.slice(32, 40);
             let row6 = seats[0].tickets.slice(40, 48);
             allSeats = { row1, row2, row3, row4, row5, row6 };
-            console.log("ALL SEATS", seats);
-            // allSeats[2].occupied = true;
+
             let data = {
               allSeats,
               venue: req.params.venueId,

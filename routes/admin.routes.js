@@ -131,7 +131,13 @@ router.get("/manage-showtimes", isAdminLoggedIn, (req, res, next) => {
   Showtime.find()
     .populate("movie")
     .populate("venue")
-    .populate("tickets")
+    .populate({
+      path: "tickets",
+      populate: {
+        path: "user",
+        model: "User",
+      },
+    })
     .then((showtimes) => {
       // TESTING NEW OBJECT
       // result = showtimes.reduce(function (r, a) {
@@ -160,6 +166,15 @@ router.get("/manage-showtimes", isAdminLoggedIn, (req, res, next) => {
 
       // END TEST
       showtimes.forEach((each) => {
+        let today = new Date();
+        today.setHours(today.getHours() - 23);
+        let date = new Date(each.date);
+
+        if (date.getTime() < today.getTime()) {
+          each.expired = true;
+        } else {
+          each.expired = false;
+        }
         let row1 = each.tickets.slice(0, 8);
         let row2 = each.tickets.slice(8, 16);
         let row3 = each.tickets.slice(16, 24);
@@ -184,6 +199,50 @@ router.get("/manage-showtimes", isAdminLoggedIn, (req, res, next) => {
     });
 });
 
+router.get("/manage-showtimes-expired", isAdminLoggedIn, (req, res, next) => {
+  Showtime.find()
+    .populate("movie")
+    .populate("venue")
+    .populate({
+      path: "tickets",
+      populate: {
+        path: "user",
+        model: "User",
+      },
+    })
+    .then((showtimes) => {
+      showtimes.forEach((each) => {
+        let today = new Date();
+        today.setHours(today.getHours() - 23);
+        let date = new Date(each.date);
+
+        if (date.getTime() < today.getTime()) {
+          each.expired = true;
+        } else {
+          each.expired = false;
+        }
+        let row1 = each.tickets.slice(0, 8);
+        let row2 = each.tickets.slice(8, 16);
+        let row3 = each.tickets.slice(16, 24);
+        let row4 = each.tickets.slice(24, 32);
+        let row5 = each.tickets.slice(32, 40);
+        let row6 = each.tickets.slice(40, 48);
+        allSeats = { row1, row2, row3, row4, row5, row6 };
+        each.allSeats = allSeats;
+        let amount = 0;
+        each.tickets.forEach((element) => {
+          if (element.occupied) amount++;
+        });
+        each.seatsFree = 64 - amount;
+        each.seatsOccupied = amount;
+      });
+      res.render("admin/manage-showtimes-expired", { showtimes });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.get(
   "/delete-showtime/:showtimeId",
   isAdminLoggedIn,
@@ -198,12 +257,12 @@ router.get(
         },
       })
       .then((showtime) => {
-        console.log("MADE IT TO SECOND STEP");
         // Ticket.deleteMany({
         //   _id: {
         //     $in: showtime.tickets,
         //   },
         // })
+
         let promises = [];
         showtime.tickets.forEach((ticket) => {
           if (ticket.user) {
@@ -245,23 +304,19 @@ router.get("/create-venue", isAdminLoggedIn, (req, res, next) => {
 
 router.post("/create-venue", isAdminLoggedIn, (req, res, next) => {
   if (!req.body.name) {
-    return res.status(400).render("user/edit", {
-      firstName,
-      lastName,
+    return res.status(400).render("admin/create-venue", {
       errorMessage: "Please provide a Name.",
     });
   }
 
   if (!req.body.location) {
-    return res.status(400).render("user/edit", {
-      firstName,
-      lastName,
+    return res.status(400).render("admin/create-venue", {
       errorMessage: "Please provide a Location.",
     });
   }
 
   if (!req.body.picUrl) {
-    return res.status(400).render("user/edit", {
+    return res.status(400).render("admin/create-venue", {
       errorMessage: "Please provide a Picture URL.",
     });
   }

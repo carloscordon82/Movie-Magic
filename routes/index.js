@@ -32,9 +32,4 @@ router.get("/", (req, res, next) => {
   res.redirect("movies");
 });
 
-router.put("/test", (req, res, next) => {
-  console.log("test hit", req.body);
-  res.json("");
-});
-
 module.exports = router;

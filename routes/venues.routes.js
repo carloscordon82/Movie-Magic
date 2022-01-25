@@ -35,7 +35,7 @@ function convertDate(data) {
     "Saturday",
   ];
   var convertedStartDate = new Date(data);
-  var month = months[convertedStartDate.getMonth() + 1];
+  var month = months[convertedStartDate.getMonth()];
   var weekDay = days[convertedStartDate.getDay()];
   var day = convertedStartDate.getDate();
 
