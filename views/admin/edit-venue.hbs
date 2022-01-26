@@ -255,17 +255,17 @@
         <div class="shadow overflow-hidden sm:rounded-md">
           <div class="px-4 py-5 bg-white sm:p-6">
             <div class="grid grid-cols-6 gap-6">
-              <div class="col-span-6 sm:col-span-4">
+              <div class="col-span-6 sm:col-span-3">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input type="text" value="{{venue.name}} "name="name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
 
-              <div class="col-span-6 sm:col-span-4">
+              <div class="col-span-6 sm:col-span-3">
                 <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
                 <input type="text" value="{{venue.location}}" name="location" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
 
-              <div class="col-span-6 sm:col-span-4">
+              <div class="col-span-6 sm:col-span-2">
                 <label for="picUrl" class="block text-sm font-medium text-gray-700">Picture URL</label>
                 <input type="text" value="{{venue.picUrl}}" name="picUrl" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
@@ -275,9 +275,9 @@
   rel="stylesheet"
 />
 
-<label class="block sm:col-span-3 text-left" style="max-width: 400px">
+<label class="block sm:col-span-4 text-left" style="max-width: 600px">
   <span class="text-gray-700">Ameneties</span>
-  <select name="ameneties" class="form-multiselect block w-full mt-1" style="height: 112px;" multiple>
+  <select name="ameneties" class="form-multiselect block w-full text-center mt-1" style="height: 114px;" multiple>
     <option {{#if venue.amensExist.[0]}}selected{{/if}}>Dolby Surround</option>
     <option {{#if venue.amensExist.[1]}}selected{{/if}}>Reclining Seats</option>
     <option {{#if venue.amensExist.[2]}}selected{{/if}}>Food Service</option>
@@ -288,19 +288,19 @@
             </div>
 <br>
 <h1>Select Layout:</h1>
-        <div class="flex flex-row flex-wrap text-center justify-left items-center">
+        <div class="flex flex-row flex-wrap text-center justify-around  items-center">
 
         {{!-- {{#each movies}} --}}
-        <div class=" flex flex-col align-items-center w-96 flex-wrap items-center">
-          <img class="" src="/images/layout1.png" alt="" style="width: 800px;">
+        <div class=" flex flex-col align-items-center flex-wrap items-center">
+          <img class="" src="/images/layout1.png" alt="" style="width: 250px;">
           <input class="form-check-input" type="radio" value="1" name="layout" {{#if venue.vip}}checked{{/if}}>
-          <label class="h-12 form-check-label" for="defaultCheck1">VIP Seating</label>
+          <label class="h-12 form-check-label pt-2" for="defaultCheck1">VIP Seating</label>
         </div>
 
-            <div class=" flex flex-col align-items-center w-96 flex-wrap items-center">
-          <img class="" src="/images/layout2.png" alt="" style="width: 800px;">
+            <div class=" flex flex-col align-items-center flex-wrap items-center">
+          <img class="" src="/images/layout2.png" alt="" style="width: 250px;">
           <input class="form-check-input" type="radio" value="2" name="layout" {{#unless venue.vip}}checked{{/unless}}>
-          <label class="h-12 form-check-label" for="defaultCheck1">Standard Seating</label>
+          <label class="h-12 form-check-label pt-2" for="defaultCheck1">Standard Seating</label>
         </div>
       {{!-- {{/each}} --}}
         </div>
@@ -309,7 +309,7 @@
 
           </div>
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Save
             </button>
           </div>
@@ -353,59 +353,6 @@
                   
 </div>
 
-
-
-
-{{!-- {{#each venues}}
-<div>
-    <a>{{name}}</a> <br>
-    <br>
-</div>
-<a href="delete-venue/{{_id}}">DELETE</a><br>
-<br>
-{{/each}}
-
-<a href="/admin/create-venue">ADD VENUE</a>
-<br>
-<br>
-<a href="/admin/">ADMIN DASHBOARD</a> --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<form action="/admin/create-venue" method="POST">
-   
-  <br> <br>
-  
-  <br>
-  <div class="form-check">
-      <h1>Create Venue:</h1>
-       <label >Name</label>
-  <input class="input" type="input" value="" name="name">
-  <label >Location</label>
-  <input class="input" type="input" value="" name="location">
-
-  
- 
-          
- <br><br>
-   <button type="submit">Submit</button>
-</form>
-<br>
-{{#if errorMessage}}
-   {{errorMessage}}
-{{/if}}
 
 
 

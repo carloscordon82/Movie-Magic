@@ -21,7 +21,7 @@
     src="https://image.tmdb.org/t/p/original/{{seats.[0].movie.backdrop}}"
     alt=""
   >
-    <div class="demo-content pt-5 pb-5 max-w-5xl mx-auto">
+    <div class="demo-content pt-5 pb-5 max-w-7xl mx-auto">
         <div class="flex flex-col items-center md:flex-row">
 
             {{!-- <div class="w-full space-y-5 md:w-3/5 md:pr-16">
@@ -110,12 +110,15 @@
 </div>
 </div>
 
-            <div class="w-screen mt-16 md:mt-0 md:w-2/5 pl-20 ">
-                <div class="relative z-10 h-auto p-8 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7">
-                    <h3 class="mb-6 text-2xl font-medium text-center">Seats Selected:</h3>
-                    <h3 class="selected-seats mb-6 text-2xl font-medium text-center">None</h3>
+            <div class="w-screen mt-16 md:mt-0 md:w-2/5">
+                <div class="relative z-10 h-auto p-8 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7"></h3>
+                    <h3 class="text-4xl text-center font-extrabold tracking-tight  text-gray-900 sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl">{{seats.[0].movie.title}}</h3>
+                  <h3 class="text-3xl text-center font-extrabold tracking-tight  text-gray-900 sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl">{{seats.[0].venue.name}}</h3>
+                      <h3 class="text-2xl text-center font-extrabold tracking-tight  text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl">{{seats.[0].date}} at {{seats.[0].time}}</h3><br>
+                    <h3 class="text-2xl text-center font-extrabold tracking-tight  text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl">Seats Selected:</h3>
+                    <h3 class="selected-seats text-4xl text-center font-extrabold tracking-tight  text-gray-900 sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl">None</h3><br>
                     <div class="block">
-                        <button id="btn" class="w-full px-3 py-4 font-medium text-white rounded-lg">Purchase</button>
+                        <button id="btn" class="bg-gray-200 w-full px-3 py-4 font-medium text-white rounded-lg">Purchase</button>
                     </div>
                     
                 </div>

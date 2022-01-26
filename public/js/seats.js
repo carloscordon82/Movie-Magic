@@ -16,7 +16,7 @@ function updateSelectedCount() {
   total.innerText = selectedSeatsCount * ticketPrice;
 }
 button.disabled = true;
-button.classList.add("bg-gray-600");
+button.classList.add("bg-gray-200");
 button.addEventListener("click", (e) => {
   console.log("button");
   button.disabled = true;
@@ -72,11 +72,11 @@ container.addEventListener("click", (e) => {
     selected[0].innerText = "None";
     button.disabled = true;
     button.classList.remove("bg-blue-600");
-    button.classList.add("bg-gray-600");
+    button.classList.add("bg-gray-200");
   } else {
     button.disabled = false;
     button.classList.add("bg-blue-600");
-    button.classList.remove("bg-gray-600");
+    button.classList.remove("bg-gray-200");
   }
 
   //   updateSelectedCount();

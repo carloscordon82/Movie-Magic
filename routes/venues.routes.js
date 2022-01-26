@@ -141,7 +141,7 @@ router.get("/:venueId/", (req, res, next) => {
           } else {
             venue.seating = "Standard - Not that great";
           }
-
+          venue.ameneties = venue.ameneties.join(", ");
           let currentDate = req.query.movieDate;
           console.log("MOVIES ", movies);
           res.render("venues/venue-details", {

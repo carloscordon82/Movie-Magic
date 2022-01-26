@@ -291,7 +291,7 @@ const template = (tickets) => {
       }
       
       body {
-        background-color: #F4F4F7;
+        background-color: #FFFFFF;
         color: #51545E;
       }
       
@@ -310,7 +310,7 @@ const template = (tickets) => {
         -premailer-width: 100%;
         -premailer-cellpadding: 0;
         -premailer-cellspacing: 0;
-        background-color: #F4F4F7;
+        background-color: #FFFFFF;
       }
       
       .email-content {
