@@ -29,12 +29,13 @@
         <div class="p-6 flex flex-col justify-start ">
                   {{!-- <img class="opacity-25" src="https://image.tmdb.org/t/p/original/{{movie.backdrop}}" alt="HTML tutorial" style="position:absolute; width:942px;"/> --}}
 
-                <h3 style="z-index: 9999" class="text-4xl font-extrabold tracking-tight  text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">{{movie.title}}
+                <h3 style="z-index: 9999" class="text-4xl mb-1 font-extrabold tracking-tight  text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">{{movie.title}}
                             </h3>
                 <p style="z-index: 9999" class="text-gray-700 text-base mb-4">
                     {{movie.overview}}
                 </p> 
-                <p class="text-gray-700 text-sm">Released: {{movie.releaseDate}}</p>
+                <p class="text-gray-700 text-lg"><b>Genres:</b> {{movie.genre}}</p>
+                <p class="text-gray-700 text-sm"><b>Released:</b> {{movie.releaseDate}}</p>
                 <br>
                 <p class="text-black text-xl">Cast:</p>
         

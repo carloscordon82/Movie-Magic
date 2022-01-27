@@ -4,6 +4,5 @@ module.exports = (req, res, next) => {
   } else if (!req.session.user.isAdmin) {
     return res.redirect("/");
   }
-
   next();
 };

@@ -5,6 +5,5 @@ module.exports = (req, res, next) => {
       originalUrl: req.originalUrl,
     });
   }
-
   next();
 };

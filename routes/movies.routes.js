@@ -108,7 +108,10 @@ router.get("/:movieId/", (req, res, next) => {
                 "RESPONSE FOR MOVIE ID",
                 responseFromApiCredits.data.cast.slice(0, 6)
               );
-
+              let genres = [];
+              responseFromApi.data.genres.forEach((genre) => {
+                genres.push(genre.name);
+              });
               Showtime.find({
                 movie: req.params.movieId,
                 date: req.query.movieDate,
@@ -181,6 +184,8 @@ router.get("/:movieId/", (req, res, next) => {
                       });
                     });
                   }
+                  movie.genre = genres.join(", ");
+                  console.log("MOVIE", movie);
 
                   res.render("movies/movie-detail", {
                     movie,

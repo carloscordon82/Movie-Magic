@@ -27,7 +27,7 @@ router.get("/", isAdminLoggedIn, (req, res, next) => {
   res.redirect("admin/manage-movies");
 });
 
-router.get("/manage-movies", (req, res, next) => {
+router.get("/manage-movies", isAdminLoggedIn, (req, res, next) => {
   Movie.find()
     .then((movies) => {
       let steps = [];
@@ -402,7 +402,7 @@ router.post("/edit-venue/:venueId", isAdminLoggedIn, (req, res, next) => {
 router.get("/create-movie", isAdminLoggedIn, (req, res, next) => {
   res.render("admin/create-movie");
 });
-router.post("/search-movie", (req, res, next) => {
+router.post("/search-movie", isAdminLoggedIn, (req, res, next) => {
   console.log(req.body, "BODY");
   if (req.body) {
     async function display() {
@@ -579,7 +579,7 @@ router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
 
 router.get(
   "/change-seats-submit/:oldId/:newId",
-  isLoggedIn,
+  isAdminLoggedIn,
   (req, res, next) => {
     Ticket.findByIdAndUpdate(req.params.oldId, {
       occupied: false,
@@ -636,77 +636,81 @@ router.get(
   }
 );
 
-router.get("/change-seats/:movieId/:venueId", isLoggedIn, (req, res, next) => {
-  let seat = false;
-  User.findById(req.session.user._id)
-    .populate("tickets")
-    .then((found) => {
-      found.tickets.forEach((element) => {
-        console.log("FOUND", element.seatNumber, req.query.seat);
+router.get(
+  "/change-seats/:movieId/:venueId",
+  isAdminLoggedIn,
+  (req, res, next) => {
+    let seat = false;
+    User.findById(req.session.user._id)
+      .populate("tickets")
+      .then((found) => {
+        found.tickets.forEach((element) => {
+          console.log("FOUND", element.seatNumber, req.query.seat);
 
-        if (element.seatNumber === req.query.seat) seat = true;
-      });
-      if (seat) {
-        Showtime.find({
-          venue: req.params.venueId,
-          movie: req.params.movieId,
-          time: req.query.movieTime,
-          date: req.query.movieDate,
-        })
-          .populate("tickets")
-          .populate("movie")
-          .populate("venue")
-          .then((seats) => {
-            if (seats.length === 0) {
-              res.render("admin/change-seats", {
-                errorMessage: "No seats found",
-              });
-              return;
-            }
-            seats[0].tickets.forEach((element, i) => {
-              console.log("checking", element);
-              if (element.seatNumber === req.query.seat) {
-                element.you = true;
-              } else {
-                element.you = false;
-              }
-            });
-
-            let row1 = seats[0].tickets.slice(0, 8);
-            let row2 = seats[0].tickets.slice(8, 16);
-            let row3 = seats[0].tickets.slice(16, 24);
-            let row4 = seats[0].tickets.slice(24, 32);
-            let row5 = seats[0].tickets.slice(32, 40);
-            let row6 = seats[0].tickets.slice(40, 48);
-            allSeats = { row1, row2, row3, row4, row5, row6 };
-
-            let data = {
-              allSeats,
-              venue: req.params.venueId,
-              movie: req.params.movieId,
-              time: req.query.movieTime,
-              date: req.query.movieDate,
-              seats,
-              seat: req.query.seat,
-            };
-            res.render("admin/change-seats", data);
-          })
-          .catch((err) => {
-            next(err);
-          });
-      } else {
-        res.render("admin/change-seats", {
-          errorMessage: "Invalid Seat",
+          if (element.seatNumber === req.query.seat) seat = true;
         });
-        return;
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+        if (seat) {
+          Showtime.find({
+            venue: req.params.venueId,
+            movie: req.params.movieId,
+            time: req.query.movieTime,
+            date: req.query.movieDate,
+          })
+            .populate("tickets")
+            .populate("movie")
+            .populate("venue")
+            .then((seats) => {
+              if (seats.length === 0) {
+                res.render("admin/change-seats", {
+                  errorMessage: "No seats found",
+                });
+                return;
+              }
+              seats[0].tickets.forEach((element, i) => {
+                console.log("checking", element);
+                if (element.seatNumber === req.query.seat) {
+                  element.you = true;
+                } else {
+                  element.you = false;
+                }
+              });
 
-router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {
+              let row1 = seats[0].tickets.slice(0, 8);
+              let row2 = seats[0].tickets.slice(8, 16);
+              let row3 = seats[0].tickets.slice(16, 24);
+              let row4 = seats[0].tickets.slice(24, 32);
+              let row5 = seats[0].tickets.slice(32, 40);
+              let row6 = seats[0].tickets.slice(40, 48);
+              allSeats = { row1, row2, row3, row4, row5, row6 };
+
+              let data = {
+                allSeats,
+                venue: req.params.venueId,
+                movie: req.params.movieId,
+                time: req.query.movieTime,
+                date: req.query.movieDate,
+                seats,
+                seat: req.query.seat,
+              };
+              res.render("admin/change-seats", data);
+            })
+            .catch((err) => {
+              next(err);
+            });
+        } else {
+          res.render("admin/change-seats", {
+            errorMessage: "Invalid Seat",
+          });
+          return;
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
+
+router.get("/refund/:seatId", isAdminLoggedIn, (req, res, next) => {
   let refundStatus = "";
   Ticket.findById(req.params.seatId)
     .then(async (ticket) => {
