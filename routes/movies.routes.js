@@ -92,115 +92,134 @@ router.get("/:movieId/", (req, res, next) => {
     .then((movie) => {
       axios
         .get(
-          `https://api.themoviedb.org/3/movie/${movie.tmdbId}?api_key=5474fe63c18c5ac27e78e2d4e61c868c&append_to_response=videos`
+          `https://api.themoviedb.org/3/movie/${movie.tmdbId}?api_key=5474fe63c18c5ac27e78e2d4e61c868c&append_to_response=releases`
         )
-        .then((responseFromApi) => {
+        .then((releases) => {
+          let cert = "";
+          console.log(releases.data.releases);
+          releases.data.releases.countries.forEach((element) => {
+            if (element.iso_3166_1 === "US" && element.certification)
+              cert = element.certification;
+          });
+          movie.cert = cert;
           axios
             .get(
-              `https://api.themoviedb.org/3/movie/${movie.tmdbId}/credits?api_key=5474fe63c18c5ac27e78e2d4e61c868c&append_to_response=videos`
+              `https://api.themoviedb.org/3/movie/${movie.tmdbId}?api_key=5474fe63c18c5ac27e78e2d4e61c868c&append_to_response=videos`
             )
-            .then((responseFromApiCredits) => {
-              responseFromApi.data.videos.results.forEach((element) => {
-                if (element.type === "Trailer")
-                  trailer = `https://www.youtube.com/embed/${element.key}`;
-              });
-              console.log(
-                "RESPONSE FOR MOVIE ID",
-                responseFromApiCredits.data.cast.slice(0, 6)
-              );
-              let genres = [];
-              responseFromApi.data.genres.forEach((genre) => {
-                genres.push(genre.name);
-              });
-              Showtime.find({
-                movie: req.params.movieId,
-                date: req.query.movieDate,
-              })
-                .populate("venue")
-                .populate("tickets")
-                .then((showtimes) => {
-                  showtimes.sort(function (a, b) {
-                    if (a.venue.name < b.venue.name) return -1;
-                    if (a.venue.name > b.venue.name) return 1;
-                    return 0;
+
+            .then((responseFromApi) => {
+              console.log("MOVIE", responseFromApi.data.releases);
+
+              axios
+                .get(
+                  `https://api.themoviedb.org/3/movie/${movie.tmdbId}/credits?api_key=5474fe63c18c5ac27e78e2d4e61c868c&append_to_response=videos`
+                )
+                .then((responseFromApiCredits) => {
+                  responseFromApi.data.videos.results.forEach((element) => {
+                    if (element.type === "Trailer")
+                      trailer = `https://www.youtube.com/embed/${element.key}`;
                   });
-
-                  let currentDate = req.query.movieDate;
-                  let show = [];
-                  if (showtimes.length > 0) {
-                    let current = showtimes[0].venue._id.toString();
-                    show = [
-                      {
-                        venue: {
-                          name: showtimes[0].venue.name,
-                          location: showtimes[0].venue.location,
-                          id: current,
-                          picUrl: showtimes[0].venue.picUrl,
-                          ameneties: showtimes[0].venue.ameneties.join(", "),
-                        },
-                        times: [],
-                      },
-                    ];
-
-                    let i = 0;
-                    showtimes.forEach((element) => {
-                      let avail = 0;
-                      element.tickets.forEach((ticket) => {
-                        if (!ticket.occupied) avail++;
+                  console.log(
+                    "RESPONSE FOR MOVIE ID",
+                    responseFromApiCredits.data.cast.slice(0, 6)
+                  );
+                  let genres = [];
+                  responseFromApi.data.genres.forEach((genre) => {
+                    genres.push(genre.name);
+                  });
+                  Showtime.find({
+                    movie: req.params.movieId,
+                    date: req.query.movieDate,
+                  })
+                    .populate("venue")
+                    .populate("tickets")
+                    .then((showtimes) => {
+                      showtimes.sort(function (a, b) {
+                        if (a.venue.name < b.venue.name) return -1;
+                        if (a.venue.name > b.venue.name) return 1;
+                        return 0;
                       });
-                      if (element.venue._id.toString() === current) {
-                        show[i]["times"].push({
-                          time: element.time,
-                          avail: avail,
-                        });
-                      } else {
-                        i++;
-                        current = element.venue._id.toString();
-                        (show[i] = {
-                          venue: {
-                            name: element.venue.name,
-                            location: element.venue.location,
-                            id: element.venue._id.toString(),
-                            picUrl: element.venue.picUrl,
-                            ameneties: element.venue.ameneties.join(", "),
+
+                      let currentDate = req.query.movieDate;
+                      let show = [];
+                      if (showtimes.length > 0) {
+                        let current = showtimes[0].venue._id.toString();
+                        show = [
+                          {
+                            venue: {
+                              name: showtimes[0].venue.name,
+                              location: showtimes[0].venue.location,
+                              id: current,
+                              picUrl: showtimes[0].venue.picUrl,
+                              ameneties:
+                                showtimes[0].venue.ameneties.join(", "),
+                            },
+                            times: [],
                           },
-                          times: [],
-                        }),
-                          show[i].times.push({
-                            time: element.time,
-                            avail: avail,
+                        ];
+
+                        let i = 0;
+                        showtimes.forEach((element) => {
+                          let avail = 0;
+                          element.tickets.forEach((ticket) => {
+                            if (!ticket.occupied) avail++;
                           });
-                      }
-                    });
-                    show.forEach((element) => {
-                      if (element.venue.layout === 1) {
-                        element.venue.seating = "VIP - Automatic Chairs";
-                      } else {
-                        element.venue.seating = "Standard - Not that great";
-                      }
+                          if (element.venue._id.toString() === current) {
+                            show[i]["times"].push({
+                              time: element.time,
+                              avail: avail,
+                            });
+                          } else {
+                            i++;
+                            current = element.venue._id.toString();
+                            (show[i] = {
+                              venue: {
+                                name: element.venue.name,
+                                location: element.venue.location,
+                                id: element.venue._id.toString(),
+                                picUrl: element.venue.picUrl,
+                                ameneties: element.venue.ameneties.join(", "),
+                              },
+                              times: [],
+                            }),
+                              show[i].times.push({
+                                time: element.time,
+                                avail: avail,
+                              });
+                          }
+                        });
+                        show.forEach((element) => {
+                          if (element.venue.layout === 1) {
+                            element.venue.seating = "VIP - Automatic Chairs";
+                          } else {
+                            element.venue.seating = "Standard - Not that great";
+                          }
 
-                      element.times.sort(function (a, b) {
-                        return +a.time.substr(0, 2) - +b.time.substr(0, 2);
+                          element.times.sort(function (a, b) {
+                            return +a.time.substr(0, 2) - +b.time.substr(0, 2);
+                          });
+                        });
+                      }
+                      movie.genre = genres.join(", ");
+
+                      res.render("movies/movie-detail", {
+                        movie,
+                        show,
+                        currentDate,
+                        allDates,
+                        trailer,
+                        allData: responseFromApi.data,
+                        cast: responseFromApiCredits.data.cast.slice(0, 6),
                       });
+                    })
+
+                    .catch((err) => {
+                      next(err);
                     });
-                  }
-                  movie.genre = genres.join(", ");
-                  console.log("MOVIE", movie);
-
-                  res.render("movies/movie-detail", {
-                    movie,
-                    show,
-                    currentDate,
-                    allDates,
-                    trailer,
-                    allData: responseFromApi.data,
-                    cast: responseFromApiCredits.data.cast.slice(0, 6),
-                  });
-                })
-
-                .catch((err) => {
-                  next(err);
                 });
+            })
+            .catch((err) => {
+              next(err);
             });
         })
         .catch((err) => {
