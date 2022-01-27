@@ -114,54 +114,55 @@ router.get("/summary", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/success", isLoggedIn, async (req, res, next) => {
-  if (req.session.user.tempSeats.length > 0) {
-    User.findByIdAndUpdate(
-      req.session.user._id,
-      {
-        $push: { tickets: req.session.user.tempSeats },
-      },
-      { new: true }
-    )
-      .then((updatedUser) => {
-        Ticket.update(
-          { _id: { $in: req.session.user.tempSeats } },
-          {
-            $set: {
-              user: req.session.user._id,
-              occupied: true,
-              paymentId: req.query.session_id,
+  if (req.session.user.tempSeats)
+    if (req.session.user.tempSeats.length > 0) {
+      User.findByIdAndUpdate(
+        req.session.user._id,
+        {
+          $push: { tickets: req.session.user.tempSeats },
+        },
+        { new: true }
+      )
+        .then((updatedUser) => {
+          Ticket.update(
+            { _id: { $in: req.session.user.tempSeats } },
+            {
+              $set: {
+                user: req.session.user._id,
+                occupied: true,
+                paymentId: req.query.session_id,
+              },
             },
-          },
-          { multi: true }
-        )
+            { multi: true }
+          )
 
-          .then((updatedTickets) => {
-            Ticket.find({ _id: { $in: req.session.user.tempSeats } })
-              .populate("venue")
-              .populate("movie")
+            .then((updatedTickets) => {
+              Ticket.find({ _id: { $in: req.session.user.tempSeats } })
+                .populate("venue")
+                .populate("movie")
 
-              .then((tickets) => {
-                let price = tickets.length * 20;
-                req.session.user.tempSeats = [];
-                req.session.user = updatedUser;
-                let recipient = req.session.user.email;
-                let subject = `Purchase Receipt - ${tickets[0].movie.title} - ${tickets[0].date} - ${tickets[0].time}`;
-                sendEmail(tickets, recipient, subject);
-                res.render("checkout/success", {
-                  tickets,
-                  price,
+                .then((tickets) => {
+                  let price = tickets.length * 20;
+                  req.session.user.tempSeats = [];
+                  req.session.user = updatedUser;
+                  let recipient = req.session.user.email;
+                  let subject = `Purchase Receipt - ${tickets[0].movie.title} - ${tickets[0].date} - ${tickets[0].time}`;
+                  sendEmail(tickets, recipient, subject);
+                  res.render("checkout/success", {
+                    tickets,
+                    price,
+                  });
+                })
+                .catch((err) => {
+                  next(err);
                 });
-              })
-              .catch((err) => {
-                next(err);
-              });
-          })
-          .catch((err) => next(err));
-      })
-      .catch((err) => next(err));
-  } else {
-    res.redirect("/");
-  }
+            })
+            .catch((err) => next(err));
+        })
+        .catch((err) => next(err));
+    } else {
+      res.redirect("/");
+    }
 });
 
 router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {

@@ -9,7 +9,7 @@ const Showtime = require("../models/Showtime.model");
 const Ticket = require("../models/Ticket.model");
 const mongoose = require("mongoose");
 const axios = require("axios");
-
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 const isLoggedIn = require("../middleware/isLoggedIn");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isAdminLoggedIn = require("../middleware/isAdminLoggedIn");
@@ -32,16 +32,31 @@ router.get("/manage-movies", (req, res, next) => {
     .then((movies) => {
       let steps = [];
       movies.forEach((element, i) => {
-        steps.push(Showtime.find({ movie: element._id }));
+        steps.push(Showtime.find({ movie: element._id }).populate("tickets"));
       });
       Promise.all(steps).then((values) => {
         values.forEach((showtimes, i) => {
-          movies[i].shows = showtimes.length;
+          let showsCount = 0;
+          showtimes.forEach((each) => {
+            let today = new Date();
+            today.setHours(today.getHours() - 23);
+            let date = new Date(each.date);
+
+            if (date.getTime() < today.getTime()) {
+              each.expired = true;
+            } else {
+              showsCount++;
+              each.expired = false;
+            }
+          });
+          movies[i].shows = showsCount;
           let seats = 0;
           showtimes.forEach((showtime) => {
-            showtime.tickets.forEach((ticket) => {
-              if (!ticket.occupied) seats++;
-            });
+            if (!showtime.expired)
+              showtime.tickets.forEach((ticket) => {
+                console.log("CHECKING TICKET", ticket.occupied);
+                if (!ticket.occupied) seats++;
+              });
           });
 
           movies[i].seats = seats;
@@ -54,7 +69,6 @@ router.get("/manage-movies", (req, res, next) => {
           const [hour, minutes] = [date.getHours(), date.getMinutes()];
           movies[i].createdDate = `${month + 1}/${day}/${year}`;
           movies[i].createdTime = `${hour}:${minutes}`;
-          console.log("PROMISES", movies[i].title, movies[i].seats);
         });
         res.render("admin/manage-movies", { movies });
       });
@@ -561,6 +575,202 @@ router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
       });
     });
   }
+});
+
+router.get(
+  "/change-seats-submit/:oldId/:newId",
+  isLoggedIn,
+  (req, res, next) => {
+    Ticket.findByIdAndUpdate(req.params.oldId, {
+      occupied: false,
+      user: null,
+      paymentId: "",
+    })
+      .then((oldTicket) => {
+        console.log("OLD TICKET", oldTicket);
+        console.log("new ID", req.params.newId);
+
+        Ticket.findByIdAndUpdate(req.params.newId, {
+          occupied: true,
+          user: req.session.user._id,
+          paymentId: oldTicket.paymentId,
+        })
+          .then((newTicket) => {
+            User.updateOne(
+              { username: req.session.user.username },
+              {
+                $pullAll: {
+                  tickets: [req.params.oldId],
+                },
+              }
+            )
+              .then((result2) => {
+                User.updateOne(
+                  { username: req.session.user.username },
+                  {
+                    $push: {
+                      tickets: [req.params.newId],
+                    },
+                    alert:
+                      "One or more of your Tickets has been changed by Management",
+                  }
+                )
+                  .then((result3) => {
+                    res.redirect("/admin/manage-showtimes");
+                  })
+                  .catch((err) => {
+                    next(err);
+                  });
+              })
+              .catch((err) => {
+                next(err);
+              });
+          })
+          .catch((err) => {
+            next(err);
+          });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
+
+router.get("/change-seats/:movieId/:venueId", isLoggedIn, (req, res, next) => {
+  let seat = false;
+  User.findById(req.session.user._id)
+    .populate("tickets")
+    .then((found) => {
+      found.tickets.forEach((element) => {
+        console.log("FOUND", element.seatNumber, req.query.seat);
+
+        if (element.seatNumber === req.query.seat) seat = true;
+      });
+      if (seat) {
+        Showtime.find({
+          venue: req.params.venueId,
+          movie: req.params.movieId,
+          time: req.query.movieTime,
+          date: req.query.movieDate,
+        })
+          .populate("tickets")
+          .populate("movie")
+          .populate("venue")
+          .then((seats) => {
+            if (seats.length === 0) {
+              res.render("admin/change-seats", {
+                errorMessage: "No seats found",
+              });
+              return;
+            }
+            seats[0].tickets.forEach((element, i) => {
+              console.log("checking", element);
+              if (element.seatNumber === req.query.seat) {
+                element.you = true;
+              } else {
+                element.you = false;
+              }
+            });
+
+            let row1 = seats[0].tickets.slice(0, 8);
+            let row2 = seats[0].tickets.slice(8, 16);
+            let row3 = seats[0].tickets.slice(16, 24);
+            let row4 = seats[0].tickets.slice(24, 32);
+            let row5 = seats[0].tickets.slice(32, 40);
+            let row6 = seats[0].tickets.slice(40, 48);
+            allSeats = { row1, row2, row3, row4, row5, row6 };
+
+            let data = {
+              allSeats,
+              venue: req.params.venueId,
+              movie: req.params.movieId,
+              time: req.query.movieTime,
+              date: req.query.movieDate,
+              seats,
+              seat: req.query.seat,
+            };
+            res.render("admin/change-seats", data);
+          })
+          .catch((err) => {
+            next(err);
+          });
+      } else {
+        res.render("admin/change-seats", {
+          errorMessage: "Invalid Seat",
+        });
+        return;
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {
+  let refundStatus = "";
+  Ticket.findById(req.params.seatId)
+    .then(async (ticket) => {
+      console.log("FOUND TICKET", ticket);
+
+      const session = await stripe.checkout.sessions.retrieve(ticket.paymentId);
+      const refund = await stripe.refunds
+        .create({
+          payment_intent: session.payment_intent,
+          amount: 2000,
+        })
+        .then((result) => {
+          console.log("RESULT", result);
+          refundStatus = result.status;
+        })
+        .catch((err) => next(err));
+
+      console.log("REFUND STATUS", refund);
+
+      if (refundStatus === "succeeded") {
+        Ticket.findByIdAndUpdate(req.params.seatId, {
+          occupied: false,
+          paymentId: "",
+        }).then((result) => {
+          User.updateOne(
+            { username: req.session.user.username },
+            {
+              $pullAll: {
+                tickets: [req.params.seatId],
+              },
+            }
+          )
+            .then((result2) => {
+              User.updateOne(
+                { username: req.session.user.username },
+                {
+                  $push: {
+                    refundedTickets: ticket._id,
+                  },
+                  alert: "One or more tickets have been canceled and refunded",
+                }
+              )
+                .then((result3) => {
+                  User.findById(req.session.user._id)
+                    .then((found) => {
+                      console.log(
+                        "test succes",
+                        req.session.user,
+                        "results3",
+                        found
+                      );
+                      req.session.user = found;
+                      res.redirect("/admin/manage-showtimes");
+                    })
+                    .catch((err) => next(err));
+                })
+                .catch((err) => next(err));
+            })
+            .catch((err) => next(err));
+        });
+      }
+    })
+    .catch((err) => next(err));
+  //
 });
 
 module.exports = router;
