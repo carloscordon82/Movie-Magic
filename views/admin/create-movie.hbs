@@ -1,53 +1,43 @@
-   
-  <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.3.0/dist/flowbite.min.css" />
-
-
-
-
-
-
-
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@themesberg/flowbite@1.3.0/dist/flowbite.min.css"
+/>
 
 <div class="flex justify-center pt-10 pb-15" style="margin:auto">
-<div class="pr-10 pb-10">
-          <div class="flex justify-center  overflow-hidden bg-white rounded-lg">
-            <div class="hidden md:flex md:flex-shrink-0">
-              <div class="flex flex-col w-64">
-                <div class="
-              flex flex-col flex-grow
-              pt-5
-              overflow-y-auto
-              bg-white
-              border-r border-gray-50
-            ">
-                  <div class="flex flex-col items-center flex-shrink-0 px-4">
-                    <a href="/" class="px-8 text-left focus:outline-none">
-                      <h2 class="
-                    block
-                    p-2
-                    text-xl
-                    font-medium
-                    tracking-tighter
-                    text-gray-900
-                    transition
-                    duration-500
-                    ease-in-out
-                    transform
-                    cursor-pointer
-                    hover:text-gray-900
-                  ">Admin Panel</h2>
-                    </a>
-                    <button class="hidden rounded-lg focus:outline-none focus:shadow-outline">
-                      <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </div>
-                  <div class="flex flex-col flex-grow px-4 mt-5 pb-10">
-                    <nav class="flex-1 space-y-1 bg-white">
-                      <ul>
-                        {{!-- <li>
+  <div class="pr-10 pb-10">
+    <div class="flex justify-center overflow-hidden bg-white rounded-lg">
+      <div class="hidden md:flex md:flex-shrink-0">
+        <div class="flex flex-col w-64">
+          <div
+            class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r border-gray-50"
+          >
+            <div class="flex flex-col items-center flex-shrink-0 px-4">
+              <a href="/" class="px-8 text-left focus:outline-none">
+                <h2
+                  class="block p-2 text-xl font-medium tracking-tighter text-gray-900 transition duration-500 ease-in-out transform cursor-pointer hover:text-gray-900"
+                >Admin Panel</h2>
+              </a>
+              <button
+                class="hidden rounded-lg focus:outline-none focus:shadow-outline"
+              >
+                <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                    clip-rule="evenodd"
+                  ></path>
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="flex flex-col flex-grow px-4 mt-5 pb-10">
+              <nav class="flex-1 space-y-1 bg-white">
+                <ul>
+                  {{! <li>
                           <a class="
                         inline-flex
                         items-center
@@ -69,8 +59,8 @@
                             </svg>
                             <span class="ml-4"> Overview</span>
                           </a>
-                        </li> --}}
-                        {{!-- <li>
+                        </li> }}
+                  {{! <li>
                           <a class="
                         inline-flex
                         items-center
@@ -92,56 +82,54 @@
                             </svg>
                             <span class="ml-4">Chat</span>
                           </a>
-                        </li> --}}
-                        <li>
-                          <a class="
-                        
-                      inline-flex
-                        items-center
-                        w-full
-                        px-4
-                        py-2
-                        mt-1
-                        text-base  text-white
-                        transition
-                        duration-500
-                        ease-in-out
-                        transform
-                        rounded-lg
-                        focus:shadow-outline
-                        bg-orange-600
-                      " white="" 70="" href="/admin/manage-movies">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                            <span class="ml-4">Manage Movies</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a class="
-                         inline-flex
-                        items-center
-                        w-full
-                        px-4
-                        py-2
-                        mt-1
-                        text-base text-gray-900
-                        transition
-                        duration-500
-                        ease-in-out
-                        transform
-                        rounded-lg
-                        focus:shadow-outline
-                        hover:bg-gray-50
-                         
-                      " href="/admin/manage-venues">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                            <span class="ml-4">Manage Venues</span>
-                          </a>
-                        </li>
-                        {{!-- <li>
+                        </li> }}
+                  <li>
+                    <a
+                      class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-white transition duration-500 ease-in-out transform rounded-lg focus:shadow-outline bg-orange-600"
+                      white=""
+                      70=""
+                      href="/admin/manage-movies"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        ></path>
+                      </svg>
+                      <span class="ml-4">Manage Movies</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-900 transition duration-500 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-50"
+                      href="/admin/manage-venues"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        ></path>
+                      </svg>
+                      <span class="ml-4">Manage Venues</span>
+                    </a>
+                  </li>
+                  {{! <li>
                           <a class="
                         inline-flex
                         items-center
@@ -162,33 +150,34 @@
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
                             <span class="ml-4">Settings</span></a>
-                        </li> --}}
-                     
-                        <li>
-                          <a class="
-                             inline-flex
-                        items-center
-                        w-full
-                        px-4
-                        py-2
-                        mt-1
-                        text-base text-gray-900
-                        transition
-                        duration-500
-                        ease-in-out
-                        transform
-                        rounded-lg
-                        focus:shadow-outline
-                        hover:bg-gray-50
-                      " white="" 70="" href="/admin/manage-showtimes">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                            </svg>
-                            <span class="ml-4">Manage Showtimes</span>
-                          </a>
-                        </li>
-                        
-                        {{!-- <li>
+                        </li> }}
+
+                  <li>
+                    <a
+                      class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-900 transition duration-500 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-50"
+                      white=""
+                      70=""
+                      href="/admin/manage-showtimes"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                        ></path>
+                      </svg>
+                      <span class="ml-4">Manage Showtimes</span>
+                    </a>
+                  </li>
+
+                  {{! <li>
                           <a class="
                         inline-flex
                         items-center
@@ -211,11 +200,11 @@
                             </svg>
                             <span class="ml-4"> Dashboard</span>
                           </a>
-                        </li> --}}
-                      </ul>
-                    </nav>
-                  </div>
-                  {{!-- <div class="flex flex-shrink-0 p-4 px-4 bg-gray-50">
+                        </li> }}
+                </ul>
+              </nav>
+            </div>
+            {{! <div class="flex flex-shrink-0 p-4 px-4 bg-gray-50">
                     <a href="#" class="flex-shrink-0 block w-full group">
                       <div class="flex items-center">
                         <div>
@@ -226,52 +215,64 @@
                         </div>
                       </div>
                     </a>
-                  </div> --}}
-                </div>
-              </div>
+                  </div> }}
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col flex-1 w-0 overflow-hidden">
+        <main class="relative flex-1 overflow-y-auto focus:outline-none">
+          <div class="py-6">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
+              <h1 class="text-lg text-neutral-600"> </h1>
             </div>
-            <div class="flex flex-col flex-1 w-0 overflow-hidden">
-              <main class="relative flex-1 overflow-y-auto focus:outline-none">
-                <div class="py-6">
-                  <div class="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
-                    <h1 class="text-lg text-neutral-600">  </h1>
-                  </div>
-                  <div class="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
-                    <!-- Put your content here -->
-                   
-                    {{!-- <div class="py-4">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
+              <!-- Put your content here -->
+
+              {{! <div class="py-4">
                       <div class="rounded-lg bg-gray-50 h-96"></div>
-                    </div> --}}
-                    <!-- Do not cross the closing tag underneath this coment-->
-                  </div>
-                </div>
-              </main>
+                    </div> }}
+              <!-- Do not cross the closing tag underneath this coment-->
             </div>
           </div>
-                  </div>
+        </main>
+      </div>
+    </div>
+  </div>
 
-<div class=" w-1/2 flex flex-col">
-                       {{!-- TABLE 1 START --}}
-                 
-                         <div class="pb-10  ">
-        <form action="/admin/search-movie" method="POST">
+  <div class="w-1/2 flex flex-col">
+    {{! TABLE 1 START }}
+
+    <div class="pb-10">
+      <form action="/admin/search-movie" method="POST">
         <div class="shadow overflow-hidden sm:rounded-md">
           <div class="px-4 py-5 bg-white sm:p-6">
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-6">
-                <label for="title" class="block text-sm font-medium text-gray-700">Movie title</label>
-                <input type="text" name="title" id="title" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <label
+                  for="title"
+                  class="block text-sm font-medium text-gray-700"
+                >Movie title</label>
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  autocomplete="given-name"
+                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                />
 
               </div>
             </div>
           </div>
           <div class="px-4 py-3 bg-gray-50 text-left sm:px-6">
-            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button
+              type="submit"
+              class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
               Search
             </button>
           </div>
 
-           {{!-- <div class="flex flew-row flex-wrap bg-white pb-10 mt-5 w-1/2 md:mt-0 md:col-span-2">
+          {{!-- <div class="flex flew-row flex-wrap bg-white pb-10 mt-5 w-1/2 md:mt-0 md:col-span-2">
         
 
 
@@ -288,167 +289,235 @@
     </div> --}}
         </div>
 
-
-
-
       </form>
-      
+
     </div>
-  {{!-- <div class=" pb-2">ACTIVE / EXPIRED TICKETS</div> --}}
-  
-  
-  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 ">
-    
-    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+    {{! <div class=" pb-2">ACTIVE / EXPIRED TICKETS</div> }}
 
+    <div class="-my-2 overflow-x-auto mb-5 sm:-mx-6 lg:-mx-8">
 
-      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Movie
-              </th>
-           
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Overview
-              </th>
-       
-         
-              <th scope="col" class="relative px-6 py-3">
-                <span class="sr-only">Edit</span>
-              
-              </th>
-            </tr>
-          </thead>
-{{#if data.results}}
-          <tbody class="bg-white divide-y divide-gray-200">
-              {{#each data.results}}
-              {{!-- MODAL --}}
-              <div class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="popup-modal{{@index}}" aria-hidden="true">
-<div class="relative px-4 w-full max-w-md h-full md:h-auto">
+      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
 
-<div class="relative bg-white rounded-lg shadow dark:bg-gray-100">
+        <div
+          class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+        >
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Movie
+                </th>
 
-<div class="flex justify-end p-2">
-<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal{{@index}}">
-<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-</button>
-</div>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Overview
+                </th>
 
-<div class="p-6 pt-0 text-center">
-<svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-<h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to add this Movie?</h3>
-<form action="/admin/create-movie-id/{{id}}">
-<button type="submit" data-modal-toggle="popup-modal-add" type="button" class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-Yes, I'm sure
-</button>
-</form>
-<button data-modal-toggle="popup-modal{{@index}}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600">No, cancel</button>
+                <th scope="col" class="relative px-6 py-3">
+                  <span class="sr-only">Edit</span>
 
-</div>
-</div>
-</div>
-</div>
-              {{!-- MODAL --}}
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0 h-32 w-20">
-                    <img class="h-28 w-24 small-pic" src="https://image.tmdb.org/t/p/original/{{poster_path}}" alt="">
-                  </div>
-                  <div class="ml-4">
-                    <div class="text-sm font-medium text-gray-900">
-                      {{title}}
+                </th>
+              </tr>
+            </thead>
+            {{#if data.results}}
+              <tbody class="bg-white divide-y divide-gray-200">
+                {{#each data.results}}
+                  {{! MODAL }}
+                  <div
+                    class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full"
+                    id="popup-modal{{@index}}"
+                    aria-hidden="true"
+                  >
+                    <div class="relative px-4 w-full max-w-md h-full md:h-auto">
+
+                      <div
+                        class="relative bg-white rounded-lg shadow dark:bg-gray-100"
+                      >
+
+                        <div class="flex justify-end p-2">
+                          <button
+                            type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                            data-modal-toggle="popup-modal{{@index}}"
+                          >
+                            <svg
+                              class="w-5 h-5"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                              xmlns="http://www.w3.org/2000/svg"
+                            ><path
+                                fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"
+                              ></path></svg>
+                          </button>
+                        </div>
+
+                        <div class="p-6 pt-0 text-center">
+                          <svg
+                            class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          ><path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path></svg>
+                          <h3
+                            class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
+                          >Are you sure you want to add this Movie?</h3>
+                          <form action="/admin/create-movie-id/{{id}}">
+                            <button
+                              type="submit"
+                              data-modal-toggle="popup-modal-add"
+                              type="button"
+                              class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                            >
+                              Yes, I'm sure
+                            </button>
+                          </form>
+                          <button
+                            data-modal-toggle="popup-modal{{@index}}"
+                            type="button"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600"
+                          >No, cancel</button>
+
+                        </div>
+                      </div>
                     </div>
-                    <div class="text-sm text-gray-500">
-                      Released Date {{release_date}}
-                    </div>
                   </div>
-                </div>
-              </td>
-         
-              <td class="px-6 py-4 ">
-                <div class="text-sm text-gray-900">{{overview}}</div>
-                {{!-- <div class="text-sm text-gray-500">{{seats}} Seats Available</div> --}}
-              </td>
-              
-           
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-            
-                 {{!-- <button id="dropdownButton{{@index}}" data-dropdown-toggle="dropdown{{@index}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Edit<svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button> --}}
-<button data-modal-toggle="popup-modal{{@index}}" type="button" class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Add</button>
+                  {{! MODAL }}
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="flex-shrink-0 h-32 w-20">
+                          <img
+                            class="h-28 w-24 small-pic"
+                            {{#if poster_path}}
+                            src="https://image.tmdb.org/t/p/original/{{poster_path}}"
+                            {{else}}
+                            src="/images/genericPoster.png" 
+                            {{/if}}
+                            alt=""
+                          />
+                        </div>
+                        <div class="ml-4">
+                          <div class="text-sm font-medium text-gray-900">
+                            {{title}}
+                          </div>
+                          <div class="text-sm text-gray-500">
+                            Released Date
+                            {{release_date}}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
 
-              </td>
-            </tr>
-         
-{{/each}}
-            <!-- More people... -->
-          </tbody>
-           {{else}}
- <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">NO MOVIES TO DISPLAY</div>
-              </td>        {{/if}}
-        </table>
+                    <td class="px-6 py-4">
+                      <div class="text-sm text-gray-900">{{overview}}</div>
+                      {{!-- <div class="text-sm text-gray-500">{{seats}} Seats Available</div> --}}
+                    </td>
+
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                    >
+
+                      {{!-- <button id="dropdownButton{{@index}}" data-dropdown-toggle="dropdown{{@index}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Edit<svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button> --}}
+                      <button
+                        data-modal-toggle="popup-modal{{@index}}"
+                        type="button"
+                        class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                      >Add</button>
+
+                    </td>
+                  </tr>
+
+                {{/each}}
+                <!-- More people... -->
+              </tbody>
+            {{else}}
+              <tbody class="bg-white divide-y divide-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">NO MOVIES TO DISPLAY</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                </td>
+              </tbody>
+            {{/if}}
+          </table>
+        </div>
+      </div>
+    </div>
+    {{! TABLE 1 END }}
+
+    {{! TABLE 2 START }}
+
+    {{! TABLE 2 END }}
+
+  </div>
+
+</div>
+
+{{#if errorMessage}}
+  {{errorMessage}}
+{{/if}}
+
+<div
+  class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full"
+  id="popup-modal-add"
+  aria-hidden="true"
+>
+  <div class="relative px-4 w-full max-w-md h-full md:h-auto">
+
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-100">
+
+      <div class="flex justify-end p-2">
+        <button
+          type="button"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+          data-modal-toggle="popup-modal{{@index}}"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          ><path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path></svg>
+        </button>
+      </div>
+
+      <div class="p-6 pt-0 text-center">
+        <svg
+          class="mx-auto mb-4 w-14 h-34 text-gray-400 dark:text-gray-200"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path></svg>
+        <h3
+          class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
+        >Adding Movie.<br />Please wait...</h3>
+
       </div>
     </div>
   </div>
-  {{!-- TABLE 1 END --}}
-
-  {{!-- TABLE 2 START --}}
-  
-{{!-- TABLE 2 END --}}
-
-</div>
-
-
-
-
-   
-
-
-
-
-                  
-</div>
-
-
-
-
-
-  
-  
-  
-  
-  
- 
-{{#if errorMessage}}
-   {{errorMessage}}
-{{/if}}
-
-
-<a href="/admin/create-movie-id/{{id}}">ADD</a>
-
-
- 
-   
-
-<div class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="popup-modal-add" aria-hidden="true">
-<div class="relative px-4 w-full max-w-md h-full md:h-auto">
-
-<div class="relative bg-white rounded-lg shadow dark:bg-gray-100">
-
-<div class="flex justify-end p-2">
-<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal{{@index}}">
-<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-</button>
-</div>
-
-<div class="p-6 pt-0 text-center">
-<svg class="mx-auto mb-4 w-14 h-34 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-<h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Adding Movie.<br>Please wait...</h3>
-
-</div>
-</div>
-</div>
 </div>

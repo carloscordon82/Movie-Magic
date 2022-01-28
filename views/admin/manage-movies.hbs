@@ -344,7 +344,7 @@ Yes, I'm sure
                 <div class="text-sm text-gray-500">{{createdTime}}</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{shows}} Showtimes</div>
+             <a href="/admin/manage-showtimes?search=%22{{title}}%22">   <div class="text-sm text-gray-900">{{shows}} Showtimes</div></a>
                 <div class="text-sm text-gray-500">{{seats}} Seats Available</div>
               </td>
               
@@ -378,80 +378,7 @@ Yes, I'm sure
       </div>
     </div>
   </div>
-  {{!-- TABLE 1 END --}}
-
-  {{!-- TABLE 2 START --}}
-  {{!-- <br>
-  <div class="pb-2">REFUNDED TICKETS    </div>
-
-  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 pb-5">
-    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Movie & Seat
-              </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date & Time
-              </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Venue
-              </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
-              </th>
-             
-            </tr>
-          </thead>
-          {{#if refundedTickets}}
-          <tbody class="bg-white divide-y divide-gray-200">
-              {{#each refundedTickets}}
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0 h-20 w-15">
-                    <img class="h-20 w-15 " src="https://image.tmdb.org/t/p/original/{{this.movie.poster}}" alt="">
-                  </div>
-                  <div class="ml-4">
-                    <div class="text-sm font-medium text-gray-900">
-                      {{this.movie.title}}
-                    </div>
-                    <div class="text-sm text-gray-500">
-                      {{this.seatNumber}}
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{this.date}}</div>
-                <div class="text-sm text-gray-500">{{this.time}}</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{this.venue.name}}</div>
-                <div class="text-sm text-gray-500">{{this.venue.location}}</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                  Refunded
-                </span>
-              </td>
-            
-              
-            </tr>
-{{/each}}
-            <!-- More people... -->
-          </tbody>
-            {{else}}
-                    <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">NO TICKETS TO DISPLAY</div>
-              </td>        {{/if}}
-        </table>
-      </div>
-    </div>
-  </div> --}}
-{{!-- TABLE 2 END --}}
+ 
 
 </div>
                   
@@ -465,22 +392,6 @@ Yes, I'm sure
 
 
 
-
-{{!-- <h1>MOVIES</h1>
-<div class="movies">
-{{#each movies}}
-<div class="delete">
-  <a  href="/movies/{{_id}}?movieDate={{../today}}"><img class="small-poster" src="https://image.tmdb.org/t/p/original/{{poster}}" alt="HTML tutorial" style="width:242px;"></a> 
-  <a class="d-btn" href="delete-movie/{{_id}}">DELETE</a>
-</div>
-{{/each}}
-</div>
-<br>
-<br>
-<h1><a href="/admin/create-movie">ADD MOVIE</a></h1>
-
-<br>
-<br> --}}
 
 <br>
 

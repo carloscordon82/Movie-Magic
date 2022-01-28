@@ -7,14 +7,10 @@ const Movie = require("../models/Movie.model");
 const Venue = require("../models/Venue.model");
 const Showtime = require("../models/Showtime.model");
 const Ticket = require("../models/Ticket.model");
-const mongoose = require("mongoose");
 const axios = require("axios");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
-const isLoggedIn = require("../middleware/isLoggedIn");
-const isLoggedOut = require("../middleware/isLoggedOut");
-const isAdminLoggedIn = require("../middleware/isAdminLoggedIn");
 
-const saltRounds = 10;
+const isAdminLoggedIn = require("../middleware/isAdminLoggedIn");
 
 let amens = [
   "Dolby Surround",
@@ -54,7 +50,6 @@ router.get("/manage-movies", isAdminLoggedIn, (req, res, next) => {
           showtimes.forEach((showtime) => {
             if (!showtime.expired)
               showtime.tickets.forEach((ticket) => {
-                console.log("CHECKING TICKET", ticket.occupied);
                 if (!ticket.occupied) seats++;
               });
           });
@@ -79,7 +74,6 @@ router.get("/manage-movies", isAdminLoggedIn, (req, res, next) => {
 });
 
 router.get("/delete-movie/:movieId", isAdminLoggedIn, (req, res, next) => {
-  console.log("DELETE");
   Movie.findByIdAndDelete(req.params.movieId)
     .then((movie) => {
       Showtime.deleteMany({ movie: movie._id })
@@ -119,7 +113,6 @@ router.get("/manage-venues", isAdminLoggedIn, (req, res, next) => {
 });
 
 router.get("/delete-venue/:venueId", isAdminLoggedIn, (req, res, next) => {
-  console.log("DELETE");
   Venue.findByIdAndDelete(req.params.venueId)
     .then((venue) => {
       Showtime.deleteMany({ venue: venue._id })
@@ -203,10 +196,10 @@ router.get("/manage-showtimes", isAdminLoggedIn, (req, res, next) => {
         });
         each.seatsFree = 64 - amount;
         each.seatsOccupied = amount;
-        console.log("WORKING");
       });
-      console.log("FINISHED");
-      res.render("admin/manage-showtimes", { showtimes });
+      let search = "";
+      if (req.query.search) search = `${req.query.search}`;
+      res.render("admin/manage-showtimes", { showtimes, search });
     })
     .catch((err) => {
       next(err);
@@ -261,7 +254,6 @@ router.get(
   "/delete-showtime/:showtimeId",
   isAdminLoggedIn,
   (req, res, next) => {
-    console.log("DELETE");
     Showtime.findByIdAndDelete(req.params.showtimeId)
       .populate({
         path: "tickets",
@@ -270,41 +262,59 @@ router.get(
           model: "User",
         },
       })
-      .then((showtime) => {
+      .then(async (showtime) => {
         // Ticket.deleteMany({
         //   _id: {
         //     $in: showtime.tickets,
         //   },
         // })
 
-        let promises = [];
-        showtime.tickets.forEach((ticket) => {
+        let i = -1;
+        // This solution works faster but because of the Stripe account not being Paid account, it has limits on back to back calls
+        // await Promise.all(showtime.tickets.map(async (ticket) => {
+        for (const ticket of showtime.tickets) {
+          i++;
           if (ticket.user) {
-            console.log("Only erasing for", ticket.user.username);
+            console.log("About to try with payment ID", ticket.paymentId);
 
-            promises.push(
-              User.updateOne(
-                { username: ticket.user.username },
-                {
-                  $pullAll: {
-                    tickets: [ticket._id],
-                  },
-                  $push: {
-                    canceledTickets: ticket._id,
-                  },
-                  alert: "One or more of your Tickets has been canceled",
-                }
-              )
+            const session = await stripe.checkout.sessions.retrieve(
+              ticket.paymentId
             );
+            console.log("Got Payment Intent", session.payment_intent);
+            const refund = await stripe.refunds
+              .create({
+                payment_intent: session.payment_intent,
+                amount: 2000,
+              })
+              .then((result) => {
+                console.log("Got Refund", result.status);
+                refundStatus = result.status;
+                User.updateOne(
+                  { username: ticket.user.username },
+                  {
+                    $pullAll: {
+                      tickets: [ticket._id],
+                    },
+                    $push: {
+                      canceledTickets: ticket._id,
+                    },
+                    alert: "One or more of your Tickets has been canceled",
+                  }
+                )
+                  .then((result) => {
+                    console.log("Ticket completed", i);
+                    if (i === showtime.tickets.length - 1) {
+                      res.redirect("../manage-showtimes");
+                    }
+                  })
+                  .catch((err) => next(err));
+              })
+              .catch((err) => next(err));
+
+            console.log("This should happen at the end of each ticket", i);
           }
-        });
-        Promise.all(promises)
-          .then((values) => {
-            res.redirect("../manage-showtimes");
-          })
-          .catch((err) => {
-            next(err);
-          });
+        }
+        console.log("outside async");
       })
       .catch((err) => {
         next(err);
@@ -337,7 +347,6 @@ router.post("/create-venue", isAdminLoggedIn, (req, res, next) => {
 
   Venue.create(req.body)
     .then((venue) => {
-      console.log(venue);
       res.redirect("/admin/manage-venues");
     })
     .catch((err) => {
@@ -360,8 +369,6 @@ router.get("/edit-venue/:venueId", isAdminLoggedIn, (req, res, next) => {
     } else {
       venue.vip = false;
     }
-    console.log("VENUE", venue.amenExist);
-
     res.render("admin/edit-venue", { venue });
   });
 });
@@ -403,7 +410,6 @@ router.get("/create-movie", isAdminLoggedIn, (req, res, next) => {
   res.render("admin/create-movie");
 });
 router.post("/search-movie", isAdminLoggedIn, (req, res, next) => {
-  console.log(req.body, "BODY");
   if (req.body) {
     async function display() {
       try {
@@ -412,10 +418,11 @@ router.post("/search-movie", isAdminLoggedIn, (req, res, next) => {
             `https://api.themoviedb.org/3/search/movie?api_key=5474fe63c18c5ac27e78e2d4e61c868c&language=en-US&query=${req.body.title}&page=1&include_adult=false`
           )
           .then((responseFromApi) => {
-            console.log(responseFromApi.data.results);
             res.render("admin/create-movie", responseFromApi);
           })
-          .catch((err) => {});
+          .catch((err) => {
+            next(err);
+          });
       } catch (err) {
         console.log(err);
       }
@@ -432,7 +439,6 @@ router.get("/create-movie-id/:id", isAdminLoggedIn, (req, res, next) => {
           `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=5474fe63c18c5ac27e78e2d4e61c868c`
         )
         .then((responseFromApi) => {
-          console.log(responseFromApi.data);
           const movie = [
             {
               tmdbId: responseFromApi.data.id,
@@ -446,18 +452,17 @@ router.get("/create-movie-id/:id", isAdminLoggedIn, (req, res, next) => {
           ];
           Movie.create(movie)
             .then((results) => {
-              console.log("Success", results);
               res.redirect("/admin/manage-movies");
             })
             .catch((err) => {
-              console.log("Something went wrong", err);
+              next(err);
             });
         })
         .catch((err) => {
-          console.log(err, "ERRORRRRRRRR");
+          next(err);
         });
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   }
   insert();
@@ -562,15 +567,14 @@ router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
             };
             Showtime.create(newShowtime)
               .then((results) => {
-                console.log("Success New Showtime", results);
                 res.redirect("/admin/manage-showtimes");
               })
               .catch((err) => {
-                console.log("Something went wrong", err);
+                next(err);
               });
           })
           .catch((err) => {
-            console.log("Something went wrong", err);
+            next(err);
           });
       });
     });
@@ -587,9 +591,6 @@ router.get(
       paymentId: "",
     })
       .then((oldTicket) => {
-        console.log("OLD TICKET", oldTicket);
-        console.log("new ID", req.params.newId);
-
         Ticket.findByIdAndUpdate(req.params.newId, {
           occupied: true,
           user: req.session.user._id,
@@ -645,8 +646,6 @@ router.get(
       .populate("tickets")
       .then((found) => {
         found.tickets.forEach((element) => {
-          console.log("FOUND", element.seatNumber, req.query.seat);
-
           if (element.seatNumber === req.query.seat) seat = true;
         });
         if (seat) {
@@ -667,7 +666,6 @@ router.get(
                 return;
               }
               seats[0].tickets.forEach((element, i) => {
-                console.log("checking", element);
                 if (element.seatNumber === req.query.seat) {
                   element.you = true;
                 } else {
@@ -714,8 +712,6 @@ router.get("/refund/:seatId", isAdminLoggedIn, (req, res, next) => {
   let refundStatus = "";
   Ticket.findById(req.params.seatId)
     .then(async (ticket) => {
-      console.log("FOUND TICKET", ticket);
-
       const session = await stripe.checkout.sessions.retrieve(ticket.paymentId);
       const refund = await stripe.refunds
         .create({
@@ -723,12 +719,9 @@ router.get("/refund/:seatId", isAdminLoggedIn, (req, res, next) => {
           amount: 2000,
         })
         .then((result) => {
-          console.log("RESULT", result);
           refundStatus = result.status;
         })
         .catch((err) => next(err));
-
-      console.log("REFUND STATUS", refund);
 
       if (refundStatus === "succeeded") {
         Ticket.findByIdAndUpdate(req.params.seatId, {
@@ -756,12 +749,6 @@ router.get("/refund/:seatId", isAdminLoggedIn, (req, res, next) => {
                 .then((result3) => {
                   User.findById(req.session.user._id)
                     .then((found) => {
-                      console.log(
-                        "test succes",
-                        req.session.user,
-                        "results3",
-                        found
-                      );
                       req.session.user = found;
                       res.redirect("/admin/manage-showtimes");
                     })

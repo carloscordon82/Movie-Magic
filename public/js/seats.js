@@ -8,7 +8,6 @@ const movieSelect = document.getElementById("movie");
 
 let ticketPrice = 20;
 
-//Update total and count
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll(".row .seat.selected");
   const selectedSeatsCount = selectedSeats.length;
@@ -18,7 +17,6 @@ function updateSelectedCount() {
 button.disabled = true;
 button.classList.add("bg-gray-200");
 button.addEventListener("click", (e) => {
-  console.log("button");
   button.disabled = true;
   const respo = fetch("../../checkout/pre-summary", {
     method: "put",
@@ -34,7 +32,6 @@ button.addEventListener("click", (e) => {
 let selectedSeats = [];
 let selectedLetters = [];
 
-//Seat click event
 container.addEventListener("click", (e) => {
   if (
     e.target.classList.contains("seat") &&
@@ -57,17 +54,15 @@ container.addEventListener("click", (e) => {
       });
     }
   }
+
   if (selectedSeats.length) button.disabled = false;
-  console.log(selectedLetters);
   selected[0].innerText = "";
   let line = "";
-  // selected.innerText = selectedLetters[0];
   selectedLetters.forEach((element, i) => {
     if (i) line += "-";
     line += ` ${element} `;
   });
   selected[0].innerText = line;
-  console.log("LINER", line);
   if (!line) {
     selected[0].innerText = "None";
     button.disabled = true;
@@ -78,22 +73,4 @@ container.addEventListener("click", (e) => {
     button.classList.add("bg-blue-600");
     button.classList.remove("bg-gray-200");
   }
-
-  //   updateSelectedCount();
 });
-
-let allData = {
-  test: "test",
-};
-const getPayment = function (a) {
-  const respo = fetch("/test", {
-    method: "put",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      allData,
-    }),
-  }).then((res) => {
-    console.log("sent");
-  });
-};
-console.log("Starting Promise Client Side", getPayment());

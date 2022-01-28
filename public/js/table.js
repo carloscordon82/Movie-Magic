@@ -1,7 +1,7 @@
 function filterRows() {
   function separate(myString) {
-    var myArray = [];
-    var myRegexp = /[^\s"]+|"([^"]*)"/gi;
+    let myArray = [];
+    let myRegexp = /[^\s"]+|"([^"]*)"/gi;
     do {
       //Each call to exec returns the next regex match as an array
       var match = myRegexp.exec(myString);
@@ -16,11 +16,9 @@ function filterRows() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
-  // filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
-  //   allWords = input.value.toUpperCase().split(" ");
-  //   console.log(allWords);
+
   let allWords = [];
   allWords = separate(input.value.toUpperCase());
 
@@ -47,9 +45,7 @@ function filterRows() {
           txtValue3.toUpperCase().indexOf(filter) > -1 ||
           txtValue4.toUpperCase().indexOf(filter) > -1
         ) {
-          // tr[i].style.display = "";
         } else {
-          // tr[i].style.display = "none";
           found = false;
         }
       }
@@ -61,3 +57,5 @@ function filterRows() {
     }
   }
 }
+console.log("running");
+filterRows();

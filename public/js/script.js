@@ -5,6 +5,7 @@ document.addEventListener(
   },
   false
 );
+
 const dates = document.getElementsByClassName("dates");
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get("movieDate");
@@ -15,10 +16,9 @@ if (myParam)
       dates[i].classList.add("bg-orange-600");
     }
   }
+
 const message = document.getElementsByClassName("message");
 console.log("before good bye");
 setTimeout(() => {
-  if (message[0])
-    console.log("good bye", (message[0].style["display"] = "none"));
-  // message.style.display = "none";
+  if (message[0]) message[0].style["display"] = "none";
 }, 5000);

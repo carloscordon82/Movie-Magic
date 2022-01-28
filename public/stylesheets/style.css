@@ -238,10 +238,8 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  /* align-content: center; */
   align-items: flex-start;
   background-color: white;
-  /* background-image: url("https://image.tmdb.org/t/p/original//tUkY0WxffPZ9PoyC62PIyyUMGnt.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   height: 270px;
@@ -256,7 +254,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  /* align-content: center; */
   align-items: center;
   background-color: white;
 
@@ -314,10 +311,8 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  /* align-content: center; */
   align-items: flex-start;
   background-color: white;
-  /* background-image: url("https://image.tmdb.org/t/p/original//tUkY0WxffPZ9PoyC62PIyyUMGnt.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   height: 140px;
@@ -357,86 +352,6 @@ body {
 
 .carousel-item {
   height: 400px;
-}
-
-/* TEST ACCORDION */
-
-.container-ac {
-  max-width: 40em;
-  margin: 10px auto;
-}
-.ac-label {
-  font-weight: 700;
-  position: relative;
-  padding: 0.5em 1em;
-  margin-bottom: 0.5em;
-  display: block;
-  cursor: pointer;
-  background-color: whiteSmoke;
-  transition: background-color 0.15s ease-in-out;
-}
-.ac-input:checked + label,
-.ac-label:hover {
-  background-color: #999;
-}
-.ac-label:after,
-.ac-input:checked + .ac-label:after {
-  content: "+";
-  position: absolute;
-  display: block;
-  right: 0;
-  top: 0;
-  width: 2em;
-  height: 100%;
-  line-height: 2.25em;
-  text-align: center;
-  background-color: #e5e5e5;
-  transition: background-color 0.15s ease-in-out;
-}
-.ac-label:hover:after,
-.ac-input:checked + .ac-label:after {
-  background-color: #b5b5b5;
-}
-.ac-input:checked + .ac-label:after {
-  content: "-";
-}
-.ac-input {
-  display: none;
-}
-.ac-text,
-.ac-sub-text {
-  opacity: 0;
-  height: 0;
-  margin-bottom: 0.5em;
-  transition: opacity 0.5s ease-in-out;
-  overflow: hidden;
-}
-.ac-input:checked ~ .ac-text,
-.ac-sub .ac-input:checked ~ .ac-sub-text {
-  opacity: 1;
-  height: auto;
-}
-.ac-sub .ac-label {
-  background: none;
-  font-weight: 600;
-  padding: 0.5em 2em;
-  margin-bottom: 0;
-}
-.ac-sub .ac-label:checked {
-  background: none;
-  border-bottom: 1px solid whitesmoke;
-}
-.ac-sub .ac-label:after,
-.ac-sub .ac-input:checked + .ac-label:after {
-  left: 0;
-  background: none;
-}
-.ac-sub .ac-input:checked + label,
-.ac-sub .ac-label:hover {
-  background: none;
-}
-.ac-sub-text {
-  padding: 0 1em 0 2em;
 }
 
 .special-bg {

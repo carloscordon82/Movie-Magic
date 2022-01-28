@@ -10,7 +10,6 @@ const movieSelect = document.getElementById("movie");
 
 let ticketPrice = 20;
 
-//Update total and count
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll(".row .seat.selected");
   const selectedSeatsCount = selectedSeats.length;
@@ -21,8 +20,6 @@ function updateSelectedCount() {
 let selectedSeats = "";
 let selectedLetters = "";
 const params = new URLSearchParams(window.location.search);
-console.log("PARAMS", params.get("seat"));
-//Seat click event
 container.addEventListener("click", (e) => {
   if (
     e.target.classList.contains("seat") &&
@@ -47,19 +44,3 @@ container.addEventListener("click", (e) => {
     )}/${selectedSeats}`;
   }
 });
-
-let allData = {
-  test: "test",
-};
-const getPayment = function (a) {
-  const respo = fetch("/test", {
-    method: "put",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      allData,
-    }),
-  }).then((res) => {
-    console.log("sent");
-  });
-};
-console.log("Starting Promise Client Side", getPayment());

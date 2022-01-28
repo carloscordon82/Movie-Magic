@@ -1,85 +1,627 @@
-
-
-
 <!-- Section 1 -->
 <section class="relative py-0 bg-white lg:py-0">
- <div class="demo-wrap">
-     <img
-    class="demo-bg"
-    src="https://image.tmdb.org/t/p/original/{{tickets.[0].movie.backdrop}}"
-    alt=""
-  >
-    <div class="demo-content flex flex-col items-center justify-between px-10 mx-auto max-w-7xl xl:px-5 lg:flex-row">
+  <div class="demo-wrap">
+    <img
+      class="demo-bg"
+      src="https://image.tmdb.org/t/p/original/{{tickets.0.movie.backdrop}}"
+      alt=""
+    />
+    <div
+      class="demo-content flex flex-col items-center justify-between px-10 mx-auto max-w-7xl xl:px-5 lg:flex-row"
+    >
 
-        <div class="flex flex-col items-center w-full px-10 pt-5 pb-20 lg:pt-20 lg:flex-row">
-            <div class="relative w-full max-w-md bg-cover lg:max-w-2xl lg:w-7/12">
-                <div class="relative flex flex-col items-center justify-center w-full h-full lg:pr-10">
-                    <img class="small-poster" src="https://image.tmdb.org/t/p/original/{{tickets.[0].movie.poster}}" style="width: 300px;">
-                </div>
+      <div
+        class="flex flex-col items-center w-full px-10 pt-5 pb-20 lg:pt-20 lg:flex-row"
+      >
+        <div class="relative w-full max-w-md bg-cover lg:max-w-2xl lg:w-7/12">
+          <div
+            class="relative flex flex-col items-center justify-center w-full h-full lg:pr-10"
+          >
+            <img
+              class="small-poster"
+              src="https://image.tmdb.org/t/p/original/{{tickets.0.movie.poster}}"
+              style="width: 300px;"
+            />
+          </div>
+        </div>
+        <div>
+          <h1
+            class="box-border mt-0 mb-4 text-3xl font-black text-gray-800 md:text-4xl lg:text-5xl xl:text-6xl"
+          >
+            Purchase
+            <span class="font-black text-indigo-600">Succesfull</span>.
+          </h1>
+          <form action="/user/tickets" method="GET">
+
+            <div class="relative">
+              <button
+                type="submit"
+                class="text-3xl inline-block w-auto px-5 py-4 text-lg font-medium text-center text-white transition duration-200 bg-orange-600 rounded-lg hover:bg-orange-400 ease"
+              >View Tickets</button>
+
             </div>
-           <div>
-<h1 class="box-border mt-0 mb-4 text-3xl font-black text-gray-800 md:text-4xl lg:text-5xl xl:text-6xl">
-                Purchase
-                <span class="font-black text-indigo-600">Succesfull</span>.
-            </h1>
-            <form action="/user/tickets" method="GET">
+          </form>
+        </div>
+        <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
+          <div
+            class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl"
+          >
+            <h4
+              class="w-full text-3xl text-gray-400 font-medium leading-snug"
+            >Movie</h4>
+            <h4
+              class="text-2xl text-center font-extrabold tracking-tight text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl"
+            >{{tickets.0.movie.title}}</h4>
+            <h4
+              class="text-gray-400 w-full text-3xl font-medium leading-snug"
+            >Date</h4>
+            <h4
+              class="text-2xl text-center font-extrabold tracking-tight text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl"
+            >{{tickets.0.date}}</h4>
+            <h4
+              class="w-full text-3xl text-gray-400 font-medium leading-snug"
+            >Time</h4>
+            <h4
+              class="text-2xl text-center font-extrabold tracking-tight text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl"
+            >{{tickets.0.time}}</h4>
+            <h4
+              class="w-full text-3xl text-gray-400 font-medium leading-snug"
+            >Venue</h4>
+            <h4
+              class="text-2xl text-center font-extrabold tracking-tight text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl"
+            >{{tickets.0.venue.name}}</h4>
+            <h4
+              class="w-full text-3xl text-gray-400 font-medium leading-snug"
+            >Seats Selected</h4>
 
-<div class="relative">
-                            <button type="submit" class="text-3xl inline-block w-1/2 px-5 py-4 text-lg font-medium text-center text-white transition duration-200 bg-orange-600 rounded-lg hover:bg-orange-400 ease">View Tickets</button>
-                            
-                        </div>
-                        </form>
-            </div>
-            <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
-                <div class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl">
-                    {{!-- <h4 class="w-full text-4xl font-medium leading-snug">Summary</h4> --}}
-                    <h4 class="w-full text-3xl text-gray-400 font-medium leading-snug">Movie</h4>
-                    <h4 class="text-2xl text-center font-extrabold tracking-tight  text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl">{{tickets.[0].movie.title}}</h4>
-                    <h4 class="text-gray-400 w-full text-3xl font-medium leading-snug">Date</h4>
-                    <h4 class="text-2xl text-center font-extrabold tracking-tight  text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl">{{tickets.[0].date}}</h4>
-                    <h4 class="w-full text-3xl text-gray-400 font-medium leading-snug">Time</h4>
-                    <h4 class="text-2xl text-center font-extrabold tracking-tight  text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl">{{tickets.[0].time}}</h4>
-                    <h4 class="w-full text-3xl text-gray-400 font-medium leading-snug">Venue</h4>
-                    <h4 class="text-2xl text-center font-extrabold tracking-tight  text-gray-900 sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl">{{tickets.[0].venue.name}}</h4>
-                    <h4 class="w-full text-3xl text-gray-400 font-medium leading-snug">Seats Selected</h4>
+            <div class="relative w-full mt-1 space-y-8">
 
-                    <div class="relative w-full mt-1 space-y-8">
-                        
-                     
-                            <div>
-                                {{#each tickets}}
+              <div>
+                {{#each tickets}}
 
-<a  class="inline-flex items-center justify-center px-4 text-base font-medium leading-6 text-white whitespace-no-wrap bg-black border border-gray-200 rounded-md shadow-sm focus:outline-none focus:shadow-none">
-            {{seatNumber}}
-            </a>
-{{/each}}
-                  
-                            </div>
-                
+                  <a
+                    class="inline-flex items-center justify-center px-4 text-base font-medium leading-6 text-white whitespace-no-wrap bg-black border border-gray-200 rounded-md shadow-sm focus:outline-none focus:shadow-none"
+                  >
+                    {{seatNumber}}
+                  </a>
+                {{/each}}
 
-                  {{!-- <form action="/checkout/process" method="POST">
+              </div>
+
+              {{!-- <form action="/checkout/process" method="POST">
 
 <div class="relative">
                             <button type="submit" class="text-3xl inline-block w-full px-5 py-4 text-lg font-medium text-center text-white transition duration-200 bg-orange-600 rounded-lg hover:bg-orange-400 ease">Pay ${{price}}.-</button>
                             
                         </div>
                         </form> --}}
-                    </div>
-
-                </div>
-                <svg class="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-gray-200 fill-current" viewBox="0 0 91 91" xmlns="http://www.w3.org/2000/svg"><g stroke="none" stroke-width="1" fill-rule="evenodd"><g fill-rule="nonzero"><g><g><circle cx="3.261" cy="3.445" r="2.72"></circle><circle cx="15.296" cy="3.445" r="2.719"></circle><circle cx="27.333" cy="3.445" r="2.72"></circle><circle cx="39.369" cy="3.445" r="2.72"></circle><circle cx="51.405" cy="3.445" r="2.72"></circle><circle cx="63.441" cy="3.445" r="2.72"></circle><circle cx="75.479" cy="3.445" r="2.72"></circle><circle cx="87.514" cy="3.445" r="2.719"></circle></g><g transform="translate(0 12)"><circle cx="3.261" cy="3.525" r="2.72"></circle><circle cx="15.296" cy="3.525" r="2.719"></circle><circle cx="27.333" cy="3.525" r="2.72"></circle><circle cx="39.369" cy="3.525" r="2.72"></circle><circle cx="51.405" cy="3.525" r="2.72"></circle><circle cx="63.441" cy="3.525" r="2.72"></circle><circle cx="75.479" cy="3.525" r="2.72"></circle><circle cx="87.514" cy="3.525" r="2.719"></circle></g><g transform="translate(0 24)"><circle cx="3.261" cy="3.605" r="2.72"></circle><circle cx="15.296" cy="3.605" r="2.719"></circle><circle cx="27.333" cy="3.605" r="2.72"></circle><circle cx="39.369" cy="3.605" r="2.72"></circle><circle cx="51.405" cy="3.605" r="2.72"></circle><circle cx="63.441" cy="3.605" r="2.72"></circle><circle cx="75.479" cy="3.605" r="2.72"></circle><circle cx="87.514" cy="3.605" r="2.719"></circle></g><g transform="translate(0 36)"><circle cx="3.261" cy="3.686" r="2.72"></circle><circle cx="15.296" cy="3.686" r="2.719"></circle><circle cx="27.333" cy="3.686" r="2.72"></circle><circle cx="39.369" cy="3.686" r="2.72"></circle><circle cx="51.405" cy="3.686" r="2.72"></circle><circle cx="63.441" cy="3.686" r="2.72"></circle><circle cx="75.479" cy="3.686" r="2.72"></circle><circle cx="87.514" cy="3.686" r="2.719"></circle></g><g transform="translate(0 49)"><circle cx="3.261" cy="2.767" r="2.72"></circle><circle cx="15.296" cy="2.767" r="2.719"></circle><circle cx="27.333" cy="2.767" r="2.72"></circle><circle cx="39.369" cy="2.767" r="2.72"></circle><circle cx="51.405" cy="2.767" r="2.72"></circle><circle cx="63.441" cy="2.767" r="2.72"></circle><circle cx="75.479" cy="2.767" r="2.72"></circle><circle cx="87.514" cy="2.767" r="2.719"></circle></g><g transform="translate(0 61)"><circle cx="3.261" cy="2.846" r="2.72"></circle><circle cx="15.296" cy="2.846" r="2.719"></circle><circle cx="27.333" cy="2.846" r="2.72"></circle><circle cx="39.369" cy="2.846" r="2.72"></circle><circle cx="51.405" cy="2.846" r="2.72"></circle><circle cx="63.441" cy="2.846" r="2.72"></circle><circle cx="75.479" cy="2.846" r="2.72"></circle><circle cx="87.514" cy="2.846" r="2.719"></circle></g><g transform="translate(0 73)"><circle cx="3.261" cy="2.926" r="2.72"></circle><circle cx="15.296" cy="2.926" r="2.719"></circle><circle cx="27.333" cy="2.926" r="2.72"></circle><circle cx="39.369" cy="2.926" r="2.72"></circle><circle cx="51.405" cy="2.926" r="2.72"></circle><circle cx="63.441" cy="2.926" r="2.72"></circle><circle cx="75.479" cy="2.926" r="2.72"></circle><circle cx="87.514" cy="2.926" r="2.719"></circle></g><g transform="translate(0 85)"><circle cx="3.261" cy="3.006" r="2.72"></circle><circle cx="15.296" cy="3.006" r="2.719"></circle><circle cx="27.333" cy="3.006" r="2.72"></circle><circle cx="39.369" cy="3.006" r="2.72"></circle><circle cx="51.405" cy="3.006" r="2.72"></circle><circle cx="63.441" cy="3.006" r="2.72"></circle><circle cx="75.479" cy="3.006" r="2.72"></circle><circle cx="87.514" cy="3.006" r="2.719"></circle></g></g></g></g></svg>
-                <svg class="absolute bottom-0 right-0 z-0 w-32 h-32 -mb-12 -mr-12 text-yellow-400 fill-current" viewBox="0 0 91 91" xmlns="http://www.w3.org/2000/svg"><g stroke="none" stroke-width="1" fill-rule="evenodd"><g fill-rule="nonzero"><g><g><circle cx="3.261" cy="3.445" r="2.72"></circle><circle cx="15.296" cy="3.445" r="2.719"></circle><circle cx="27.333" cy="3.445" r="2.72"></circle><circle cx="39.369" cy="3.445" r="2.72"></circle><circle cx="51.405" cy="3.445" r="2.72"></circle><circle cx="63.441" cy="3.445" r="2.72"></circle><circle cx="75.479" cy="3.445" r="2.72"></circle><circle cx="87.514" cy="3.445" r="2.719"></circle></g><g transform="translate(0 12)"><circle cx="3.261" cy="3.525" r="2.72"></circle><circle cx="15.296" cy="3.525" r="2.719"></circle><circle cx="27.333" cy="3.525" r="2.72"></circle><circle cx="39.369" cy="3.525" r="2.72"></circle><circle cx="51.405" cy="3.525" r="2.72"></circle><circle cx="63.441" cy="3.525" r="2.72"></circle><circle cx="75.479" cy="3.525" r="2.72"></circle><circle cx="87.514" cy="3.525" r="2.719"></circle></g><g transform="translate(0 24)"><circle cx="3.261" cy="3.605" r="2.72"></circle><circle cx="15.296" cy="3.605" r="2.719"></circle><circle cx="27.333" cy="3.605" r="2.72"></circle><circle cx="39.369" cy="3.605" r="2.72"></circle><circle cx="51.405" cy="3.605" r="2.72"></circle><circle cx="63.441" cy="3.605" r="2.72"></circle><circle cx="75.479" cy="3.605" r="2.72"></circle><circle cx="87.514" cy="3.605" r="2.719"></circle></g><g transform="translate(0 36)"><circle cx="3.261" cy="3.686" r="2.72"></circle><circle cx="15.296" cy="3.686" r="2.719"></circle><circle cx="27.333" cy="3.686" r="2.72"></circle><circle cx="39.369" cy="3.686" r="2.72"></circle><circle cx="51.405" cy="3.686" r="2.72"></circle><circle cx="63.441" cy="3.686" r="2.72"></circle><circle cx="75.479" cy="3.686" r="2.72"></circle><circle cx="87.514" cy="3.686" r="2.719"></circle></g><g transform="translate(0 49)"><circle cx="3.261" cy="2.767" r="2.72"></circle><circle cx="15.296" cy="2.767" r="2.719"></circle><circle cx="27.333" cy="2.767" r="2.72"></circle><circle cx="39.369" cy="2.767" r="2.72"></circle><circle cx="51.405" cy="2.767" r="2.72"></circle><circle cx="63.441" cy="2.767" r="2.72"></circle><circle cx="75.479" cy="2.767" r="2.72"></circle><circle cx="87.514" cy="2.767" r="2.719"></circle></g><g transform="translate(0 61)"><circle cx="3.261" cy="2.846" r="2.72"></circle><circle cx="15.296" cy="2.846" r="2.719"></circle><circle cx="27.333" cy="2.846" r="2.72"></circle><circle cx="39.369" cy="2.846" r="2.72"></circle><circle cx="51.405" cy="2.846" r="2.72"></circle><circle cx="63.441" cy="2.846" r="2.72"></circle><circle cx="75.479" cy="2.846" r="2.72"></circle><circle cx="87.514" cy="2.846" r="2.719"></circle></g><g transform="translate(0 73)"><circle cx="3.261" cy="2.926" r="2.72"></circle><circle cx="15.296" cy="2.926" r="2.719"></circle><circle cx="27.333" cy="2.926" r="2.72"></circle><circle cx="39.369" cy="2.926" r="2.72"></circle><circle cx="51.405" cy="2.926" r="2.72"></circle><circle cx="63.441" cy="2.926" r="2.72"></circle><circle cx="75.479" cy="2.926" r="2.72"></circle><circle cx="87.514" cy="2.926" r="2.719"></circle></g><g transform="translate(0 85)"><circle cx="3.261" cy="3.006" r="2.72"></circle><circle cx="15.296" cy="3.006" r="2.719"></circle><circle cx="27.333" cy="3.006" r="2.72"></circle><circle cx="39.369" cy="3.006" r="2.72"></circle><circle cx="51.405" cy="3.006" r="2.72"></circle><circle cx="63.441" cy="3.006" r="2.72"></circle><circle cx="75.479" cy="3.006" r="2.72"></circle><circle cx="87.514" cy="3.006" r="2.719"></circle></g></g></g></g></svg>
             </div>
+
+          </div>
+          <svg
+            class="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-gray-200 fill-current"
+            viewBox="0 0 91 91"
+            xmlns="http://www.w3.org/2000/svg"
+          ><g stroke="none" stroke-width="1" fill-rule="evenodd"><g
+                fill-rule="nonzero"
+              ><g><g><circle cx="3.261" cy="3.445" r="2.72"></circle><circle
+                      cx="15.296"
+                      cy="3.445"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.445"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 12)"><circle
+                      cx="3.261"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="3.525"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.525"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 24)"><circle
+                      cx="3.261"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="3.605"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.605"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 36)"><circle
+                      cx="3.261"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="3.686"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.686"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 49)"><circle
+                      cx="3.261"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="2.767"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="2.767"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 61)"><circle
+                      cx="3.261"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="2.846"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="2.846"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 73)"><circle
+                      cx="3.261"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="2.926"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="2.926"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 85)"><circle
+                      cx="3.261"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="3.006"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.006"
+                      r="2.719"
+                    ></circle></g></g></g></g></svg>
+          <svg
+            class="absolute bottom-0 right-0 z-0 w-32 h-32 -mb-12 -mr-12 text-yellow-400 fill-current"
+            viewBox="0 0 91 91"
+            xmlns="http://www.w3.org/2000/svg"
+          ><g stroke="none" stroke-width="1" fill-rule="evenodd"><g
+                fill-rule="nonzero"
+              ><g><g><circle cx="3.261" cy="3.445" r="2.72"></circle><circle
+                      cx="15.296"
+                      cy="3.445"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.445"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.445"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 12)"><circle
+                      cx="3.261"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="3.525"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.525"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.525"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 24)"><circle
+                      cx="3.261"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="3.605"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.605"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.605"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 36)"><circle
+                      cx="3.261"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="3.686"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.686"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.686"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 49)"><circle
+                      cx="3.261"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="2.767"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="2.767"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="2.767"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 61)"><circle
+                      cx="3.261"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="2.846"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="2.846"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="2.846"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 73)"><circle
+                      cx="3.261"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="2.926"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="2.926"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="2.926"
+                      r="2.719"
+                    ></circle></g><g transform="translate(0 85)"><circle
+                      cx="3.261"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="15.296"
+                      cy="3.006"
+                      r="2.719"
+                    ></circle><circle
+                      cx="27.333"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="39.369"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="51.405"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="63.441"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="75.479"
+                      cy="3.006"
+                      r="2.72"
+                    ></circle><circle
+                      cx="87.514"
+                      cy="3.006"
+                      r="2.719"
+                    ></circle></g></g></g></g></svg>
         </div>
+      </div>
 
     </div>
-</div>
+  </div>
 </section>
-
-
-
-
-
 
 {{!-- {{tickets.[0].movie.title}}<br>
 {{tickets.[0].venue.name}}<br>

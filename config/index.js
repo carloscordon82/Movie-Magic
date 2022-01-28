@@ -34,7 +34,6 @@ module.exports = (app) => {
   app.use((req, res, next) => {
     if (req.session.user) {
       User.findById(req.session.user._id).then((user) => {
-        // req.session.user = user;
         req.app.locals.globalUser = user;
         next();
       });

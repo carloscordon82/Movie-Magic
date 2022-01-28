@@ -22,16 +22,13 @@ const { log } = require("console");
 const saltRounds = 10;
 
 function sendEmail(data, recipient, subject) {
-  console.log("RECIPIENT", recipient);
-  console.log("received for email this data", data);
-
   let transporter = nodemailer.createTransport({
-    host: "mail.realhomesgroup.com",
+    host: process.env.MAIL_HOST,
     port: 465,
     secure: true,
     auth: {
-      user: "movie-theater@realhomesgroup.com",
-      pass: "56lmqw12",
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS,
     },
   });
   var message = {
@@ -84,7 +81,6 @@ router.put("/pre-summary", isLoggedIn, (req, res, next) => {
   } else {
     req.session.user.tempSeats = req.body.selectedSeats;
   }
-
   res.json("");
 });
 
@@ -98,12 +94,9 @@ router.post("/pre-summary", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/summary", isLoggedIn, (req, res, next) => {
-  console.log("PRE SUMMARY", req.session.user.tempSeats);
-
   Ticket.find({ _id: { $in: req.session.user.tempSeats } })
     .populate("venue")
     .populate("movie")
-
     .then((tickets) => {
       let price = tickets.length * 20;
       res.render("checkout/summary", { tickets, price });
@@ -140,7 +133,6 @@ router.get("/success", isLoggedIn, async (req, res, next) => {
               Ticket.find({ _id: { $in: req.session.user.tempSeats } })
                 .populate("venue")
                 .populate("movie")
-
                 .then((tickets) => {
                   let price = tickets.length * 20;
                   req.session.user.tempSeats = [];
@@ -169,8 +161,6 @@ router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {
   let refundStatus = "";
   Ticket.findById(req.params.seatId)
     .then(async (ticket) => {
-      console.log("FOUND TICKET", ticket);
-
       const session = await stripe.checkout.sessions.retrieve(ticket.paymentId);
       const refund = await stripe.refunds
         .create({
@@ -178,12 +168,9 @@ router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {
           amount: 2000,
         })
         .then((result) => {
-          console.log("RESULT", result);
           refundStatus = result.status;
         })
         .catch((err) => next(err));
-
-      console.log("REFUND STATUS", refund);
 
       if (refundStatus === "succeeded") {
         Ticket.findByIdAndUpdate(req.params.seatId, {
@@ -210,12 +197,6 @@ router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {
                 .then((result3) => {
                   User.findById(req.session.user._id)
                     .then((found) => {
-                      console.log(
-                        "test succes",
-                        req.session.user,
-                        "results3",
-                        found
-                      );
                       req.session.user = found;
                       res.redirect("/user/tickets");
                     })
@@ -228,7 +209,6 @@ router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {
       }
     })
     .catch((err) => next(err));
-  //
 });
 
 module.exports = router;
