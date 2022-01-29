@@ -350,6 +350,9 @@ Yes, I'm sure
 <!-- Dropdown menu -->
 <div id="dropdown{{@index}}" class="hidden z-10 w-22 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
     <ul class="py-1" aria-labelledby="dropdownButton{{@index}}">
+          <li>
+        <a href="/checkout/print-ticket/{{this._id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200" download>Download Ticket</a>
+      </li>
       <li>
         <a href="/seats/change-seats/{{this.movie._id}}/{{this.venue._id}}?movieTime={{this.time}}&movieDate={{this.date}}&seat={{this.seatNumber}}&id={{this._id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">Change Seats</a>
       </li>

@@ -2,6 +2,8 @@ const router = require("express").Router();
 const seatsDefault = require("../config/seatsDefault");
 const timesDefault = require("../config/timesDefault");
 const htmlTemplate = require("../config/email");
+const pdfTemplate = require("../config/pdf");
+
 const User = require("../models/User.model");
 const Movie = require("../models/Movie.model");
 const Venue = require("../models/Venue.model");
@@ -10,6 +12,7 @@ const Ticket = require("../models/Ticket.model");
 const mongoose = require("mongoose");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 let fs = require("fs");
+var pdf = require("pdf-creator-node");
 
 var url = require("url");
 const hbs = require("hbs");
@@ -155,6 +158,49 @@ router.get("/success", isLoggedIn, async (req, res, next) => {
     } else {
       res.redirect("/");
     }
+});
+
+router.get("/print-ticket/:ticketId", isLoggedIn, (req, res, next) => {
+  console.log("route");
+
+  Ticket.findById(req.params.ticketId)
+    .populate("movie")
+    .populate("venue")
+    .then((ticket) => {
+      function createPDF(data) {
+        var options = {
+          format: "A3",
+          orientation: "portrait",
+          border: "10mm",
+          header: {
+            height: "0mm",
+            contents: {},
+          },
+          footer: {},
+        };
+
+        var document = {
+          html: pdfTemplate(data),
+          data: data,
+          path: path.join(__dirname, `../public/${ticket._id}.pdf`),
+          type: "",
+        };
+
+        // Call PDF CReator
+        pdf
+          .create(document, options)
+          .then((result) => {
+            res.redirect(`/${ticket._id}.pdf`);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+      createPDF(ticket);
+
+      console.log(ticket);
+    })
+    .catch((err) => next(err));
 });
 
 router.get("/refund/:seatId", isLoggedIn, (req, res, next) => {

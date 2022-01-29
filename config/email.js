@@ -6,7 +6,7 @@ const template = (tickets) => {
   let description = `<b>Movie:</b> ${tickets[0].movie.title}<br>
   <b>Date:</b> ${tickets[0].date}<br>
   <b>Time:</b> ${tickets[0].time}<br>
-  <b>Time:</b> ${seats.join(", ")}<br>`;
+  <b>Seats:</b> ${seats.join(", ")}<br>`;
 
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml">
