@@ -194,7 +194,7 @@ router.get("/manage-showtimes", isAdminLoggedIn, (req, res, next) => {
         each.tickets.forEach((element) => {
           if (element.occupied) amount++;
         });
-        each.seatsFree = 64 - amount;
+        each.seatsFree = 48 - amount;
         each.seatsOccupied = amount;
       });
       let search = "";
@@ -240,7 +240,7 @@ router.get("/manage-showtimes-expired", isAdminLoggedIn, (req, res, next) => {
         each.tickets.forEach((element) => {
           if (element.occupied) amount++;
         });
-        each.seatsFree = 64 - amount;
+        each.seatsFree = 48 - amount;
         each.seatsOccupied = amount;
       });
       res.render("admin/manage-showtimes-expired", { showtimes });
@@ -535,8 +535,8 @@ router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
     let times = req.body.time;
     if (typeof times === "string") times = [times];
 
-    dates.forEach((date) => {
-      times.forEach((time) => {
+    dates.forEach((date, i) => {
+      times.forEach((time, j) => {
         let newTickets = [];
         let newTicket = [];
         seatsDefault.forEach((seat) => {
@@ -567,7 +567,9 @@ router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
             };
             Showtime.create(newShowtime)
               .then((results) => {
-                res.redirect("/admin/manage-showtimes");
+                console.log("Added Showtime ", i, j);
+                if (i === dates.length - 1 && j === times.length - 1)
+                  res.redirect("/admin/manage-showtimes");
               })
               .catch((err) => {
                 next(err);
@@ -578,6 +580,7 @@ router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
           });
       });
     });
+    console.log("AFTER ALL CREATED");
   }
 });
 
