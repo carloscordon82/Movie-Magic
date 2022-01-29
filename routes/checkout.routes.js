@@ -196,9 +196,8 @@ router.get("/print-ticket/:ticketId", isLoggedIn, (req, res, next) => {
             console.error(error);
           });
       }
-      createPDF(ticket);
 
-      console.log(ticket);
+      if (ticket.username === req.session.user.username) createPDF(ticket);
     })
     .catch((err) => next(err));
 });
