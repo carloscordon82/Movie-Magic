@@ -351,7 +351,7 @@ Yes, I'm sure
 <div id="dropdown{{@index}}" class="hidden z-10 w-22 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
     <ul class="py-1" aria-labelledby="dropdownButton{{@index}}">
           <li>
-        <a href="/checkout/print-ticket/{{this._id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200" download>Download Ticket</a>
+        <a data-modal-toggle="popup-modal-ticket"  href="/checkout/print-ticket/{{this._id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200" download>Download Ticket</a>
       </li>
       <li>
         <a href="/seats/change-seats/{{this.movie._id}}/{{this.venue._id}}?movieTime={{this.time}}&movieDate={{this.date}}&seat={{this.seatNumber}}&id={{this._id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">Change Seats</a>
@@ -651,3 +651,40 @@ Yes, I'm sure
 </div>
 <!-- This example requires Tailwind CSS v2.0+ -->
 
+
+
+ {{!-- MODAL --}}
+
+<div class="hidden mr-20 overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="popup-modal-ticket" aria-hidden="true">
+<div class="relative  w-full max-w-md h-full md:h-auto">
+
+<div class="relative bg-white rounded-lg shadow dark:bg-gray-100">
+
+<div class="flex justify-end p-2">
+<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal-ticket">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+</button>
+</div>
+<div class="flex justify-center">
+    <div class="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center">
+      <svg class="w-6 h-6 text-violet-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </div>
+  <br>
+<div class="p-6 pt-0 text-center">
+
+<h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Generating Ticket PDF<br>You can close this window once your download starts</h3><br>
+
+</div>
+</div>
+</div>
+</div>
+
+ {{!-- MODAL --}}
+
+
+
+   
+             

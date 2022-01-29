@@ -166,6 +166,7 @@ router.get("/print-ticket/:ticketId", isLoggedIn, (req, res, next) => {
   Ticket.findById(req.params.ticketId)
     .populate("movie")
     .populate("venue")
+    .populate("user")
     .then((ticket) => {
       function createPDF(data) {
         var options = {
@@ -196,8 +197,7 @@ router.get("/print-ticket/:ticketId", isLoggedIn, (req, res, next) => {
             console.error(error);
           });
       }
-
-      if (ticket.username === req.session.user.username) createPDF(ticket);
+      if (ticket.user.username === req.session.user.username) createPDF(ticket);
     })
     .catch((err) => next(err));
 });

@@ -2,12 +2,12 @@
   .entire {
     display: none;
   }
-  .mobile {
-    display: flex;
-    color: black;
-  }
 }
-
+.mobile {
+  text-align: center;
+  border: 3px solid green;
+  width: 100%;
+}
 .movies {
   display: flex;
   flex-direction: row;

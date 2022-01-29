@@ -15,21 +15,6 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const saltRounds = 10;
 
 router.get("/", (req, res, next) => {
-  let pis = ["pi_3KKxkMDpYP7j5IOA0hLYarfS", "pi_3KKxpyDpYP7j5IOA4wWYUSZ2"];
-  let promises = [];
-  pis.forEach(async (payId) => {
-    await stripe.checkout.sessions.retrieve(ticket.paymentId);
-    promises.push(
-      stripe.refunds.create({
-        payment_intent: payId,
-        amount: 2000,
-      })
-    );
-  });
-  Promise.all(promises).then((values) => {
-    console.log(values);
-  });
-
   res.redirect("movies");
 });
 
