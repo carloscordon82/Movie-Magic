@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Movie Magic Cinemas</title>
       <link rel="stylesheet" href="/stylesheets/style.css" />
@@ -13,7 +13,7 @@
   </head>
   <body>
 
-    
+    <span class="entire">
 <!-- Section 1 -->
 <section class="top-element relative w-full px-8 text-white  {{#if globalUser.isAdmin}} bg-gradient-to-t from-gray-500 to-gray-600  {{else}}bg-gradient-to-t from-orange-600 to-orange-500 {{/if}}body-font">
     <div class="container flex flex-col flex-wrap items-center justify-between py-1 mx-auto md:flex-row max-w-7xl">
@@ -228,13 +228,16 @@ document.getElementById("alert").href = "/user/dismiss-alerts?red="+window.locat
         </div>
     </div>
 </section>
-
     <script src="/js/script.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/@themesberg/flowbite@1.3.0/dist/flowbite.bundle.js"></script>
-  
+  </span>
+  <span class="mobile" style="position:fixed" >
+      <p>THIS WEBSITE IS MEANT TO BE SEEN ON A BIG SCREEN</p>
+  </span>
+
   </body>
 
 </html>
