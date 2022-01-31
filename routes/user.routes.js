@@ -19,7 +19,6 @@ router.get("/dashboard", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/edit", isLoggedIn, (req, res, next) => {
-  console.log("EDIT", req.session.user);
   res.render("user/edit");
 });
 
@@ -150,7 +149,6 @@ router.get("/dismiss-alerts", isLoggedIn, (req, res, next) => {
     .catch((error) => {
       console.log(error);
     });
-  // console.log(req.query);
   res.redirect(req.query.red);
 });
 
@@ -199,7 +197,6 @@ router.get("/tickets", isLoggedIn, (req, res, next) => {
       },
     })
     .then((data) => {
-      console.log("DATA", data);
       let today = new Date();
       today.setHours(today.getHours() - 23);
       data.tickets.expiredExists = false;

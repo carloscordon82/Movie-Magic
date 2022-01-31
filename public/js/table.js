@@ -26,7 +26,6 @@ function filterRows() {
     for (i = 0; i < tr.length; i++) {
       tr[i].style.display = "";
     }
-  console.log(allWords);
   for (i = 0; i < tr.length; i++) {
     let found = true;
     allWords.forEach((filter) => {
@@ -57,5 +56,4 @@ function filterRows() {
     }
   }
 }
-console.log("running");
 filterRows();

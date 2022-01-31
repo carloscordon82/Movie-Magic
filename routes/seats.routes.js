@@ -18,9 +18,6 @@ router.get("/change/:oldId/:newId", isLoggedIn, (req, res, next) => {
     paymentId: "",
   })
     .then((oldTicket) => {
-      console.log("OLD TICKET", oldTicket);
-      console.log("new ID", req.params.newId);
-
       Ticket.findByIdAndUpdate(req.params.newId, {
         occupied: true,
         user: req.session.user._id,
@@ -45,7 +42,6 @@ router.get("/change/:oldId/:newId", isLoggedIn, (req, res, next) => {
                 }
               )
                 .then((result3) => {
-                  console.log("MADE IT");
                   res.redirect("/user/tickets");
                 })
                 .catch((err) => {
@@ -70,8 +66,6 @@ router.get("/change-seats/:movieId/:venueId", isLoggedIn, (req, res, next) => {
     .populate("tickets")
     .then((found) => {
       found.tickets.forEach((element) => {
-        console.log("FOUND", element.seatNumber, req.query.seat);
-
         if (element.seatNumber === req.query.seat) seat = true;
       });
       if (seat) {
@@ -85,7 +79,6 @@ router.get("/change-seats/:movieId/:venueId", isLoggedIn, (req, res, next) => {
           .populate("movie")
           .populate("venue")
           .then((seats) => {
-            console.log("SEATS", seats);
             if (seats.length === 0) {
               res.render("seats/change-seats", {
                 errorMessage: "No seats found",
@@ -93,7 +86,6 @@ router.get("/change-seats/:movieId/:venueId", isLoggedIn, (req, res, next) => {
               return;
             }
             seats[0].tickets.forEach((element, i) => {
-              console.log("checking", element);
               if (element.seatNumber === req.query.seat) {
                 element.you = true;
               } else {
@@ -145,14 +137,12 @@ router.get("/:movieId/:venueId", isLoggedIn, (req, res, next) => {
     .populate("movie")
     .populate("venue")
     .then((seats) => {
-      console.log("SEATS", seats);
       if (seats.length === 0) {
         res.render("seats", {
           errorMessage: "No seats found",
         });
         return;
       }
-      //   allSeats = seats[0].tickets;
       let row1 = seats[0].tickets.slice(0, 8);
       let row2 = seats[0].tickets.slice(8, 16);
       let row3 = seats[0].tickets.slice(16, 24);
@@ -160,8 +150,6 @@ router.get("/:movieId/:venueId", isLoggedIn, (req, res, next) => {
       let row5 = seats[0].tickets.slice(32, 40);
       let row6 = seats[0].tickets.slice(40, 48);
       allSeats = { row1, row2, row3, row4, row5, row6 };
-      // console.log("ALL SEATS", seats);
-      // allSeats[2].occupied = true;
       let data = {
         allSeats,
         venue: req.params.venueId,

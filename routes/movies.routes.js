@@ -55,7 +55,6 @@ router.get("/", (req, res, next) => {
       if (movies.length) {
         movies.forEach((element, i) => {
           movies[i].odd = i % 2;
-          console.log("odd", element.odd);
         });
       }
 
@@ -87,7 +86,6 @@ router.get("/:movieId/", (req, res, next) => {
   end.setDate(today.getDate() + 10);
 
   let allDates = getDaysArray(today, end);
-  console.log("TRY", allDates);
   Movie.findById(req.params.movieId)
     .then((movie) => {
       axios
@@ -96,7 +94,6 @@ router.get("/:movieId/", (req, res, next) => {
         )
         .then((releases) => {
           let cert = "";
-          console.log(releases.data.releases);
           releases.data.releases.countries.forEach((element) => {
             if (element.iso_3166_1 === "US" && element.certification)
               cert = element.certification;
@@ -108,8 +105,6 @@ router.get("/:movieId/", (req, res, next) => {
             )
 
             .then((responseFromApi) => {
-              console.log("MOVIE", responseFromApi.data.releases);
-
               axios
                 .get(
                   `https://api.themoviedb.org/3/movie/${movie.tmdbId}/credits?api_key=5474fe63c18c5ac27e78e2d4e61c868c&append_to_response=videos`
@@ -119,10 +114,7 @@ router.get("/:movieId/", (req, res, next) => {
                     if (element.type === "Trailer")
                       trailer = `https://www.youtube.com/embed/${element.key}`;
                   });
-                  console.log(
-                    "RESPONSE FOR MOVIE ID",
-                    responseFromApiCredits.data.cast.slice(0, 6)
-                  );
+
                   let genres = [];
                   responseFromApi.data.genres.forEach((genre) => {
                     genres.push(genre.name);
@@ -191,12 +183,6 @@ router.get("/:movieId/", (req, res, next) => {
                           }
                         });
                         show.forEach((element) => {
-                          console.log(
-                            "venue",
-                            element.venue.name,
-                            "is",
-                            element.venue.layout
-                          );
                           if (element.venue.layout === 1) {
                             element.venue.seating = "VIP - Automatic Chairs";
                           } else {

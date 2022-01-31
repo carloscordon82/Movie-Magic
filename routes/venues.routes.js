@@ -88,7 +88,6 @@ router.get("/:venueId/", (req, res, next) => {
         .populate("movie")
         .populate("tickets")
         .then((showtimes) => {
-          console.log("SHOWS", showtimes);
           let movies = [];
           if (showtimes.length > 0) {
             let current = showtimes[0].movie._id.toString();
@@ -110,7 +109,6 @@ router.get("/:venueId/", (req, res, next) => {
               element.tickets.forEach((ticket) => {
                 if (!ticket.occupied) avail++;
               });
-              console.log(avail, "AVAIL");
               if (element.movie._id.toString() === current) {
                 movies[i]["times"].push({ time: element.time, avail: avail });
               } else {
@@ -145,7 +143,6 @@ router.get("/:venueId/", (req, res, next) => {
           }
           venue.ameneties = venue.ameneties.join(", ");
           let currentDate = req.query.movieDate;
-          console.log("MOVIES ", movies);
           res.render("venues/venue-details", {
             venue,
             movies,

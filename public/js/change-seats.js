@@ -35,7 +35,6 @@ container.addEventListener("click", (e) => {
   let dialogue = `Replacing Old Seat ${params.get(
     "seat"
   )} with New Seat ${selectedLetters}`;
-  console.log("DIALO", selectedSeats);
   for (let i = 0; i < seatChange.length; i++) {
     seatChange[i].innerText = dialogue;
   }

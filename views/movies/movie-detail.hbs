@@ -11,23 +11,12 @@
     </div>
 </div>
 
-
-
- 
-
-
 <div class="flex justify-center w-auto " style="padding: 50px;">
 
-    {{!-- <div
-        style="position: absolute; width:0%; height:200px; background-image:url(https://image.tmdb.org/t/p/original/{{movie.backdrop}})">
-        ;lksajdf;lkjasdf;lkjasd;flkjasd;flkjasd;flkjas;dflkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasd;flkjasdf;lkj
-    </div> --}}
     <div class="demo-wrap flex flex-col md:flex-row md:full rounded-lg bg-white shadow-lg w-auto"
         style="position: relative;">
         <img class="demo-bg" src="https://image.tmdb.org/t/p/original/{{movie.backdrop}}" alt="">
-        {{!-- <div class=""
-            style="width:300px; height:200px; background-image:url(https://image.tmdb.org/t/p/original/{{movie.backdrop}})">
-        </div> --}}
+
         <img class="demo-content w-96 h-96 md:h-auto object-cover md:w-96 rounded-t-lg md:rounded-none md:rounded-l-lg"
             src="https://image.tmdb.org/t/p/original/{{movie.poster}}" alt="HTML tutorial" style="width:342px;" />
 
@@ -45,7 +34,7 @@
             <p class="text-gray-700 text-lg"><b>Genres:</b> {{movie.genre}}</p>
             <p class="text-gray-700 text-sm"><b>Released:</b> {{movie.releaseDate}}</p>
             <p class="text-gray-700 text-sm mt-2"><b>Cast:</b></p>
-            
+
 
             <section class="relative pt-2 overflow-hidden ">
 
@@ -71,8 +60,6 @@
                         </div>
                         {{/each}}
 
-
-
                     </div>
                 </div>
             </section>
@@ -90,11 +77,8 @@
 </div>
 </div>
 
-
-
 {{#if show}}
 {{#each show}}
-
 
 <div class="flex justify-center pb-10">
     <div class="flex flex-col md:flex-row md:full rounded-lg bg-white shadow-lg w-11/12">
@@ -122,11 +106,9 @@
                 {{/each}}
             </div>
 
-
         </div>
         <img class=" w-96 h-48 md:h-auto object-cover md:w-96 rounded-t-lg md:rounded-none md:rounded-r-lg"
             src="{{venue.picUrl}}" alt="HTML tutorial" style="width:242px;" />
-
 
     </div>
 
@@ -137,8 +119,6 @@
 <div class="flex text-center justify-center w-auto" style="padding: 20px;">
     <div class="md:full rounded-lg bg-white shadow-lg w-11/12">
 
-
-
         <div class="p-6 ">
 
             <h3
@@ -146,19 +126,12 @@
                 NO SHOWTIMES AVAILABLE.<br> PICK A DIFFEERNT DATE OR MOVIE
             </h3>
 
-
-
-
         </div>
-
-
 
     </div>
 
 </div>
 {{/if}}
-
-
 
 {{#if errorMessage}}
 {{errorMessage}}

@@ -161,8 +161,6 @@ router.get("/success", isLoggedIn, async (req, res, next) => {
 });
 
 router.get("/print-ticket/:ticketId", isLoggedIn, (req, res, next) => {
-  console.log("route");
-
   Ticket.findById(req.params.ticketId)
     .populate("movie")
     .populate("venue")

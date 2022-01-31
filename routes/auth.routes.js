@@ -10,8 +10,6 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const saltRounds = 10;
 
 router.get("/login", isLoggedOut, (req, res, next) => {
-  console.log("ORIGNAL", req.app.locals.originalUrl);
-
   res.render("auth/login", { layout: false });
 });
 
