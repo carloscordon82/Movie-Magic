@@ -388,6 +388,15 @@ body {
   height: auto;
 }
 
+.demo-bg2 {
+  opacity: 0.1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+}
+
 .demo-content {
   position: relative;
 }

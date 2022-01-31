@@ -153,6 +153,7 @@ router.get("/:movieId/", (req, res, next) => {
                               picUrl: showtimes[0].venue.picUrl,
                               ameneties:
                                 showtimes[0].venue.ameneties.join(", "),
+                              layout: showtimes[0].venue.layout,
                             },
                             times: [],
                           },
@@ -179,6 +180,7 @@ router.get("/:movieId/", (req, res, next) => {
                                 id: element.venue._id.toString(),
                                 picUrl: element.venue.picUrl,
                                 ameneties: element.venue.ameneties.join(", "),
+                                layout: element.venue.layout,
                               },
                               times: [],
                             }),
@@ -189,6 +191,12 @@ router.get("/:movieId/", (req, res, next) => {
                           }
                         });
                         show.forEach((element) => {
+                          console.log(
+                            "venue",
+                            element.venue.name,
+                            "is",
+                            element.venue.layout
+                          );
                           if (element.venue.layout === 1) {
                             element.venue.seating = "VIP - Automatic Chairs";
                           } else {

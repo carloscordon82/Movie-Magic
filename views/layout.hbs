@@ -12,27 +12,14 @@
      
   </head>
   <body>
-
+  <div class="mobile" style="z-index:-9999; position:fixed" >
+      <p>THIS WEBSITE IS MEANT TO BE SEEN ON A BIG SCREEN</p>
+  </div>
     <span class="entire">
-<!-- Section 1 -->
 <section class="top-element relative w-full px-8 text-white  {{#if globalUser.isAdmin}} bg-gradient-to-t from-gray-500 to-gray-600  {{else}}bg-gradient-to-t from-orange-600 to-orange-500 {{/if}}body-font">
     <div class="container flex flex-col flex-wrap items-center justify-between py-1 mx-auto md:flex-row max-w-7xl">
     <img class="  md:h-auto object-cover  rounded-t-lg md:rounded-none md:rounded-l-lg" src="/images/logo.png" alt="HTML tutorial" style="width:190px; margin:-10px 0px -20px -50px"/>
-
         <nav class="top-0 left-0 z-0 flex items-center justify-center w-full h-full py-5 -ml-0 space-x-5 text-base md:-ml-5 md:py-0 md:absolute">
-            {{!-- <a href="/" class="relative font-medium text-lg leading-6 text-white transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
-                <span class="block">Home</span>
-                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0"></span>
-                </span>
-            </a> --}}
-             {{!-- <a href="/movies" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:text-white hover:bg-orange-400 focus:outline-none focus:shadow-none">
-                Movies
-            </a>
-             <a href="/venues" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:text-white hover:bg-orange-400 focus:outline-none focus:shadow-none">
-                Venues
-            </a> --}}
-
             <a href="/movies"> 
             <button style="padding-left: 75px" class="w-60 text-gray-600 bg-white border border-solid border-gray-100 hover:bg-black hover:text-white active:bg-orange-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-center inline-flex items-center" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,7 +28,6 @@
             Movies
             </button>
             </a>
-
             <a href="/venues"> 
             <button style="padding-left: 70px" class="w-60 text-gray-600 bg-white border border-solid border-gray-100 hover:bg-black hover:text-white active:bg-orange-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 inline-flex" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,12 +36,7 @@
             Venues
             </button>
             </a>
-            
-           
-          
         </nav>
-
-
 
 {{#if globalUser.username}}
 <div class="relative z-10 inline-flex items-center space-x-6 md:ml-5 lg:justify-end">
@@ -98,42 +79,6 @@
         </div>
         {{/if}}
 
-
-
-{{!-- {{#if globalUser.username}}
-<div class="relative z-10 inline-flex items-center space-x-3 md:ml-5 lg:justify-end">
-            <a href="/user/dashboard" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:text-white hover:bg-orange-400 focus:outline-none focus:shadow-none">
-                My Account
-            </a>
-            {{#if globalUser.isAdmin}}
-            <a href="/admin" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:text-white hover:bg-orange-400 focus:outline-none focus:shadow-none">
-                Manage
-            </a>
-            {{/if}}
-            <span class="inline-flex rounded-md shadow-sm">
-                <a href="/logout" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-black border border-white rounded-md shadow-sm hover:bg-orange-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Logout
-                </a>
-            </span>
-        </div>
-{{else}}
-        <div class="relative z-10 inline-flex items-center space-x-3 md:ml-5 lg:justify-end">
-            <a href="/login" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:text-white hover:bg-orange-400 focus:outline-none focus:shadow-none">
-                Sign in
-            </a>
-            <span class="inline-flex rounded-md shadow-sm">
-                <a href="/signup" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-orange-400 border border-gray-200 rounded-md shadow-sm hover:bg-blue-700 hover:text-gray-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Sign up
-                </a>
-            </span>
-        </div>
-        {{/if}} --}}
-
-
-
-
-
-
     </div>
 </section>
 
@@ -161,7 +106,6 @@ document.getElementById("alert").href = "/user/dismiss-alerts?red="+window.locat
 {{{body}}}
 
 
-<!-- Section 2 -->
 <section class="bottom-element w-full bg-orange-600">
     <div class="px-8 py-12 mx-auto max-w-7xl">
         <div class="grid grid-cols-2 gap-10 mb-3 md:grid-cols-3 lg:grid-cols-12 lg:gap-20">
@@ -234,9 +178,7 @@ document.getElementById("alert").href = "/user/dismiss-alerts?red="+window.locat
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/@themesberg/flowbite@1.3.0/dist/flowbite.bundle.js"></script>
   </span>
-  <div class="mobile" style="position:fixed" >
-      <p>THIS WEBSITE IS MEANT TO BE SEEN ON A BIG SCREEN</p>
-  </div>
+
 
   </body>
 

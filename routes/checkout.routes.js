@@ -142,7 +142,7 @@ router.get("/success", isLoggedIn, async (req, res, next) => {
                   req.session.user = updatedUser;
                   let recipient = req.session.user.email;
                   let subject = `Purchase Receipt - ${tickets[0].movie.title} - ${tickets[0].date} - ${tickets[0].time}`;
-                  sendEmail(tickets, recipient, subject);
+                  //sendEmail(tickets, recipient, subject);
                   res.render("checkout/success", {
                     tickets,
                     price,

@@ -153,8 +153,10 @@
 <div class="form-check">
       <h1>Select Venue:</h1>
       {{#each venues}}
+      <div>
   <input class="ml-5 form-check-input" type="radio" value="{{_id}}" name="venue" {{#unless @index}}checked{{/unless}}>
   <label class="form-check-label" for="defaultCheck1">{{name}}</label>
+  </div>
     {{/each}}
     <br>
     <br>

@@ -275,19 +275,16 @@ router.get(
         for (const ticket of showtime.tickets) {
           i++;
           if (ticket.user) {
-            console.log("About to try with payment ID", ticket.paymentId);
-
             const session = await stripe.checkout.sessions.retrieve(
               ticket.paymentId
             );
-            console.log("Got Payment Intent", session.payment_intent);
+
             const refund = await stripe.refunds
               .create({
                 payment_intent: session.payment_intent,
                 amount: 2000,
               })
               .then((result) => {
-                console.log("Got Refund", result.status);
                 refundStatus = result.status;
                 User.updateOne(
                   { username: ticket.user.username },
@@ -302,7 +299,6 @@ router.get(
                   }
                 )
                   .then((result) => {
-                    console.log("Ticket completed", i);
                     if (i === showtime.tickets.length - 1) {
                       res.redirect("../manage-showtimes");
                     }
@@ -310,11 +306,11 @@ router.get(
                   .catch((err) => next(err));
               })
               .catch((err) => next(err));
-
-            console.log("This should happen at the end of each ticket", i);
+          }
+          if (i === showtime.tickets.length - 1) {
+            res.redirect("../manage-showtimes");
           }
         }
-        console.log("outside async");
       })
       .catch((err) => {
         next(err);
@@ -398,7 +394,6 @@ router.post("/edit-venue/:venueId", isAdminLoggedIn, (req, res, next) => {
 
   Venue.findByIdAndUpdate(req.params.venueId, req.body)
     .then((venue) => {
-      console.log(venue);
       res.redirect("/admin/manage-venues");
     })
     .catch((err) => {
@@ -423,9 +418,7 @@ router.post("/search-movie", isAdminLoggedIn, (req, res, next) => {
           .catch((err) => {
             next(err);
           });
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     }
     display();
   }
@@ -567,7 +560,6 @@ router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
             };
             Showtime.create(newShowtime)
               .then((results) => {
-                console.log("Added Showtime ", i, j);
                 if (i === dates.length - 1 && j === times.length - 1)
                   res.redirect("/admin/manage-showtimes");
               })
@@ -580,7 +572,6 @@ router.post("/create-showtime", isAdminLoggedIn, (req, res, next) => {
           });
       });
     });
-    console.log("AFTER ALL CREATED");
   }
 });
 
