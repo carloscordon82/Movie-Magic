@@ -586,6 +586,8 @@ router.get(
     })
       .populate("user")
       .then((oldTicket) => {
+        console.log("OLD TICKET User", oldTicket.user);
+        console.log("OLD TICKET", oldTicket);
         Ticket.findByIdAndUpdate(req.params.newId, {
           occupied: true,
           user: oldTicket.user.username,
