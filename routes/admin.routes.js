@@ -642,59 +642,53 @@ router.get(
         found.tickets.forEach((element) => {
           if (element.seatNumber === req.query.seat) seat = true;
         });
-        if (seat) {
-          Showtime.find({
-            venue: req.params.venueId,
-            movie: req.params.movieId,
-            time: req.query.movieTime,
-            date: req.query.movieDate,
-          })
-            .populate("tickets")
-            .populate("movie")
-            .populate("venue")
-            .then((seats) => {
-              if (seats.length === 0) {
-                res.render("admin/change-seats", {
-                  errorMessage: "No seats found",
-                });
-                return;
-              }
-              seats[0].tickets.forEach((element, i) => {
-                if (element.seatNumber === req.query.seat) {
-                  element.you = true;
-                } else {
-                  element.you = false;
-                }
+
+        Showtime.find({
+          venue: req.params.venueId,
+          movie: req.params.movieId,
+          time: req.query.movieTime,
+          date: req.query.movieDate,
+        })
+          .populate("tickets")
+          .populate("movie")
+          .populate("venue")
+          .then((seats) => {
+            if (seats.length === 0) {
+              res.render("admin/change-seats", {
+                errorMessage: "No seats found",
               });
-
-              let row1 = seats[0].tickets.slice(0, 8);
-              let row2 = seats[0].tickets.slice(8, 16);
-              let row3 = seats[0].tickets.slice(16, 24);
-              let row4 = seats[0].tickets.slice(24, 32);
-              let row5 = seats[0].tickets.slice(32, 40);
-              let row6 = seats[0].tickets.slice(40, 48);
-              allSeats = { row1, row2, row3, row4, row5, row6 };
-
-              let data = {
-                allSeats,
-                venue: req.params.venueId,
-                movie: req.params.movieId,
-                time: req.query.movieTime,
-                date: req.query.movieDate,
-                seats,
-                seat: req.query.seat,
-              };
-              res.render("admin/change-seats", data);
-            })
-            .catch((err) => {
-              next(err);
+              return;
+            }
+            seats[0].tickets.forEach((element, i) => {
+              if (element.seatNumber === req.query.seat) {
+                element.you = true;
+              } else {
+                element.you = false;
+              }
             });
-        } else {
-          res.render("admin/change-seats", {
-            errorMessage: "Invalid Seat",
+
+            let row1 = seats[0].tickets.slice(0, 8);
+            let row2 = seats[0].tickets.slice(8, 16);
+            let row3 = seats[0].tickets.slice(16, 24);
+            let row4 = seats[0].tickets.slice(24, 32);
+            let row5 = seats[0].tickets.slice(32, 40);
+            let row6 = seats[0].tickets.slice(40, 48);
+            allSeats = { row1, row2, row3, row4, row5, row6 };
+
+            let data = {
+              allSeats,
+              venue: req.params.venueId,
+              movie: req.params.movieId,
+              time: req.query.movieTime,
+              date: req.query.movieDate,
+              seats,
+              seat: req.query.seat,
+            };
+            res.render("admin/change-seats", data);
+          })
+          .catch((err) => {
+            next(err);
           });
-          return;
-        }
       })
       .catch((err) => {
         next(err);
