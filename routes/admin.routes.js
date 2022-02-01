@@ -584,6 +584,7 @@ router.get(
       user: null,
       paymentId: "",
     })
+      .populate("user")
       .then((oldTicket) => {
         Ticket.findByIdAndUpdate(req.params.newId, {
           occupied: true,
@@ -592,7 +593,7 @@ router.get(
         })
           .then((newTicket) => {
             User.updateOne(
-              { username: req.session.user.username },
+              { username: oldTicket.user.username },
               {
                 $pullAll: {
                   tickets: [req.params.oldId],
@@ -601,7 +602,7 @@ router.get(
             )
               .then((result2) => {
                 User.updateOne(
-                  { username: req.session.user.username },
+                  { username: oldTicket.user.username },
                   {
                     $push: {
                       tickets: [req.params.newId],
