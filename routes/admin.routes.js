@@ -590,7 +590,7 @@ router.get(
         console.log("OLD TICKET", oldTicket);
         Ticket.findByIdAndUpdate(req.params.newId, {
           occupied: true,
-          user: oldTicket.user.username,
+          user: oldTicket.user._id,
           paymentId: oldTicket.paymentId,
         })
           .then((newTicket) => {
